@@ -42,7 +42,7 @@ export const Header: React.FC<HeaderProps> = ({
               <span>Licensed Clearing & Forwarding Agent — Apapa, Lagos</span>
             </span>
             <span className="hidden md:inline text-slate-600">|</span>
-            <span className="hidden md:inline text-slate-300">Mon - Fri: 8:00 AM - 6:00 PM</span>
+            <span className="hidden md:inline text-slate-300">Mon - Sat: 8:00 AM - 6:00 PM</span>
           </div>
           <div className="flex items-center gap-4 text-xs">
             <a

@@ -41,7 +41,7 @@ export const COMPANY_DETAILS = {
   phoneRaw: "+2349127232001",
   email: "rimitransportandalliedlimited@gmail.com",
   officeAddress: "11A PELEWURA WAY, APAPA LAGOS STATE.",
-  businessHours: "MONDAY - FRIDAY (8:00 AM - 6:00 PM)",
+  businessHours: "MONDAY - SATURDAY (8:00 AM - 6:00 PM)",
   whatsappNumber: "08169183582",
   whatsappUrl: "https://wa.me/2348169183582",
   whatsappMessageUrl: (msg: string) => `https://wa.me/2348169183582?text=${encodeURIComponent(msg)}`,

@@ -136,7 +136,7 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                     Thank you, <strong className="text-amber-400">{formData.fullName}</strong>. Your inquiry reference is <span className="font-mono font-bold text-white bg-slate-800 px-2 py-0.5 rounded-sm">{submissionRef}</span>.
                   </p>
                   <p className="text-xs text-slate-400 max-w-md mx-auto">
-                    Our clearing officers at 11A Pelewura Way, Apapa are reviewing your details. We will respond via email ({formData.email}) or phone ({formData.phone}) promptly during business hours (Mon-Fri 8:00 AM - 6:00 PM).
+                    Our clearing officers at 11A Pelewura Way, Apapa are reviewing your details. We will respond via email ({formData.email}) or phone ({formData.phone}) promptly during business hours (Mon-Sat 8:00 AM - 6:00 PM).
                   </p>
                 </div>
 
