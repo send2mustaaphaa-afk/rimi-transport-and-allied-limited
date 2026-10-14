@@ -205,6 +205,23 @@ export const SERVICES_DATA: ServiceItem[] = [
     turnaroundTime: "Rapid audit within 1 business day",
     suitableFor: "Corporate procurement teams, compliance officers, international shippers",
     deliverables: ["Compliance Audit Certificate", "Verified Documentation Pack", "Permit Endorsements"]
+  },
+  {
+    id: "vehicle-clearing-roro",
+    title: "Vehicle Clearing & Ro-Ro Logistics",
+    shortDescription: "Specialized Roll-on/Roll-off (Ro-Ro) and containerized automobile customs clearance, PTML terminal release, and secure multi-car carrier haulage.",
+    fullDescription: "From executive SUVs, luxury sedans, and commercial fleets to heavy machinery, our specialized automobile division handles customs duty valuation (VIN valuation system), PTML terminal discharge, customs inspection, and secure car carrier haulage directly to your showroom or private residence.",
+    iconName: "Car",
+    features: [
+      "Nigeria Customs VIN (Vehicle Identification Number) valuation & duty assessment",
+      "PTML (Grimaldi) & Tin Can Ro-Ro terminal fast discharge and tally",
+      "Luxury car, SUV, brand-new automobile, and fleet clearance",
+      "Specialized multi-car carrier truck haulage to Lagos & nationwide destinations",
+      "Transit insurance and scratch-free delivery guarantee"
+    ],
+    turnaroundTime: "24 - 48 Hours upon vessel berthing",
+    suitableFor: "Automobile dealerships, corporate fleet managers, private vehicle importers",
+    deliverables: ["Customs Duty Receipt", "Vehicle Release Gate Pass", "Direct Delivery Manifest"]
   }
 ];
 

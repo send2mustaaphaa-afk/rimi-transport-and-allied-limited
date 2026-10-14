@@ -90,7 +90,7 @@ export const Hero: React.FC<HeroProps> = ({
                 onClick={onExploreServices}
                 className="px-6 py-3.5 bg-slate-900/80 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-sm sm:text-base rounded-lg border border-slate-700 hover:border-slate-600 transition-colors flex items-center justify-center gap-2"
               >
-                <span>Explore 9 Key Services</span>
+                <span>Explore 10 Key Services</span>
               </button>
 
               <a

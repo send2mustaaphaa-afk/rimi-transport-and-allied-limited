@@ -3,6 +3,7 @@ import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { AboutSection } from './components/AboutSection';
 import { ServicesSection } from './components/ServicesSection';
+import { VehicleFleetSection } from './components/VehicleFleetSection';
 import { WhyChooseUs } from './components/WhyChooseUs';
 import { QuoteSection } from './components/QuoteSection';
 import { TrackingSection } from './components/TrackingSection';
@@ -60,7 +61,7 @@ export default function App() {
     if (currentPath === '/admin') return;
 
     const handleScroll = () => {
-      const sections = ['home', 'about', 'services', 'why-us', 'quote', 'tracking', 'contact'];
+      const sections = ['home', 'about', 'services', 'vehicles', 'why-us', 'quote', 'tracking', 'contact'];
       const scrollPosition = window.scrollY + 200;
 
       for (const section of sections) {
@@ -191,6 +192,11 @@ export default function App() {
 
         {/* 3. Our Services Section */}
         <ServicesSection
+          onRequestQuoteWithService={handleRequestQuote}
+        />
+
+        {/* 3B. Automobile & Vehicle Fleet Logistics Showcase */}
+        <VehicleFleetSection
           onRequestQuoteWithService={handleRequestQuote}
         />
 

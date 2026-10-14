@@ -11,6 +11,7 @@ import {
   Boxes,
   Warehouse,
   FileCheck,
+  Car,
   ArrowRight,
   CheckCircle,
   ExternalLink
@@ -40,15 +41,16 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
       case 'Boxes': return <Boxes {...props} />;
       case 'Warehouse': return <Warehouse {...props} />;
       case 'FileCheck': return <FileCheck {...props} />;
+      case 'Car': return <Car {...props} />;
       default: return <ShieldCheck {...props} />;
     }
   };
 
   const filteredServices = SERVICES_DATA.filter(service => {
     if (activeFilter === 'all') return true;
-    if (activeFilter === 'customs' && (service.id.includes('customs') || service.id.includes('compliance') || service.id.includes('import'))) return true;
-    if (activeFilter === 'freight' && (service.id.includes('freight') || service.id.includes('sea') || service.id.includes('air'))) return true;
-    if (activeFilter === 'haulage' && (service.id.includes('land') || service.id.includes('cargo') || service.id.includes('warehousing'))) return true;
+    if (activeFilter === 'customs' && (service.id.includes('customs') || service.id.includes('compliance') || service.id.includes('import') || service.id.includes('vehicle'))) return true;
+    if (activeFilter === 'freight' && (service.id.includes('freight') || service.id.includes('sea') || service.id.includes('air') || service.id.includes('roro'))) return true;
+    if (activeFilter === 'haulage' && (service.id.includes('land') || service.id.includes('cargo') || service.id.includes('warehousing') || service.id.includes('vehicle'))) return true;
     return true;
   });
 
@@ -80,7 +82,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              All 9 Services
+              All 10 Services
             </button>
             <button
               onClick={() => setActiveFilter('customs')}

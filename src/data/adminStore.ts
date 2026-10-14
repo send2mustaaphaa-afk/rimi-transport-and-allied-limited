@@ -56,10 +56,19 @@ export const getContactMessages = (): ContactMessageRecord[] => {
   }
 };
 
-// ---------------- APPEND QUOTE (LOCAL + SUPABASE SYNC) ----------------
-export const appendQuoteRequest = (
+export interface QuoteSubmissionResult {
+  success: boolean;
+  dbSaved: boolean;
+  emailSent: boolean;
+  id: string;
+  error?: string;
+  emailError?: string;
+}
+
+// ---------------- SUBMIT & APPEND QUOTE (SUPABASE DB + RESEND EMAIL VIA EDGE FUNCTION) ----------------
+export const submitQuoteRequest = async (
   quote: Omit<QuoteRequestRecord, 'createdAt' | 'status'> & { status?: QuoteRequestRecord['status'] }
-): void => {
+): Promise<QuoteSubmissionResult> => {
   const newRecord: QuoteRequestRecord = {
     ...quote,
     status: quote.status || 'New',
@@ -78,37 +87,129 @@ export const appendQuoteRequest = (
     }
   }
 
-  // 2. Asynchronously sync to Supabase backend
-  (async () => {
-    try {
-      const { error } = await supabase.from('quotes').insert([
-        {
+  // 2. Persist to Supabase Database 'quotes' table
+  try {
+    const { error: insertError } = await supabase.from('quotes').insert([
+      {
+        id: newRecord.id,
+        full_name: newRecord.fullName,
+        company_name: newRecord.companyName || null,
+        email: newRecord.email,
+        phone: newRecord.phone,
+        shipment_type: newRecord.shipmentType,
+        origin: newRecord.origin || null,
+        destination: newRecord.destination || null,
+        cargo_description: newRecord.cargoDescription || null,
+        container_size: newRecord.containerSize || null,
+        estimated_weight: newRecord.estimatedWeight || null,
+        message: newRecord.message || null,
+        status: newRecord.status,
+        estimated_cost: newRecord.estimatedCost || null,
+        created_at: newRecord.createdAt
+      }
+    ]);
+
+    if (insertError) {
+      console.error('Supabase quote insert error:', insertError.message, insertError);
+      return {
+        success: false,
+        dbSaved: false,
+        emailSent: false,
+        id: newRecord.id,
+        error: insertError.message
+      };
+    }
+
+    console.info('Quote successfully saved to Supabase quotes table:', newRecord.id);
+  } catch (err: unknown) {
+    const errorMsg = err instanceof Error ? err.message : String(err);
+    console.error('Supabase quote network exception:', errorMsg);
+    return {
+      success: false,
+      dbSaved: false,
+      emailSent: false,
+      id: newRecord.id,
+      error: errorMsg
+    };
+  }
+
+  // 3. Automatically trigger send-quote-email Edge Function via Resend API
+  try {
+    console.info(`Triggering send-quote-email Edge Function for quote ${newRecord.id}...`);
+    const { data: funcData, error: funcError } = await supabase.functions.invoke('send-quote-email', {
+      body: {
+        quote: {
           id: newRecord.id,
           full_name: newRecord.fullName,
+          fullName: newRecord.fullName,
           company_name: newRecord.companyName,
+          companyName: newRecord.companyName,
           email: newRecord.email,
           phone: newRecord.phone,
           shipment_type: newRecord.shipmentType,
+          shipmentType: newRecord.shipmentType,
           origin: newRecord.origin,
           destination: newRecord.destination,
-          cargo_description: newRecord.cargoDescription,
           container_size: newRecord.containerSize,
+          containerSize: newRecord.containerSize,
+          cargo_description: newRecord.cargoDescription,
+          cargoDescription: newRecord.cargoDescription,
           estimated_weight: newRecord.estimatedWeight,
+          estimatedWeight: newRecord.estimatedWeight,
           message: newRecord.message,
-          status: newRecord.status,
-          estimated_cost: newRecord.estimatedCost,
           created_at: newRecord.createdAt
         }
-      ]);
-      if (error) {
-        console.warn('Supabase quote sync warning (saved locally):', error.message);
-      } else {
-        console.info('Quote successfully persisted to Supabase:', newRecord.id);
       }
-    } catch (err) {
-      console.warn('Supabase quote network exception (saved locally):', err);
+    });
+
+    if (funcError) {
+      console.warn('send-quote-email Edge Function call error:', funcError);
+      return {
+        success: true,
+        dbSaved: true,
+        emailSent: false,
+        id: newRecord.id,
+        emailError: funcError.message || 'Edge function call failed'
+      };
     }
-  })();
+
+    if (funcData && funcData.success === false) {
+      console.warn('send-quote-email Edge Function returned error:', funcData.error);
+      return {
+        success: true,
+        dbSaved: true,
+        emailSent: false,
+        id: newRecord.id,
+        emailError: funcData.error || 'Email dispatch failed'
+      };
+    }
+
+    console.info('Quote email successfully dispatched to rimitransportandalliedlimited@gmail.com', funcData);
+    return {
+      success: true,
+      dbSaved: true,
+      emailSent: true,
+      id: newRecord.id
+    };
+  } catch (fnErr: unknown) {
+    const fnErrMsg = fnErr instanceof Error ? fnErr.message : String(fnErr);
+    console.warn('Exception invoking send-quote-email Edge Function:', fnErrMsg);
+    return {
+      success: true,
+      dbSaved: true,
+      emailSent: false,
+      id: newRecord.id,
+      emailError: fnErrMsg
+    };
+  }
+};
+
+export const appendQuoteRequest = (
+  quote: Omit<QuoteRequestRecord, 'createdAt' | 'status'> & { status?: QuoteRequestRecord['status'] }
+): void => {
+  submitQuoteRequest(quote).catch(err => {
+    console.warn('Error in appendQuoteRequest wrapper:', err);
+  });
 };
 
 // ---------------- APPEND CONTACT MESSAGE (LOCAL + SUPABASE SYNC) ----------------

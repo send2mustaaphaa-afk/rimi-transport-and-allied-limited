@@ -11,6 +11,7 @@ import {
   Boxes,
   Warehouse,
   FileCheck,
+  Car,
   CheckCircle2,
   Clock,
   Briefcase,
@@ -42,6 +43,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
       case 'Boxes': return <Boxes className="w-6 h-6 text-amber-500" />;
       case 'Warehouse': return <Warehouse className="w-6 h-6 text-amber-500" />;
       case 'FileCheck': return <FileCheck className="w-6 h-6 text-amber-500" />;
+      case 'Car': return <Car className="w-6 h-6 text-amber-500" />;
       default: return <ShieldCheck className="w-6 h-6 text-amber-500" />;
     }
   };

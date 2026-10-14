@@ -14,7 +14,8 @@ import {
   checkSupabaseHealth,
   SupabaseHealth,
   SQL_SCHEMA_SETUP,
-  SUPABASE_URL
+  SUPABASE_URL,
+  supabase
 } from '../data/supabaseClient';
 import {
   LayoutDashboard,
@@ -148,6 +149,55 @@ export const AdminPage: React.FC<AdminPageProps> = ({
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
   const [isAddingNew, setIsAddingNew] = useState(false);
+  const [isTestingEmail, setIsTestingEmail] = useState(false);
+  const [emailTestResult, setEmailTestResult] = useState<{ success: boolean; message: string } | null>(null);
+
+  const handleTestEmailFunction = async () => {
+    setIsTestingEmail(true);
+    setEmailTestResult(null);
+    try {
+      const { data, error } = await supabase.functions.invoke('send-quote-email', {
+        body: {
+          quote: {
+            id: `TEST-${Date.now().toString().slice(-4)}`,
+            fullName: 'Diagnostic Test User',
+            companyName: 'Rimi Logistics Test Systems',
+            email: 'rimitransportandalliedlimited@gmail.com',
+            phone: '+234 816 918 3582',
+            shipmentType: 'Customs Clearance & Diagnostics',
+            containerSize: '20ft Container (FCL)',
+            origin: 'Apapa Port Test Pier',
+            destination: 'Ikeja Industrial Estate, Lagos',
+            message: 'Live diagnostic test ping to verify Resend email notification delivery to rimitransportandalliedlimited@gmail.com.'
+          }
+        }
+      });
+
+      if (error) {
+        setEmailTestResult({
+          success: false,
+          message: `Edge Function invocation error: ${error.message}`
+        });
+      } else if (data && data.success === false) {
+        setEmailTestResult({
+          success: false,
+          message: `Resend error: ${data.error || 'Failed to dispatch email'}`
+        });
+      } else {
+        setEmailTestResult({
+          success: true,
+          message: `Success! Test email delivered via Resend API to rimitransportandalliedlimited@gmail.com (ID: ${data?.id || 'OK'})`
+        });
+      }
+    } catch (err: unknown) {
+      setEmailTestResult({
+        success: false,
+        message: `Exception: ${err instanceof Error ? err.message : String(err)}`
+      });
+    } finally {
+      setIsTestingEmail(false);
+    }
+  };
 
   // New Consignment Form State
   const [newConsignment, setNewConsignment] = useState({
@@ -1443,6 +1493,70 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 <pre className="bg-slate-950 text-slate-200 p-4 rounded-xl text-[11px] font-mono overflow-x-auto max-h-80 leading-relaxed border border-slate-800 select-all">
                   {SQL_SCHEMA_SETUP}
                 </pre>
+              </div>
+            </div>
+
+            {/* Edge Function & Resend Email Integration Card */}
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-600 flex items-center justify-center shrink-0">
+                    <Mail className="w-5 h-5 stroke-[2.2]" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-sm flex items-center gap-2">
+                      <span>Supabase Edge Function: send-quote-email</span>
+                      <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                        Resend API
+                      </span>
+                    </h4>
+                    <p className="text-xs text-slate-500 mt-0.5">
+                      Automatically dispatches quote inquiry notifications to <code className="text-slate-800 font-mono font-bold">rimitransportandalliedlimited@gmail.com</code>.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleTestEmailFunction}
+                    disabled={isTestingEmail}
+                    className="px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-amber-400 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                  >
+                    <RefreshCw className={`w-3.5 h-3.5 ${isTestingEmail ? 'animate-spin' : ''}`} />
+                    <span>{isTestingEmail ? 'Testing Email...' : 'Send Test Notification Ping'}</span>
+                  </button>
+                </div>
+              </div>
+
+              {emailTestResult && (
+                <div className={`p-3.5 rounded-xl text-xs flex items-start gap-2.5 ${emailTestResult.success ? 'bg-emerald-50 border border-emerald-200 text-emerald-800' : 'bg-amber-50 border border-amber-200 text-amber-800'}`}>
+                  {emailTestResult.success ? <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" /> : <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />}
+                  <div>
+                    <strong className="block font-bold">{emailTestResult.success ? 'Email Notification Dispatched' : 'Notification Notice'}</strong>
+                    <span>{emailTestResult.message}</span>
+                  </div>
+                </div>
+              )}
+
+              <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-3 text-xs text-slate-700">
+                <div className="font-bold text-slate-900 text-xs flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+                  Deployment & Secret Configuration Commands
+                </div>
+                <div className="space-y-2">
+                  <p className="text-slate-600 text-[11px]">
+                    1. Set your Resend API Key in Supabase secrets:
+                  </p>
+                  <pre className="bg-slate-950 text-amber-300 p-2.5 rounded-lg font-mono text-[11px] overflow-x-auto select-all">
+                    npx supabase secrets set RESEND_API_KEY="re_your_api_key_here" --project-ref brclfzknbsveotjzwzyi
+                  </pre>
+                  <p className="text-slate-600 text-[11px] pt-1">
+                    2. Deploy the Edge Function:
+                  </p>
+                  <pre className="bg-slate-950 text-emerald-400 p-2.5 rounded-lg font-mono text-[11px] overflow-x-auto select-all">
+                    npx supabase functions deploy send-quote-email --project-ref brclfzknbsveotjzwzyi --no-verify-jwt
+                  </pre>
+                </div>
               </div>
             </div>
           </div>

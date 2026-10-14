@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { COMPANY_DETAILS, SERVICES_DATA } from '../data/companyData';
-import { appendQuoteRequest } from '../data/adminStore';
+import { submitQuoteRequest } from '../data/adminStore';
 import {
   Send,
   CheckCircle2,
@@ -9,7 +9,11 @@ import {
   Shield,
   HelpCircle,
   FileText,
-  Clock
+  Clock,
+  Loader2,
+  Mail,
+  AlertCircle,
+  Check
 } from 'lucide-react';
 
 interface QuoteSectionProps {
@@ -38,6 +42,8 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
 
   const [submitted, setSubmitted] = useState(false);
   const [submissionRef, setSubmissionRef] = useState('');
+  const [emailStatus, setEmailStatus] = useState<'sent' | 'failed' | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -51,15 +57,18 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    if (isSubmitting) return; // Prevent duplicate submissions
 
-    setTimeout(() => {
-      const generatedRef = `RTL-QT-${Math.floor(100000 + Math.random() * 900000)}`;
-      
-      // Save to admin repository
-      appendQuoteRequest({
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    const generatedRef = `RTL-QT-${Math.floor(100000 + Math.random() * 900000)}`;
+
+    try {
+      // 1. Persist to Supabase Database & automatically trigger send-quote-email Edge Function
+      const result = await submitQuoteRequest({
         id: generatedRef,
         fullName: formData.fullName,
         companyName: formData.companyName,
@@ -74,13 +83,28 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
         message: formData.message
       });
 
-      setSubmissionRef(generatedRef);
+      if (!result.dbSaved) {
+        setSubmitError(
+          result.error || 'Failed to save quote to Supabase database. Please check your internet connection or contact us via WhatsApp.'
+        );
+        setIsSubmitting(false);
+        return;
+      }
+
+      setSubmissionRef(result.id);
+      setEmailStatus(result.emailSent ? 'sent' : 'failed');
       setIsSubmitting(false);
       setSubmitted(true);
+
       if (onQuoteSubmitted) {
-        onQuoteSubmitted(generatedRef);
+        onQuoteSubmitted(result.id);
       }
-    }, 600);
+    } catch (err: unknown) {
+      const errorMsg = err instanceof Error ? err.message : String(err);
+      console.error('Unhandled quote submission error:', errorMsg);
+      setSubmitError(`Submission interrupted: ${errorMsg}`);
+      setIsSubmitting(false);
+    }
   };
 
   const generateWhatsAppMessage = () => {
@@ -124,20 +148,46 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
           <div className="lg:col-span-8 bg-slate-950/90 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-md">
             {submitted ? (
               <div className="text-center py-10 space-y-6">
-                <div className="w-16 h-16 bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 rounded-full flex items-center justify-center mx-auto">
+                <div className={`w-16 h-16 ${emailStatus === 'sent' ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-400' : 'bg-amber-500/20 border-amber-500/40 text-amber-400'} border rounded-full flex items-center justify-center mx-auto`}>
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
                 
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <h3 className="text-xl sm:text-2xl font-bold font-display text-white">
-                    Quote Request Received Successfully!
+                    {emailStatus === 'sent'
+                      ? 'Quote Request Received & Operations Notified!'
+                      : 'Quote Request Saved to Database!'}
                   </h3>
+
+                  {/* Status Badges */}
+                  <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                      <Check className="w-3.5 h-3.5" /> Saved in Supabase
+                    </span>
+                    {emailStatus === 'sent' ? (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                        <Mail className="w-3.5 h-3.5" /> Email Sent to Operations Desk
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                        <Clock className="w-3.5 h-3.5" /> Email Delivery Pending Edge Setup
+                      </span>
+                    )}
+                  </div>
+
                   <p className="text-sm text-slate-300 max-w-md mx-auto">
                     Thank you, <strong className="text-amber-400">{formData.fullName}</strong>. Your inquiry reference is <span className="font-mono font-bold text-white bg-slate-800 px-2 py-0.5 rounded-sm">{submissionRef}</span>.
                   </p>
-                  <p className="text-xs text-slate-400 max-w-md mx-auto">
-                    Our clearing officers at 11A Pelewura Way, Apapa are reviewing your details. We will respond via email ({formData.email}) or phone ({formData.phone}) promptly during business hours (Mon-Sat 8:00 AM - 6:00 PM).
-                  </p>
+                  
+                  {emailStatus === 'sent' ? (
+                    <p className="text-xs text-slate-400 max-w-md mx-auto">
+                      All your shipment specifications have been forwarded to our operations desk at <span className="text-slate-300 font-mono">rimitransportandalliedlimited@gmail.com</span>. Our clearing officers at 11A Pelewura Way, Apapa are reviewing your parameters and will respond promptly via email ({formData.email}) or phone ({formData.phone}).
+                    </p>
+                  ) : (
+                    <p className="text-xs text-slate-400 max-w-md mx-auto">
+                      Your quote details are safely saved in our database. Note: Automatic email dispatch is awaiting Resend Edge Function key configuration, but our operations team can inspect your quote directly in our dispatch system. You can also chat directly on WhatsApp below for instant clearance.
+                    </p>
+                  )}
                 </div>
 
                 {/* WhatsApp Fast Track Action */}
@@ -160,6 +210,8 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                   <button
                     onClick={() => {
                       setSubmitted(false);
+                      setEmailStatus(null);
+                      setSubmitError(null);
                       setFormData({
                         fullName: '',
                         companyName: '',
@@ -183,6 +235,15 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {submitError && (
+                  <div className="bg-red-500/10 border border-red-500/30 text-red-200 text-xs rounded-xl p-4 flex items-start gap-3">
+                    <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="block text-red-300 font-semibold mb-0.5">Quote Submission Notice:</strong>
+                      <span>{submitError}</span>
+                    </div>
+                  </div>
+                )}
                 
                 {/* 1. Contact Information */}
                 <div>
@@ -353,10 +414,13 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-7 py-3.5 bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-slate-950 font-extrabold text-sm rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 cursor-pointer disabled:opacity-50"
+                    className="px-7 py-3.5 bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-slate-950 font-extrabold text-sm rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
-                      <span>Calculating Quotation...</span>
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
+                        <span>Saving Quote & Notifying Operations...</span>
+                      </>
                     ) : (
                       <>
                         <span>Submit Quote Request</span>

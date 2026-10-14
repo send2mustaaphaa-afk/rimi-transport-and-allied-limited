@@ -36,17 +36,24 @@ export const ContactSection: React.FC = () => {
     setIsSending(true);
 
     appendContactMessage({
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
       subject: formData.subject || 'General Logistics Inquiry',
-      message: formData.message
+      message: formData.message.trim()
     });
 
     setTimeout(() => {
       setIsSending(false);
       setSubmitted(true);
-    }, 500);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+    }, 600);
   };
 
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('11A Pelewura Way, Apapa, Lagos, Nigeria')}`;
