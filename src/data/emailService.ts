@@ -64,7 +64,11 @@ export async function sendQuoteNotificationEmail(quote: QuoteEmailPayload): Prom
     });
 
     if (response.ok) {
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
+      if (data && data.success === 'false') {
+        console.warn('FormSubmit needs activation check on rimitransportandalliedlimited@gmail.com:', data.message);
+        return { success: false, message: data.message };
+      }
       console.info('Quote email notification dispatched to', OWNER_EMAIL, data);
       return { success: true };
     } else {
