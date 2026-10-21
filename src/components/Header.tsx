@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { COMPANY_DETAILS } from '../data/companyData';
-import { Menu, X, Phone, MessageSquare, ArrowRight, Shield } from 'lucide-react';
+import { Menu, X, MessageSquare, ArrowRight } from 'lucide-react';
 
 interface HeaderProps {
   activeSection: string;
@@ -34,39 +34,6 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
-      {/* Top Utility Bar */}
-      <div className="bg-slate-900 text-slate-300 text-xs py-2 px-4 sm:px-8 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-          <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
-            <span className="flex items-center gap-1.5 text-slate-300">
-              <Shield className="w-3.5 h-3.5 text-amber-500" />
-              <span>Licensed Clearing & Forwarding Agent — Apapa, Lagos</span>
-            </span>
-            <span className="hidden md:inline text-slate-600">|</span>
-            <span className="hidden md:inline text-slate-300">Mon - Sat: 8:00 AM - 6:00 PM</span>
-          </div>
-          <div className="flex items-center gap-4 text-xs">
-            <a
-              href={`tel:${COMPANY_DETAILS.phoneRaw}`}
-              className="hover:text-amber-400 transition-colors flex items-center gap-1 font-medium text-white"
-            >
-              <Phone className="w-3.5 h-3.5 text-amber-500" />
-              <span>{COMPANY_DETAILS.phone}</span>
-            </a>
-            <span className="text-slate-600">|</span>
-            <a
-              href={COMPANY_DETAILS.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-emerald-400 transition-colors flex items-center gap-1 font-medium text-emerald-400"
-            >
-              <MessageSquare className="w-3.5 h-3.5" />
-              <span>WhatsApp: {COMPANY_DETAILS.whatsappNumber}</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
       {/* Main Navigation */}
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between">
         {/* Zone 1: Single text element Brand wordmark */}
