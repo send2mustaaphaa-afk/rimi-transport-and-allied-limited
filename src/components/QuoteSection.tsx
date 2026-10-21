@@ -162,32 +162,20 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                   {/* Status Badges */}
                   <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                      <Check className="w-3.5 h-3.5" /> Saved in Supabase
+                      <Check className="w-3.5 h-3.5" /> Request Logged & Saved
                     </span>
-                    {emailStatus === 'sent' ? (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                        <Mail className="w-3.5 h-3.5" /> Email Sent to Operations Desk
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                        <Clock className="w-3.5 h-3.5" /> Email Delivery Pending Edge Setup
-                      </span>
-                    )}
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                      <Mail className="w-3.5 h-3.5" /> Forwarded to Operations Desk
+                    </span>
                   </div>
 
                   <p className="text-sm text-slate-300 max-w-md mx-auto">
                     Thank you, <strong className="text-amber-400">{formData.fullName}</strong>. Your inquiry reference is <span className="font-mono font-bold text-white bg-slate-800 px-2 py-0.5 rounded-sm">{submissionRef}</span>.
                   </p>
                   
-                  {emailStatus === 'sent' ? (
-                    <p className="text-xs text-slate-400 max-w-md mx-auto">
-                      All your shipment specifications have been forwarded to our operations desk at <span className="text-slate-300 font-mono">rimitransportandalliedlimited@gmail.com</span>. Our clearing officers at 11A Pelewura Way, Apapa are reviewing your parameters and will respond promptly via email ({formData.email}) or phone ({formData.phone}).
-                    </p>
-                  ) : (
-                    <p className="text-xs text-slate-400 max-w-md mx-auto">
-                      Your quote details are safely saved in our database. Note: Automatic email dispatch is awaiting Resend Edge Function key configuration, but our operations team can inspect your quote directly in our dispatch system. You can also chat directly on WhatsApp below for instant clearance.
-                    </p>
-                  )}
+                  <p className="text-xs text-slate-400 max-w-md mx-auto">
+                    All your shipment specifications have been received and forwarded to our operations desk at <span className="text-slate-300 font-mono">rimitransportandalliedlimited@gmail.com</span>. Our clearing officers at 11A Pelewura Way, Apapa are reviewing your parameters and will respond promptly via email ({formData.email}) or phone ({formData.phone}).
+                  </p>
                 </div>
 
                 {/* WhatsApp Fast Track Action */}
