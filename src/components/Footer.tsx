@@ -1,6 +1,7 @@
 import React from 'react';
 import { COMPANY_DETAILS, SERVICES_DATA } from '../data/companyData';
 import { Phone, Mail, MapPin, Clock, MessageSquare, Shield, ArrowUp, Lock } from 'lucide-react';
+import logoImg from '../assets/logo.png';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -28,10 +29,12 @@ export const Footer: React.FC<FooterProps> = ({
           
           {/* Column 1: Company Profile (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-slate-900 border border-amber-500/40 text-amber-500 flex items-center justify-center font-bold text-base font-display">
-                R
-              </div>
+            <div className="flex items-center gap-3">
+              <img
+                src={logoImg}
+                alt="RIMI TRANSPORT AND ALLIED LIMITED Logo"
+                className="h-[48px] w-auto object-contain shrink-0 drop-shadow-md"
+              />
               <div>
                 <span className="text-base font-extrabold text-white font-display block leading-tight">
                   RIMI TRANSPORT

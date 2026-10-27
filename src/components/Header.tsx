@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { COMPANY_DETAILS } from '../data/companyData';
 import { Menu, X, MessageSquare, ArrowRight } from 'lucide-react';
+import logoImg from '../assets/logo.png';
 
 interface HeaderProps {
   activeSection: string;
@@ -35,16 +36,18 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
       {/* Main Navigation */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between">
-        {/* Zone 1: Single text element Brand wordmark */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 flex items-center justify-between">
+        {/* Zone 1: Official Logo + Brand Wordmark */}
         <button
           onClick={() => handleLinkClick('home')}
           className="text-left focus:outline-hidden group cursor-pointer"
         >
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-lg bg-slate-900 text-amber-500 flex items-center justify-center font-bold text-lg font-display tracking-tight shadow-xs group-hover:bg-slate-800 transition-colors border border-amber-500/30">
-              R
-            </div>
+          <div className="flex items-center gap-3">
+            <img
+              src={logoImg}
+              alt="RIMI TRANSPORT AND ALLIED LIMITED Logo"
+              className="h-[50px] w-auto object-contain shrink-0 group-hover:scale-105 transition-transform duration-200 drop-shadow-xs"
+            />
             <div>
               <span className="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 font-display block leading-tight group-hover:text-amber-600 transition-colors">
                 RIMI TRANSPORT
