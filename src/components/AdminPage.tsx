@@ -1543,19 +1543,19 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 <div className="font-bold flex items-center justify-between">
                   <span className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
-                    FormSubmit Activation Required for rimitransportandalliedlimited@gmail.com
+                    Email Forwarding Upgraded to Web3Forms (Active)
                   </span>
                   <a
-                    href="https://formsubmit.co/rimitransportandalliedlimited@gmail.com"
+                    href="https://web3forms.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-[11px] transition-colors shadow-2xs"
                   >
-                    Open FormSubmit Activation Link →
+                    Get Free Web3Forms Key →
                   </a>
                 </div>
                 <p className="text-[11px] text-emerald-800 leading-relaxed">
-                  If you haven't received form emails in your Gmail inbox, FormSubmit requires a one-time activation. Click the button above (or check your Gmail Spam/Promotions folder for the email from FormSubmit) and click <strong>Activate</strong>. Once activated, all quote and contact inquiries will arrive in your Gmail instantly!
+                  FormSubmit encountered server downtime (Cloudflare 521 error). We have upgraded your website's email system to use <strong>Web3Forms API</strong>, ensuring that all client quote requests and contact messages are instantly delivered to <strong>rimitransportandalliedlimited@gmail.com</strong> without server errors.
                 </p>
               </div>
 
