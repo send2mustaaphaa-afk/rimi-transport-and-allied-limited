@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { COMPANY_DETAILS, SERVICES_DATA } from '../data/companyData';
 import { Phone, Mail, MapPin, Clock, MessageSquare, Shield, ArrowUp, Lock } from 'lucide-react';
 import logoImg from '../assets/logo.png';
 
 interface FooterProps {
-  onNavigate: (sectionId: string) => void;
-  onRequestQuote: () => void;
-  onSelectService: (serviceTitle: string) => void;
+  onNavigate?: (sectionId: string) => void;
+  onRequestQuote?: () => void;
+  onSelectService?: (serviceTitle: string) => void;
   onNavigateToAdmin?: () => void;
 }
 
@@ -29,7 +30,7 @@ export const Footer: React.FC<FooterProps> = ({
           
           {/* Column 1: Company Profile (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="flex items-center gap-3">
+            <Link to="/" className="inline-flex items-center gap-3">
               <img
                 src={logoImg}
                 alt="RIMI TRANSPORT AND ALLIED LIMITED Logo"
@@ -43,7 +44,7 @@ export const Footer: React.FC<FooterProps> = ({
                   AND ALLIED LIMITED
                 </span>
               </div>
-            </div>
+            </Link>
 
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
               Premier Clearing & Forwarding and Intermodal Logistics solutions in Nigeria. Providing reliable customs brokerage, international ocean and air freight, port haulage, and bonded warehousing from our Apapa headquarters.
@@ -64,60 +65,44 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <ul className="space-y-2">
               <li>
-                <button
-                  onClick={() => onNavigate('home')}
-                  className="hover:text-amber-400 transition-colors text-left"
-                >
+                <Link to="/" className="hover:text-amber-400 transition-colors text-left block">
                   Home
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate('about')}
-                  className="hover:text-amber-400 transition-colors text-left"
-                >
+                <Link to="/about" className="hover:text-amber-400 transition-colors text-left block">
                   About Us
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate('services')}
-                  className="hover:text-amber-400 transition-colors text-left"
-                >
+                <Link to="/services" className="hover:text-amber-400 transition-colors text-left block">
                   Our Services
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate('vehicles')}
-                  className="hover:text-amber-400 transition-colors text-left"
-                >
-                  Automobiles & Fleet
-                </button>
+                <Link to="/ports" className="hover:text-amber-400 transition-colors text-left block">
+                  Ports & Coverage
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate('why-us')}
-                  className="hover:text-amber-400 transition-colors text-left"
-                >
+                <Link to="/fleet" className="hover:text-amber-400 transition-colors text-left block">
+                  Fleet & Automobiles
+                </Link>
+              </li>
+              <li>
+                <Link to="/why-choose-us" className="hover:text-amber-400 transition-colors text-left block">
                   Why Choose Us
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate('tracking')}
-                  className="hover:text-amber-400 transition-colors text-left"
-                >
+                <Link to="/track" className="hover:text-amber-400 transition-colors text-left block">
                   Track Consignment
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={onRequestQuote}
-                  className="text-amber-400 hover:text-amber-300 font-semibold transition-colors text-left"
-                >
-                  Request a Quote
-                </button>
+                <Link to="/contact" className="text-amber-400 hover:text-amber-300 font-semibold transition-colors text-left block">
+                  Contact & Quote
+                </Link>
               </li>
             </ul>
           </div>
@@ -130,16 +115,13 @@ export const Footer: React.FC<FooterProps> = ({
             <ul className="space-y-1.5">
               {SERVICES_DATA.slice(0, 7).map((srv) => (
                 <li key={srv.id}>
-                  <button
-                    onClick={() => {
-                      onNavigate('services');
-                      onSelectService(srv.title);
-                    }}
+                  <Link
+                    to={`/services/${srv.id}`}
                     className="hover:text-amber-400 transition-colors text-left truncate block max-w-full"
                     title={srv.title}
                   >
                     {srv.title}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -150,32 +132,32 @@ export const Footer: React.FC<FooterProps> = ({
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">
               Apapa Operations Office
             </h4>
-            <div className="space-y-2.5 text-xs text-slate-300">
-              <div className="flex items-start gap-2">
+            <div className="space-y-3 text-xs text-slate-300">
+              <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                <span>{COMPANY_DETAILS.officeAddress}</span>
+                <span className="leading-relaxed">{COMPANY_DETAILS.officeAddress}</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-amber-500 shrink-0" />
                 <a href={`tel:${COMPANY_DETAILS.phoneRaw}`} className="hover:text-amber-400 transition-colors font-medium text-white">
                   {COMPANY_DETAILS.phone}
                 </a>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-amber-500 shrink-0" />
                 <a href={`mailto:${COMPANY_DETAILS.email}`} className="hover:text-amber-400 transition-colors truncate" title={COMPANY_DETAILS.email}>
                   {COMPANY_DETAILS.email}
                 </a>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <MessageSquare className="w-4 h-4 text-emerald-400 shrink-0" />
                 <a href={COMPANY_DETAILS.whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors text-emerald-400 font-semibold">
-                  WhatsApp: {COMPANY_DETAILS.whatsappNumber}
+                  WhatsApp: {COMPANY_DETAILS.whatsappNumberDisplay}
                 </a>
               </div>
-              <div className="flex items-center gap-2 text-slate-400 pt-1">
+              <div className="flex items-center gap-2.5 text-slate-300 pt-1 border-t border-slate-900">
                 <Clock className="w-4 h-4 text-amber-500 shrink-0" />
-                <span>{COMPANY_DETAILS.businessHours}</span>
+                <span className="leading-relaxed">{COMPANY_DETAILS.businessHours}</span>
               </div>
             </div>
           </div>
@@ -186,31 +168,25 @@ export const Footer: React.FC<FooterProps> = ({
       {/* Bottom Bar */}
       <div className="border-t border-slate-900 bg-slate-950 py-6 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[11px] text-slate-500 text-center sm:text-left">
-            © {new Date().getFullYear()} {COMPANY_DETAILS.name}. All rights reserved. Registered Clearing & Forwarding Agency, Apapa Lagos.
+          <p className="text-[11px] text-slate-400 text-center sm:text-left">
+            © {new Date().getFullYear()} {COMPANY_DETAILS.name}. All rights reserved. Registered customs clearing and freight forwarding agency in Apapa, Lagos.
           </p>
 
           <div className="flex items-center gap-4 text-[11px]">
-            <span className="text-slate-500 hidden sm:inline">Apapa Port · Tin Can Island · MMIA Airport</span>
-            <span className="text-slate-700 hidden sm:inline">·</span>
-            <a
-              href="#admin"
-              onClick={(e) => {
-                e.preventDefault();
-                window.location.hash = 'admin';
-                if (onNavigateToAdmin) {
-                  onNavigateToAdmin();
-                }
-              }}
+            <span className="text-slate-400 hidden sm:inline">Apapa Port · Tin Can Island · MMIA Airport</span>
+            <span className="text-slate-700 hidden sm:inline" aria-hidden="true">·</span>
+            <Link
+              to="/admin"
               className="text-[11px] text-slate-400 hover:text-slate-200 transition-colors inline-flex items-center gap-1.5 cursor-pointer hover:underline underline-offset-2"
               title="Staff Login"
             >
               <Lock className="w-3 h-3 text-slate-400" />
               <span>Staff Login</span>
-            </a>
+            </Link>
             <button
               onClick={scrollToTop}
-              className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white transition-colors flex items-center gap-1 cursor-pointer"
+              className="btn-interactive p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white transition-colors flex items-center gap-1 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+              aria-label="Scroll back to top of page"
               title="Scroll to top"
             >
               <ArrowUp className="w-3.5 h-3.5" />

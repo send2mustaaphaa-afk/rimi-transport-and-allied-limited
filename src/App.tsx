@@ -1,33 +1,70 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { AboutSection } from './components/AboutSection';
-import { ServicesSection } from './components/ServicesSection';
-import { VehicleFleetSection } from './components/VehicleFleetSection';
-import { WhyChooseUs } from './components/WhyChooseUs';
-import { QuoteSection } from './components/QuoteSection';
-import { TrackingSection } from './components/TrackingSection';
-import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
+import { QuoteCtaBand } from './components/QuoteCtaBand';
+import { ScrollToTop } from './components/ScrollToTop';
 import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
+import { MobileQuickActionBar } from './components/MobileQuickActionBar';
 import { AdminPage } from './components/AdminPage';
+
+// Multi-Page Views
+import { HomePage } from './pages/HomePage';
+import { AboutPage } from './pages/AboutPage';
+import { ServicesPage } from './pages/ServicesPage';
+import { ServiceDetailPage } from './pages/ServiceDetailPage';
+import { PortsPage } from './pages/PortsPage';
+import { FleetPage } from './pages/FleetPage';
+import { WhyChooseUsPage } from './pages/WhyChooseUsPage';
+import { TrackingPage } from './pages/TrackingPage';
+import { ContactPage } from './pages/ContactPage';
+import { NotFoundPage } from './pages/NotFoundPage';
+
 import { DEMO_TRACKING_SHIPMENTS, TrackingShipment } from './data/companyData';
 import { fetchRemoteShipments, syncShipmentToSupabase } from './data/adminStore';
+import { useScrollReveal } from './hooks/useScrollReveal';
 
 export default function App() {
-  const [currentPath, setCurrentPath] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      if (window.location.pathname === '/admin' || window.location.hash === '#admin') {
-        return '/admin';
-      }
-    }
-    return '/';
-  });
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const [activeSection, setActiveSection] = useState('home');
   const [selectedQuoteService, setSelectedQuoteService] = useState<string>('');
   const [activeTrackingId, setActiveTrackingId] = useState<string>('');
   const [shipments, setShipments] = useState<TrackingShipment[]>(DEMO_TRACKING_SHIPMENTS);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  // Initialize IntersectionObserver scroll reveals whenever route changes
+  useScrollReveal(location.pathname);
+
+  // Redirect legacy anchor hashes (e.g. #services, #about, #quote, #tracking, #why-us, #admin) to clean routes
+  useEffect(() => {
+    const hash = (location.hash || '').toLowerCase();
+    if (!hash) return;
+
+    const legacyHashMap: Record<string, string> = {
+      '#admin': '/admin',
+      '#about': '/about',
+      '#services': '/services',
+      '#service': '/services',
+      '#ports': '/ports',
+      '#fleet': '/fleet',
+      '#vehicles': '/fleet',
+      '#automobiles': '/fleet',
+      '#why-us': '/why-choose-us',
+      '#whyus': '/why-choose-us',
+      '#why-choose-us': '/why-choose-us',
+      '#tracking': '/track',
+      '#track': '/track',
+      '#quote': '/contact',
+      '#contact': '/contact',
+      '#faq': '/contact',
+      '#faqs': '/contact'
+    };
+
+    if (legacyHashMap[hash]) {
+      navigate(legacyHashMap[hash], { replace: true });
+    }
+  }, [location.hash, navigate]);
 
   // Sync shipments with Supabase backend on load
   useEffect(() => {
@@ -38,103 +75,19 @@ export default function App() {
     });
   }, []);
 
-  // Sync route with URL changes / popstate / hashchange
+  // Track scroll progress percentage
   useEffect(() => {
-    const handleLocationChange = () => {
-      if (window.location.pathname === '/admin' || window.location.hash === '#admin') {
-        setCurrentPath('/admin');
-      } else {
-        setCurrentPath('/');
-      }
-    };
-
-    window.addEventListener('popstate', handleLocationChange);
-    window.addEventListener('hashchange', handleLocationChange);
-    return () => {
-      window.removeEventListener('popstate', handleLocationChange);
-      window.removeEventListener('hashchange', handleLocationChange);
-    };
-  }, []);
-
-  // Track scroll position to update active navbar link on public homepage
-  useEffect(() => {
-    if (currentPath === '/admin') return;
-
     const handleScroll = () => {
-      const sections = ['home', 'about', 'services', 'vehicles', 'why-us', 'quote', 'tracking', 'contact'];
-      const scrollPosition = window.scrollY + 200;
-
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section);
-            break;
-          }
-        }
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        const currentProgress = (window.scrollY / totalScroll) * 100;
+        setScrollProgress(Math.min(Math.max(currentProgress, 0), 100));
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [currentPath]);
-
-  const navigateToAdmin = () => {
-    try {
-      window.history.pushState(null, '', '/admin');
-    } catch (e) {
-      window.location.hash = 'admin';
-    }
-    setCurrentPath('/admin');
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-  };
-
-  const navigateToHome = () => {
-    try {
-      window.history.pushState(null, '', '/');
-    } catch (e) {
-      window.location.hash = '';
-    }
-    setCurrentPath('/');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const scrollToSection = (sectionId: string) => {
-    if (currentPath !== '/') {
-      navigateToHome();
-      setTimeout(() => {
-        const el = document.getElementById(sectionId);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-      return;
-    }
-
-    setActiveSection(sectionId);
-    if (sectionId === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleRequestQuote = (serviceName?: string) => {
-    if (serviceName) {
-      setSelectedQuoteService(serviceName);
-    }
-    scrollToSection('quote');
-  };
-
-  const handleTrackShipment = (trackingId?: string) => {
-    if (trackingId) {
-      setActiveTrackingId(trackingId);
-    }
-    scrollToSection('tracking');
-  };
+  }, []);
 
   const handleQuoteSubmitted = (trackingRef: string) => {
     setActiveTrackingId(trackingRef);
@@ -151,11 +104,11 @@ export default function App() {
     syncShipmentToSupabase(newShipment);
   };
 
-  // --- ADMIN ROUTE VIEW (/admin) ---
-  if (currentPath === '/admin') {
+  // --- STAFF PORTAL ROUTE (/admin) ---
+  if (location.pathname === '/admin') {
     return (
       <AdminPage
-        onReturnHome={navigateToHome}
+        onReturnHome={() => navigate('/')}
         shipments={shipments}
         onUpdateShipment={handleUpdateShipment}
         onAddShipment={handleAddShipment}
@@ -163,71 +116,103 @@ export default function App() {
     );
   }
 
-  // --- PUBLIC HOMEPAGE (ZERO ADMIN OVERLAY) ---
+  // --- PUBLIC MULTI-PAGE APPLICATION ---
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans selection:bg-amber-500 selection:text-white">
-      {/* Main Navigation with Admin Dashboard on menu */}
+      {/* Resets window scroll position upon route change */}
+      <ScrollToTop />
+
+      {/* Top Amber Scroll Progress Bar */}
+      <div
+        className="fixed top-0 left-0 right-0 h-[3px] bg-transparent z-50 pointer-events-none scroll-progress-bar"
+        aria-hidden="true"
+      >
+        <div
+          className="h-full bg-amber-500 transition-all duration-75 ease-out shadow-[0_0_8px_rgba(245,158,11,0.6)]"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+
+      {/* Global Header */}
       <Header
-        activeSection={activeSection}
-        onNavigate={scrollToSection}
-        onRequestQuote={() => handleRequestQuote()}
-        onNavigateToAdmin={navigateToAdmin}
+        onRequestQuote={() => navigate('/contact')}
+        onNavigateToAdmin={() => navigate('/admin')}
       />
 
-      <main className="flex-1">
-        {/* 1. Hero Section */}
-        <div id="home">
-          <Hero
-            onRequestQuote={() => handleRequestQuote()}
-            onTrackShipment={handleTrackShipment}
-            onExploreServices={() => scrollToSection('services')}
+      {/* Multi-Page Routes */}
+      <main className="flex-1 pb-16 sm:pb-0">
+        <Routes>
+          {/* Home */}
+          <Route path="/" element={<HomePage />} />
+
+          {/* About */}
+          <Route path="/about" element={<AboutPage />} />
+
+          {/* Services Overview & Sub-pages */}
+          <Route
+            path="/services"
+            element={
+              <ServicesPage
+                onQuoteWithService={(serviceName) => setSelectedQuoteService(serviceName || '')}
+              />
+            }
           />
-        </div>
+          <Route path="/services/:serviceId" element={<ServiceDetailPage />} />
 
-        {/* 2. About Us Section */}
-        <AboutSection
-          onRequestQuote={() => handleRequestQuote()}
-          onContactClick={() => scrollToSection('contact')}
-        />
+          {/* Ports & Coverage */}
+          <Route path="/ports" element={<PortsPage />} />
 
-        {/* 3. Our Services Section */}
-        <ServicesSection
-          onRequestQuoteWithService={handleRequestQuote}
-        />
+          {/* Automobiles & Fleet */}
+          <Route
+            path="/fleet"
+            element={
+              <FleetPage
+                onQuoteWithService={(serviceName) => setSelectedQuoteService(serviceName || '')}
+              />
+            }
+          />
 
-        {/* 3B. Automobile & Vehicle Fleet Logistics Showcase */}
-        <VehicleFleetSection
-          onRequestQuoteWithService={handleRequestQuote}
-        />
+          {/* Why Choose Us */}
+          <Route path="/why-choose-us" element={<WhyChooseUsPage />} />
 
-        {/* 4. Why Choose Us Section */}
-        <WhyChooseUs
-          onRequestQuote={() => handleRequestQuote()}
-        />
+          {/* Track Consignment */}
+          <Route
+            path="/track"
+            element={
+              <TrackingPage
+                shipments={shipments}
+                activeTrackingId={activeTrackingId}
+              />
+            }
+          />
+          {/* Alias /tracking -> /track */}
+          <Route path="/tracking" element={<Navigate to="/track" replace />} />
 
-        {/* 5. Request a Quote Section */}
-        <QuoteSection
-          initialService={selectedQuoteService}
-          onQuoteSubmitted={handleQuoteSubmitted}
-        />
+          {/* Contact & Quote */}
+          <Route
+            path="/contact"
+            element={<ContactPage onQuoteSubmitted={handleQuoteSubmitted} />}
+          />
+          {/* Alias /quote -> /contact */}
+          <Route path="/quote" element={<Navigate to="/contact" replace />} />
 
-        {/* 6. Cargo & Customs Milestone Tracking */}
-        <TrackingSection
-          initialTrackingId={activeTrackingId}
-          onRequestQuote={() => handleRequestQuote()}
-          shipmentsList={shipments}
-        />
-
-        {/* 7. Contact Us & Embedded Map Section */}
-        <ContactSection />
+          {/* Custom 404 Page */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
 
-      {/* Corporate Footer with hidden discreet admin dot */}
+      {/* Shared Short Call-To-Action Band at the end of every page */}
+      <QuoteCtaBand />
+
+      {/* Global Footer */}
       <Footer
-        onNavigate={scrollToSection}
-        onRequestQuote={() => handleRequestQuote()}
-        onSelectService={(serviceTitle) => handleRequestQuote(serviceTitle)}
-        onNavigateToAdmin={navigateToAdmin}
+        onRequestQuote={() => navigate('/contact')}
+        onNavigateToAdmin={() => navigate('/admin')}
+      />
+
+      {/* Sticky Bottom Bar on Mobile (Call, WhatsApp, Get Quote) */}
+      <MobileQuickActionBar
+        onRequestQuote={() => navigate('/contact')}
       />
 
       {/* Floating WhatsApp Quick Connect */}

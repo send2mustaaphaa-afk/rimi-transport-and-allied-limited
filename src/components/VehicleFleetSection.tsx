@@ -16,6 +16,7 @@ import {
 import luxuryCarsPortImg from '../assets/images/luxury_cars_port_1791890294373.jpg';
 import carCarrierHaulageImg from '../assets/images/car_carrier_haulage_1791890309517.jpg';
 import roroDischargeImg from '../assets/images/roro_black_officers_1791988253646.jpg';
+import { AnimatedCounter } from './AnimatedCounter';
 
 interface VehicleFleetSectionProps {
   onRequestQuoteWithService: (serviceName?: string) => void;
@@ -87,24 +88,25 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
   });
 
   return (
-    <section id="vehicles" className="py-20 bg-slate-900 text-white border-b border-slate-800 relative overflow-hidden">
+    <section id="vehicles" className="py-16 sm:py-24 bg-slate-900 text-white border-b border-slate-800 relative overflow-hidden">
       {/* Subtle ambient background glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+        {/* Section Header with Amber Label & Accent Line */}
+        <div className="reveal-on-scroll flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 border border-amber-500/30 px-3.5 py-1.5 rounded-full mb-3">
+            <div className="text-xs font-bold text-amber-400 uppercase tracking-widest flex items-center gap-2">
               <Car className="w-3.5 h-3.5 text-amber-400" />
-              <span>Automobile Logistics & Vehicle Clearing Division</span>
+              <span>AUTOMOBILE & FLEET LOGISTICS</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-display tracking-tight text-balance">
+            <span className="section-accent-line" />
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-display tracking-tight text-balance mt-3">
               Premium Vehicle Importation, Port Clearing & Haulage
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed">
+            <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed max-w-[65ch]">
               We manage the end-to-end clearing and delivery of luxury automobiles, executive fleets, commercial vehicles, and heavy machinery arriving via Roll-on/Roll-off (Ro-Ro) vessels and containerized shipping at Lagos ports.
             </p>
           </div>
@@ -158,22 +160,22 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
           </div>
         </div>
 
-        {/* Highlight Stats Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-4.5">
+        {/* Highlight Stats Strip with Animated Counters */}
+        <div className="reveal-group grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          <div className="reveal-on-scroll bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 premium-card-lift">
             <div className="flex items-center gap-2 text-amber-400 text-xs font-bold mb-1">
               <Anchor className="w-4 h-4 shrink-0" />
               <span>PTML & Tin Can Direct</span>
             </div>
             <div className="text-xl sm:text-2xl font-extrabold text-white font-display">
-              100% Ro-Ro Berth
+              <AnimatedCounter value="100%" /> Ro-Ro Berth
             </div>
             <p className="text-[11px] text-slate-400 mt-1">
               Direct presence at Grimaldi PTML terminal gate
             </p>
           </div>
 
-          <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-4.5">
+          <div className="reveal-on-scroll bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 premium-card-lift">
             <div className="flex items-center gap-2 text-amber-400 text-xs font-bold mb-1">
               <ShieldCheck className="w-4 h-4 shrink-0" />
               <span>Customs VIN Valuation</span>
@@ -186,7 +188,7 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
             </p>
           </div>
 
-          <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-4.5">
+          <div className="reveal-on-scroll bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 premium-card-lift">
             <div className="flex items-center gap-2 text-amber-400 text-xs font-bold mb-1">
               <Truck className="w-4 h-4 shrink-0" />
               <span>Multi-Car Carrier</span>
@@ -199,13 +201,13 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
             </p>
           </div>
 
-          <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-4.5">
+          <div className="reveal-on-scroll bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 premium-card-lift">
             <div className="flex items-center gap-2 text-amber-400 text-xs font-bold mb-1">
               <Clock className="w-4 h-4 shrink-0" />
               <span>Fast Terminal Exit</span>
             </div>
             <div className="text-xl sm:text-2xl font-extrabold text-white font-display">
-              24 - 48 Hours
+              <AnimatedCounter value="24 - 48 Hours" />
             </div>
             <p className="text-[11px] text-slate-400 mt-1">
               Average release window from ship discharge
@@ -214,11 +216,11 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
         </div>
 
         {/* Featured Visual Grid of Vehicles */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <div className="reveal-group grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
           {filteredItems.map((item) => (
             <div
               key={item.id}
-              className="bg-slate-950/90 border border-slate-800 hover:border-amber-500/50 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 flex flex-col justify-between group"
+              className="reveal-on-scroll bg-slate-950/90 border border-slate-800 hover:border-amber-500/50 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 flex flex-col justify-between group premium-card-lift"
             >
               <div>
                 {/* Image Showcase Card */}
@@ -280,7 +282,7 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
                   <button
                     type="button"
                     onClick={() => setPreviewImage(item.image)}
-                    className="text-xs font-semibold text-slate-400 hover:text-white flex items-center gap-1 transition-colors cursor-pointer"
+                    className="text-xs font-semibold text-slate-400 hover:text-white flex items-center gap-1 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm"
                   >
                     <span>View HD Photo</span>
                     <ExternalLink className="w-3 h-3" />
@@ -289,10 +291,10 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
                   <button
                     type="button"
                     onClick={() => onRequestQuoteWithService('Vehicle Clearing & Ro-Ro Logistics')}
-                    className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-lg transition-colors flex items-center gap-1.5 shadow-sm cursor-pointer"
+                    className="btn-interactive group px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-lg transition-colors flex items-center gap-1.5 shadow-sm cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
                   >
-                    <span>Get Vehicle Quote</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <span>Request a Quote</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" />
                   </button>
                 </div>
               </div>
@@ -301,7 +303,7 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
         </div>
 
         {/* Specialized Automobile Import Guidance Card */}
-        <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div className="reveal-on-scroll bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <div className="inline-flex items-center gap-2 text-xs font-bold text-amber-400">
               <Layers className="w-4 h-4" />
@@ -319,10 +321,10 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
             <button
               type="button"
               onClick={() => onRequestQuoteWithService('Vehicle Clearing & Ro-Ro Logistics')}
-              className="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs sm:text-sm rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 cursor-pointer"
+              className="btn-interactive w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs sm:text-sm rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
             >
               <Car className="w-4 h-4" />
-              <span>Request Automobile Clearance Quote</span>
+              <span>Request a Quote</span>
             </button>
           </div>
         </div>

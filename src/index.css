@@ -1,11 +1,67 @@
 @import "tailwindcss";
 
+:root {
+  /* Brand Color Palette */
+  --color-navy-950: #060e1a;
+  --color-navy-900: #0B192C;
+  --color-navy-850: #10243E;
+  --color-navy-800: #1E3E62;
+  --color-navy-700: #2b5687;
+  
+  --color-amber-500: #F59E0B;
+  --color-amber-600: #D97706;
+  --color-amber-400: #FBBF24;
+  --color-amber-tint: rgba(245, 158, 11, 0.12);
+  --color-amber-border: rgba(245, 158, 11, 0.35);
+
+  --color-surface-light: #ffffff;
+  --color-surface-muted: #F8FAFC;
+  --color-surface-subtle: #F1F5F9;
+  --color-border-subtle: #E2E8F0;
+  --color-border-strong: #CBD5E1;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748B;
+
+  /* 8px Spacing Scale */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem;  /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem;    /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem;  /* 24px */
+  --space-8: 2rem;    /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem;   /* 48px */
+  --space-16: 4rem;   /* 64px */
+  --space-20: 5rem;   /* 80px */
+  --space-24: 6rem;   /* 96px */
+
+  /* Radius Scale */
+  --radius-sm: 0.375rem;  /* 6px */
+  --radius-md: 0.5rem;    /* 8px */
+  --radius-lg: 0.75rem;   /* 12px */
+  --radius-xl: 1rem;      /* 16px */
+  --radius-2xl: 1.25rem;  /* 20px */
+  --radius-full: 9999px;
+
+  /* Elevation Shadows */
+  --shadow-subtle: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+  --shadow-card: 0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  --shadow-card-hover: 0 12px 24px -4px rgba(15, 23, 42, 0.12), 0 4px 8px -2px rgba(15, 23, 42, 0.06);
+  --shadow-elevated: 0 20px 30px -6px rgba(15, 23, 42, 0.18), 0 8px 12px -4px rgba(15, 23, 42, 0.08);
+
+  /* Typography Scale */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Cabinet Grotesk", "Inter", sans-serif;
+}
+
 @theme {
-  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Cabinet Grotesk", "Plus Jakarta Sans", sans-serif;
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
   --color-brand-950: #060e1a;
   --color-brand-900: #0B192C;
-  --color-brand-850: #112239;
+  --color-brand-850: #10243E;
   --color-brand-800: #1E3E62;
   --color-brand-700: #2b5687;
   --color-amber-accent: #E5890A;
@@ -15,10 +71,185 @@
 html {
   scroll-behavior: smooth;
   font-family: var(--font-sans);
+  overflow-x: hidden;
+  font-size: 16px;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.7;
 }
 
 .font-display {
   font-family: var(--font-display);
+}
+
+/* Fluid Hero Heading Clamp with tighter line-height and negative tracking */
+.hero-headline-fluid {
+  font-size: clamp(2rem, 5.2vw, 3.5rem);
+  line-height: 1.16;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+/* Fluid Section Heading Clamp */
+.section-headline-fluid {
+  font-size: clamp(1.75rem, 3.8vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+/* Body Lead Text: 16-18px fluid with 1.65-1.75 line-height */
+.body-lead-fluid {
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.7;
+}
+
+/* Section Amber Accent Line */
+.section-accent-line {
+  display: block;
+  width: 44px;
+  height: 3px;
+  background-color: var(--color-amber-500);
+  border-radius: 2px;
+  margin-top: 0.5rem;
+}
+
+/* =========================================================================
+   MOTION SYSTEM (Vanilla CSS & GPU Accelerated)
+   ========================================================================= */
+
+/* Hero Ken Burns slow subtle zoom (scale 1 -> 1.06 over 20s) */
+@keyframes heroKenBurns {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-ken-burns {
+  animation: heroKenBurns 20s ease-in-out infinite alternate;
+  will-change: transform;
+  transform-origin: center center;
+}
+
+/* Hero Page Load Stagger (fade-in & translateY 16px -> 0, 600-800ms ease-out) */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-stagger-1 {
+  animation: heroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+
+.hero-stagger-2 {
+  animation: heroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both;
+}
+
+.hero-stagger-3 {
+  animation: heroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
+}
+
+.hero-stagger-4 {
+  animation: heroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.40s both;
+}
+
+.hero-stagger-5 {
+  animation: heroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.54s both;
+}
+
+.hero-stagger-6 {
+  animation: heroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.68s both;
+}
+
+.hero-stagger-right {
+  animation: heroFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+}
+
+/* Scroll Reveal Base */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Group Staggers (80ms - 100ms interval between items) */
+.reveal-group > .reveal-on-scroll:nth-child(1) { transition-delay: 0ms; }
+.reveal-group > .reveal-on-scroll:nth-child(2) { transition-delay: 90ms; }
+.reveal-group > .reveal-on-scroll:nth-child(3) { transition-delay: 180ms; }
+.reveal-group > .reveal-on-scroll:nth-child(4) { transition-delay: 270ms; }
+.reveal-group > .reveal-on-scroll:nth-child(5) { transition-delay: 360ms; }
+.reveal-group > .reveal-on-scroll:nth-child(6) { transition-delay: 450ms; }
+.reveal-group > .reveal-on-scroll:nth-child(7) { transition-delay: 540ms; }
+.reveal-group > .reveal-on-scroll:nth-child(8) { transition-delay: 630ms; }
+.reveal-group > .reveal-on-scroll:nth-child(9) { transition-delay: 720ms; }
+.reveal-group > .reveal-on-scroll:nth-child(10) { transition-delay: 810ms; }
+
+/* Premium Card hover lift with shadow deepening */
+.premium-card-lift {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+  will-change: transform, box-shadow;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .premium-card-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-card-hover);
+  }
+}
+
+/* Icon square gentle color transition on card hover */
+.card-icon-square {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.premium-card-lift:hover .card-icon-square,
+.group:hover .card-icon-square {
+  background-color: rgba(245, 158, 11, 0.22);
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #D97706;
+  transform: scale(1.06);
+}
+
+/* Accessible, smooth interactive buttons */
+.btn-interactive {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-interactive:hover {
+  transform: translateY(-1.5px);
+}
+
+.btn-interactive:active {
+  transform: translateY(0);
+}
+
+.btn-interactive:focus-visible {
+  outline: 2px solid var(--color-amber-500);
+  outline-offset: 2px;
 }
 
 /* Custom scrollbar */
@@ -35,4 +266,47 @@ html {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* Accessibility: Respect prefers-reduced-motion by disabling animations and showing content immediately */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .animate-ken-burns {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .hero-stagger-1,
+  .hero-stagger-2,
+  .hero-stagger-3,
+  .hero-stagger-4,
+  .hero-stagger-5,
+  .hero-stagger-6,
+  .hero-stagger-right {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .scroll-progress-bar {
+    display: none !important;
+  }
+
+  .premium-card-lift:hover {
+    transform: none !important;
+  }
 }

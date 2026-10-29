@@ -45,6 +45,11 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
   const [emailStatus, setEmailStatus] = useState<'sent' | 'failed' | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formErrors, setFormErrors] = useState<{
+    fullName?: string;
+    email?: string;
+    phone?: string;
+  }>({});
 
   useEffect(() => {
     if (initialService) {
@@ -55,11 +60,40 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (formErrors[name as keyof typeof formErrors]) {
+      setFormErrors(prev => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const validate = (): boolean => {
+    const newErrors: { fullName?: string; email?: string; phone?: string } = {};
+
+    if (!formData.fullName.trim() || formData.fullName.trim().length < 2) {
+      newErrors.fullName = 'Please enter your full name (minimum 2 characters).';
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
+      newErrors.email = 'Please enter a valid email address (e.g. name@company.com).';
+    }
+
+    const phoneClean = formData.phone.replace(/[\s\-+()]/g, '');
+    if (!formData.phone.trim() || phoneClean.length < 7) {
+      newErrors.phone = 'Please enter a valid phone number with country/area code (e.g. +234 803 000 0000).';
+    }
+
+    setFormErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return; // Prevent duplicate submissions
+
+    if (!validate()) {
+      setSubmitError('Please complete all required fields with valid details before submitting.');
+      return;
+    }
 
     setIsSubmitting(true);
     setSubmitError(null);
@@ -124,20 +158,21 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
   };
 
   return (
-    <section id="quote" className="py-20 bg-slate-900 text-white relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(217,119,6,0.1),transparent_50%)]" />
+    <section id="quote" className="py-16 sm:py-24 bg-slate-900 text-white relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(217,119,6,0.12),transparent_50%)]" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Section Header */}
-        <div className="max-w-3xl mb-12">
-          <div className="text-xs font-bold text-amber-400 uppercase tracking-widest mb-2">
-            Instant Logistics Quotation
+        {/* Section Header with Amber Label & Accent Line */}
+        <div className="reveal-on-scroll max-w-3xl mb-12 sm:mb-16">
+          <div className="text-xs font-bold text-amber-400 uppercase tracking-widest flex items-center gap-2">
+            <span>GET A QUOTE</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-display tracking-tight text-balance">
+          <span className="section-accent-line" />
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-display tracking-tight text-balance mt-3">
             Request a Free, Transparent Logistics Quotation
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed max-w-[65ch]">
             Fill in your shipment parameters below. Our Apapa-based clearing and operations desk will calculate exact terminal, statutory duty, shipping, and haulage costings without hidden charges.
           </p>
         </div>
@@ -145,7 +180,7 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
           {/* Main Form Box */}
-          <div className="lg:col-span-8 bg-slate-950/90 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-md">
+          <div className="reveal-on-scroll lg:col-span-8 bg-slate-950/90 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-md">
             {submitted ? (
               <div className="text-center py-10 space-y-6">
                 <div className={`w-16 h-16 ${emailStatus === 'sent' ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-400' : 'bg-amber-500/20 border-amber-500/40 text-amber-400'} border rounded-full flex items-center justify-center mx-auto`}>
@@ -190,7 +225,7 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                     className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm"
                   >
                     <MessageSquare className="w-4 h-4" />
-                    <span>Send Quote Directly to WhatsApp (08169183582)</span>
+                    <span>Talk to Us on WhatsApp ({COMPANY_DETAILS.whatsappNumberDisplay})</span>
                   </a>
                 </div>
 
@@ -251,8 +286,14 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                         value={formData.fullName}
                         onChange={handleChange}
                         placeholder="e.g. Alhaji Mustapha Ibrahim"
-                        className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                        aria-invalid={!!formErrors.fullName}
+                        className={`w-full bg-slate-900 border ${
+                          formErrors.fullName ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-slate-700 focus:border-amber-500 focus:ring-amber-500'
+                        } rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:ring-1`}
                       />
+                      {formErrors.fullName && (
+                        <p className="mt-1 text-[11px] text-red-400">{formErrors.fullName}</p>
+                      )}
                     </div>
 
                     <div>
@@ -280,8 +321,14 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="e.g. procurement@company.com"
-                        className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                        aria-invalid={!!formErrors.email}
+                        className={`w-full bg-slate-900 border ${
+                          formErrors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-slate-700 focus:border-amber-500 focus:ring-amber-500'
+                        } rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:ring-1`}
                       />
+                      {formErrors.email && (
+                        <p className="mt-1 text-[11px] text-red-400">{formErrors.email}</p>
+                      )}
                     </div>
 
                     <div>
@@ -295,8 +342,14 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="e.g. +234 803 000 0000"
-                        className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                        aria-invalid={!!formErrors.phone}
+                        className={`w-full bg-slate-900 border ${
+                          formErrors.phone ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-slate-700 focus:border-amber-500 focus:ring-amber-500'
+                        } rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:ring-1`}
                       />
+                      {formErrors.phone && (
+                        <p className="mt-1 text-[11px] text-red-400">{formErrors.phone}</p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -402,7 +455,7 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-7 py-3.5 bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-slate-950 font-extrabold text-sm rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="btn-interactive group px-7 py-3.5 bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-slate-950 font-extrabold text-sm rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
                   >
                     {isSubmitting ? (
                       <>
@@ -411,8 +464,8 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                       </>
                     ) : (
                       <>
-                        <span>Submit Quote Request</span>
-                        <Send className="w-4 h-4" />
+                        <span>Request a Quote</span>
+                        <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
                       </>
                     )}
                   </button>
@@ -422,10 +475,10 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
           </div>
 
           {/* Right Column: Pricing Guarantee & Advisory */}
-          <div className="lg:col-span-4 space-y-5">
+          <div className="reveal-on-scroll lg:col-span-4 space-y-5">
             
             {/* Guarantee Card */}
-            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 space-y-4">
+            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 space-y-4 premium-card-lift">
               <div className="flex items-center gap-2.5 text-amber-400 font-bold text-sm">
                 <Calculator className="w-5 h-5 text-amber-500" />
                 <span>Our Transparent Quote Guarantee</span>
@@ -469,7 +522,7 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                 className="w-full py-2.5 px-4 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-2 transition-colors"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>WhatsApp: {COMPANY_DETAILS.whatsappNumber}</span>
+                <span>Talk to Us on WhatsApp ({COMPANY_DETAILS.whatsappNumberDisplay})</span>
               </a>
             </div>
 

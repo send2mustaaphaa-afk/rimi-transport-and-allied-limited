@@ -149,16 +149,16 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
             href={COMPANY_DETAILS.whatsappMessageUrl(whatsappMessage)}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2.5 text-xs font-bold text-emerald-800 bg-emerald-100 hover:bg-emerald-200 border border-emerald-300 rounded-lg transition-colors flex items-center justify-center gap-2"
+            className="btn-interactive px-4 py-2.5 text-xs font-bold text-emerald-800 bg-emerald-100 hover:bg-emerald-200 border border-emerald-300 rounded-lg transition-colors flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
           >
             <MessageSquare className="w-4 h-4 text-emerald-600" />
-            <span>Chat on WhatsApp</span>
+            <span>Talk to Us on WhatsApp</span>
           </a>
 
           <div className="flex items-center gap-2">
             <button
               onClick={onClose}
-              className="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-200/70 transition-colors"
+              className="btn-interactive px-4 py-2.5 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-200/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
             >
               Close
             </button>
@@ -167,10 +167,10 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                 onRequestQuoteForService(service.title);
                 onClose();
               }}
-              className="px-5 py-2.5 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 active:bg-slate-950 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm"
+              className="btn-interactive group px-5 py-2.5 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 active:bg-slate-950 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2"
             >
-              <span>Request Quote for This Service</span>
-              <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
+              <span>Request a Quote</span>
+              <ArrowRight className="w-3.5 h-3.5 text-amber-400 group-hover:translate-x-1 transition-transform duration-200" />
             </button>
           </div>
         </div>

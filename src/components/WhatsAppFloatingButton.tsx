@@ -15,10 +15,10 @@ export const WhatsAppFloatingButton: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end">
+    <div className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end pointer-events-auto [margin-bottom:env(safe-area-inset-bottom,0)] [margin-right:env(safe-area-inset-right,0)]">
       {/* Expanded Quick Chat Popup */}
       {isOpen && (
-        <div className="mb-3 w-80 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
+        <div className="mb-3 w-72 sm:w-80 max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-elevated border border-slate-200 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
           
           {/* Header */}
           <div className="bg-slate-900 text-white p-4 flex items-center justify-between">
@@ -110,27 +110,27 @@ export const WhatsAppFloatingButton: React.FC = () => {
                 <Phone className="w-3 h-3 text-amber-500" />
                 {COMPANY_DETAILS.phone}
               </span>
-              <span>WhatsApp: {COMPANY_DETAILS.whatsappNumber}</span>
+              <span>WhatsApp: {COMPANY_DETAILS.whatsappNumberDisplay}</span>
             </div>
           </div>
 
         </div>
       )}
 
-      {/* Floating Action Trigger Button */}
+      {/* Floating Action Trigger Button - Refined compact size */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-white shadow-xl flex items-center justify-center transition-transform hover:scale-105 active:scale-95 cursor-pointer ring-4 ring-emerald-500/20"
+        className="w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-white shadow-card-hover flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-white/30"
         aria-label="Open WhatsApp live inquiry"
-        title={`Chat on WhatsApp: ${COMPANY_DETAILS.whatsappNumber}`}
+        title={`Talk to Us on WhatsApp: ${COMPANY_DETAILS.whatsappNumberDisplay}`}
       >
         {isOpen ? (
-          <X className="w-6 h-6" />
+          <X className="w-5 h-5" />
         ) : (
           <div className="relative">
-            <MessageSquare className="w-7 h-7" />
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-amber-400 rounded-full border-2 border-slate-950 animate-ping"></span>
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-amber-400 rounded-full border-2 border-slate-950"></span>
+            <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6" />
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-400 rounded-full border border-slate-950 animate-ping"></span>
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-400 rounded-full border border-slate-950"></span>
           </div>
         )}
       </button>

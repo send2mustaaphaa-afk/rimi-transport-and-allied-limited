@@ -59,86 +59,93 @@ export const ContactSection: React.FC = () => {
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('11A Pelewura Way, Apapa, Lagos, Nigeria')}`;
 
   return (
-    <section id="contact" className="py-20 bg-white border-b border-slate-200">
+    <section id="contact" className="py-16 sm:py-24 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Section Header */}
-        <div className="max-w-3xl mb-14">
-          <div className="text-xs font-bold text-amber-600 uppercase tracking-widest mb-2">
-            Get In Touch
+        {/* Section Header with Amber Label & Accent Line */}
+        <div className="reveal-on-scroll max-w-3xl mb-12 sm:mb-16">
+          <div className="text-xs font-bold text-amber-600 uppercase tracking-widest flex items-center gap-2">
+            <span>CONTACT US</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-display tracking-tight text-balance">
+          <span className="section-accent-line" />
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-display tracking-tight text-balance mt-3">
             Contact Our Apapa Maritime & Logistics Office
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed max-w-[65ch]">
             Reach out to our logistics consultants for urgent consignment clearances, ocean freight booking, inland haulage arrangements, or custom brokerage inquiries.
           </p>
         </div>
 
-        {/* Contact Info Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+        {/* Contact Info Cards (Equal heights, 16px radius, hover lift, amber-tinted icon square) */}
+        <div className="reveal-group grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
           
           {/* Phone Card */}
-          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:border-amber-500/50 transition-colors">
-            <div className="w-10 h-10 rounded-xl bg-slate-900 text-amber-400 flex items-center justify-center mb-3">
-              <Phone className="w-5 h-5" />
+          <div className="reveal-on-scroll group bg-slate-50 border border-slate-200/90 rounded-2xl p-5 hover:border-amber-500/50 transition-all shadow-subtle flex flex-col justify-between premium-card-lift">
+            <div>
+              <div className="card-icon-square w-12 h-12 rounded-xl bg-amber-500/12 border border-amber-500/25 text-amber-600 flex items-center justify-center mb-3">
+                <Phone className="w-5 h-5 stroke-[2.2]" />
+              </div>
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                Official Phone
+              </div>
+              <a
+                href={`tel:${COMPANY_DETAILS.phoneRaw}`}
+                className="text-sm sm:text-base font-bold text-slate-900 hover:text-amber-600 mt-1 block transition-colors"
+              >
+                {COMPANY_DETAILS.phone}
+              </a>
+              <p className="text-[11px] text-slate-500 mt-1">
+                Direct hotline to clearing coordinators
+              </p>
             </div>
-            <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              Official Phone
-            </div>
-            <a
-              href={`tel:${COMPANY_DETAILS.phoneRaw}`}
-              className="text-sm sm:text-base font-bold text-slate-900 hover:text-amber-600 mt-1 block transition-colors"
-            >
-              {COMPANY_DETAILS.phone}
-            </a>
-            <p className="text-[11px] text-slate-500 mt-1">
-              Direct hotline to clearing coordinators
-            </p>
           </div>
 
           {/* Email Card */}
-          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:border-amber-500/50 transition-colors">
-            <div className="w-10 h-10 rounded-xl bg-slate-900 text-amber-400 flex items-center justify-center mb-3">
-              <Mail className="w-5 h-5" />
+          <div className="reveal-on-scroll group bg-slate-50 border border-slate-200/90 rounded-2xl p-5 hover:border-amber-500/50 transition-all shadow-subtle flex flex-col justify-between premium-card-lift">
+            <div>
+              <div className="card-icon-square w-12 h-12 rounded-xl bg-amber-500/12 border border-amber-500/25 text-amber-600 flex items-center justify-center mb-3">
+                <Mail className="w-5 h-5 stroke-[2.2]" />
+              </div>
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                Email Address
+              </div>
+              <a
+                href={`mailto:${COMPANY_DETAILS.email}`}
+                className="text-xs sm:text-sm font-bold text-slate-900 hover:text-amber-600 mt-1 block truncate transition-colors"
+                title={COMPANY_DETAILS.email}
+              >
+                {COMPANY_DETAILS.email}
+              </a>
+              <p className="text-[11px] text-slate-500 mt-1">
+                Invoices, bills of lading & manifests
+              </p>
             </div>
-            <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              Email Address
-            </div>
-            <a
-              href={`mailto:${COMPANY_DETAILS.email}`}
-              className="text-xs sm:text-sm font-bold text-slate-900 hover:text-amber-600 mt-1 block truncate transition-colors"
-              title={COMPANY_DETAILS.email}
-            >
-              {COMPANY_DETAILS.email}
-            </a>
-            <p className="text-[11px] text-slate-500 mt-1">
-              Invoices, bills of lading & manifests
-            </p>
           </div>
 
           {/* Office Address Card */}
-          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:border-amber-500/50 transition-colors">
-            <div className="w-10 h-10 rounded-xl bg-slate-900 text-amber-400 flex items-center justify-center mb-3">
-              <MapPin className="w-5 h-5" />
+          <div className="reveal-on-scroll group bg-slate-50 border border-slate-200/90 rounded-2xl p-5 hover:border-amber-500/50 transition-all shadow-subtle flex flex-col justify-between premium-card-lift">
+            <div>
+              <div className="card-icon-square w-12 h-12 rounded-xl bg-amber-500/12 border border-amber-500/25 text-amber-600 flex items-center justify-center mb-3">
+                <MapPin className="w-5 h-5 stroke-[2.2]" />
+              </div>
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                Head Office Address
+              </div>
+              <div className="text-xs sm:text-sm font-bold text-slate-900 mt-1">
+                {COMPANY_DETAILS.officeAddress}
+              </div>
+              <p className="text-[11px] text-slate-500 mt-1">
+                Apapa Maritime Hub, Lagos State
+              </p>
             </div>
-            <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              Head Office Address
-            </div>
-            <div className="text-xs sm:text-sm font-bold text-slate-900 mt-1">
-              {COMPANY_DETAILS.officeAddress}
-            </div>
-            <p className="text-[11px] text-slate-500 mt-1">
-              Apapa Maritime Hub, Lagos State
-            </p>
           </div>
 
           {/* WhatsApp / Hours Card */}
-          <div className="bg-slate-900 text-white rounded-2xl p-5 border border-slate-800 flex flex-col justify-between">
+          <div className="reveal-on-scroll group bg-slate-900 text-white rounded-2xl p-5 border border-slate-800 flex flex-col justify-between shadow-card premium-card-lift">
             <div>
               <div className="flex items-center justify-between mb-3">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                  <MessageSquare className="w-5 h-5" />
+                <div className="card-icon-square w-12 h-12 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center">
+                  <MessageSquare className="w-5 h-5 stroke-[2.2]" />
                 </div>
                 <span className="text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full">
                   Instant Response
@@ -148,7 +155,7 @@ export const ContactSection: React.FC = () => {
                 WhatsApp Desk
               </div>
               <div className="text-sm font-bold text-white mt-1">
-                {COMPANY_DETAILS.whatsappNumber}
+                {COMPANY_DETAILS.whatsappNumberDisplay}
               </div>
               <div className="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
                 <Clock className="w-3.5 h-3.5 text-amber-400" />
@@ -160,20 +167,20 @@ export const ContactSection: React.FC = () => {
               href={COMPANY_DETAILS.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-lg transition-colors flex items-center justify-center gap-1.5"
+              className="btn-interactive mt-3 w-full py-2 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-bold text-xs rounded-lg transition-colors flex items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
             >
               <MessageSquare className="w-3.5 h-3.5" />
-              <span>Open WhatsApp Chat</span>
+              <span>Talk to Us on WhatsApp</span>
             </a>
           </div>
 
         </div>
 
         {/* 2-Column: Direct Inquiry Form & Interactive Embedded Map */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="reveal-group grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
           {/* Left Column: Direct Message Form */}
-          <div className="lg:col-span-6 bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8">
+          <div className="reveal-on-scroll lg:col-span-6 bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8">
             <h3 className="text-lg font-bold text-slate-900 font-display mb-1">
               Send Us a Message
             </h3>
@@ -286,17 +293,17 @@ export const ContactSection: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSending}
-                  className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                  className="btn-interactive group w-full py-3 bg-slate-900 hover:bg-slate-800 active:bg-slate-950 text-white font-bold text-xs rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2"
                 >
                   {isSending ? 'Sending...' : 'Send Message to Apapa Office'}
-                  <Send className="w-3.5 h-3.5 text-amber-400" />
+                  <Send className="w-3.5 h-3.5 text-amber-400 group-hover:translate-x-1 transition-transform duration-200" />
                 </button>
               </form>
             )}
           </div>
 
           {/* Right Column: Embedded Map & Strategic Proximity Viewer */}
-          <div className="lg:col-span-6 space-y-4">
+          <div className="reveal-on-scroll lg:col-span-6 space-y-4">
             
             <div className="bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 shadow-lg text-white">
               
@@ -371,7 +378,7 @@ export const ContactSection: React.FC = () => {
                     Prefer WhatsApp Messaging?
                   </h4>
                   <p className="text-[11px] text-emerald-800">
-                    Send consignments, documents or questions to <strong>08169183582</strong>
+                    Send consignments, documents or questions to <strong>{COMPANY_DETAILS.whatsappNumberDisplay}</strong>
                   </p>
                 </div>
               </div>
@@ -381,7 +388,7 @@ export const ContactSection: React.FC = () => {
                 rel="noopener noreferrer"
                 className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg transition-colors whitespace-nowrap shadow-xs"
               >
-                Chat Now
+                Talk to Us on WhatsApp
               </a>
             </div>
 

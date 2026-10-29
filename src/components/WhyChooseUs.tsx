@@ -1,5 +1,6 @@
 import React from 'react';
 import { WHY_CHOOSE_US_POINTS, COMPANY_DETAILS } from '../data/companyData';
+import { AnimatedCounter } from './AnimatedCounter';
 import {
   Award,
   Zap,
@@ -57,69 +58,74 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onRequestQuote }) => {
   ];
 
   return (
-    <section id="why-us" className="py-20 bg-white border-b border-slate-200">
+    <section id="why-us" className="py-16 sm:py-24 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="text-xs font-bold text-amber-600 uppercase tracking-widest mb-2">
-            Why Partner With Us
+        {/* Section Header with Amber Label & Accent Line */}
+        <div className="reveal-on-scroll text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <div className="text-xs font-bold text-amber-600 uppercase tracking-widest inline-flex items-center gap-2">
+            <span>WHY CHOOSE US</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-display tracking-tight text-balance">
+          <span className="section-accent-line mx-auto" />
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-display tracking-tight text-balance mt-3">
             Delivering Strategic Value & Operational Peace of Mind
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed max-w-[65ch] mx-auto">
             International supply chains in Nigeria require deep regulatory knowledge, on-the-ground port agility, and unyielding reliability. Here is why leading enterprises trust {COMPANY_DETAILS.name}.
           </p>
         </div>
 
-        {/* 5 Core Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        {/* 5 Core Pillars Grid + CTA (Equal Heights, 16px radius, hover lift, amber-tinted icon square) */}
+        <div className="reveal-group grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {WHY_CHOOSE_US_POINTS.map((point, index) => (
             <div
               key={index}
-              className={`rounded-2xl p-6 border transition-all duration-200 shadow-2xs hover:shadow-md ${
+              className={`reveal-on-scroll rounded-2xl p-6 border transition-all duration-200 shadow-card hover:border-amber-500/50 flex flex-col justify-between group premium-card-lift ${
                 index === 0
-                  ? 'bg-slate-900 text-white border-slate-800 lg:col-span-1'
-                  : 'bg-slate-50 text-slate-900 border-slate-200 hover:border-amber-500/50'
+                  ? 'bg-slate-900 text-white border-slate-800'
+                  : 'bg-slate-50 text-slate-900 border-slate-200/90'
               }`}
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                  index === 0 ? 'bg-amber-500/20' : 'bg-slate-900'
-                }`}>
-                  {getPillarIcon(point.icon)}
-                </div>
-                <div className="text-right">
-                  <span className={`text-lg font-extrabold font-mono tabular-nums ${
-                    index === 0 ? 'text-amber-400' : 'text-slate-900'
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className={`card-icon-square w-12 h-12 rounded-xl flex items-center justify-center border shadow-2xs ${
+                    index === 0
+                      ? 'bg-amber-500/15 border-amber-500/30 text-amber-400'
+                      : 'bg-amber-500/12 border-amber-500/25 text-amber-600'
                   }`}>
-                    {point.stat}
-                  </span>
-                  <span className={`text-[10px] block font-medium ${
-                    index === 0 ? 'text-slate-400' : 'text-slate-500'
-                  }`}>
-                    {point.statLabel}
-                  </span>
+                    {getPillarIcon(point.icon)}
+                  </div>
+                  <div className="text-right">
+                    <span className={`text-lg font-extrabold font-mono tabular-nums ${
+                      index === 0 ? 'text-amber-400' : 'text-slate-900'
+                    }`}>
+                      <AnimatedCounter value={point.stat} />
+                    </span>
+                    <span className={`text-[10px] block font-medium ${
+                      index === 0 ? 'text-slate-400' : 'text-slate-500'
+                    }`}>
+                      {point.statLabel}
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              <h3 className={`text-base font-bold font-display ${
-                index === 0 ? 'text-white' : 'text-slate-900'
-              }`}>
-                {point.title}
-              </h3>
-              
-              <p className={`mt-2 text-xs leading-relaxed ${
-                index === 0 ? 'text-slate-300' : 'text-slate-600'
-              }`}>
-                {point.description}
-              </p>
+                <h3 className={`text-base font-bold font-display group-hover:text-amber-500 transition-colors ${
+                  index === 0 ? 'text-white' : 'text-slate-900'
+                }`}>
+                  {point.title}
+                </h3>
+                
+                <p className={`mt-2 text-xs leading-relaxed max-w-[65ch] ${
+                  index === 0 ? 'text-slate-300' : 'text-slate-600'
+                }`}>
+                  {point.description}
+                </p>
+              </div>
             </div>
           ))}
 
           {/* 6th Card: Direct Hotline */}
-          <div className="bg-gradient-to-br from-amber-500 to-amber-600 text-slate-950 rounded-2xl p-6 flex flex-col justify-between shadow-md">
+          <div className="reveal-on-scroll bg-gradient-to-br from-amber-500 to-amber-600 text-slate-950 rounded-2xl p-6 flex flex-col justify-between shadow-card border border-amber-400/50 premium-card-lift group">
             <div>
               <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider mb-2">
                 <ShieldCheck className="w-4 h-4" />
@@ -128,7 +134,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onRequestQuote }) => {
               <h3 className="text-lg font-extrabold font-display leading-snug">
                 Have a Container Vessel Arriving at Apapa Port?
               </h3>
-              <p className="text-xs text-slate-900/90 mt-2 font-medium">
+              <p className="text-xs text-slate-950/90 mt-2 font-medium max-w-[65ch]">
                 Send your Bill of Lading & Packing List to our Apapa team for immediate document pre-assessment.
               </p>
             </div>
@@ -136,17 +142,17 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onRequestQuote }) => {
             <div className="pt-4 mt-4 border-t border-slate-950/15">
               <button
                 onClick={onRequestQuote}
-                className="w-full py-2.5 bg-slate-950 text-white hover:bg-slate-900 font-bold text-xs rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                className="btn-interactive group/btn w-full py-3 bg-slate-950 text-amber-400 hover:text-white hover:bg-slate-900 font-extrabold text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 focus-visible:ring-offset-amber-500"
               >
-                <span>Initiate Pre-Assessment</span>
-                <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
+                <span>Request a Quote</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform duration-200" />
               </button>
             </div>
           </div>
         </div>
 
         {/* Interactive Comparison Table */}
-        <div className="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
+        <div className="reveal-on-scroll bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
           <div className="p-6 sm:p-7 border-b border-slate-200 bg-white">
             <h3 className="text-lg font-bold text-slate-900 font-display">
               The RIMI Advantage: Solving Nigeria Port Clearance Bottlenecks

@@ -99,24 +99,25 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
   };
 
   return (
-    <section id="tracking" className="py-20 bg-slate-100/70 border-b border-slate-200">
+    <section id="tracking" className="py-16 sm:py-24 bg-slate-100/80 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Section Header */}
-        <div className="max-w-3xl mb-12">
-          <div className="text-xs font-bold text-amber-600 uppercase tracking-widest mb-2">
-            Cargo & Customs Milestone Tracker
+        {/* Section Header with Amber Label & Accent Line */}
+        <div className="reveal-on-scroll max-w-3xl mb-12 sm:mb-16">
+          <div className="text-xs font-bold text-amber-600 uppercase tracking-widest flex items-center gap-2">
+            <span>CARGO TRACKING</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-display tracking-tight text-balance">
+          <span className="section-accent-line" />
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-display tracking-tight text-balance mt-3">
             Track Consignment Status & Port Clearance Progress
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed max-w-[65ch]">
             Monitor real-time updates for shipments clearing through Apapa Port, Tin Can Island, and Murtala Muhammed Airport.
           </p>
         </div>
 
         {/* Search Bar Box */}
-        <div className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-sm mb-8">
+        <div className="reveal-on-scroll bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-sm mb-8">
           <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row gap-3 items-center">
             <div className="relative flex-1 w-full">
               <Search className="absolute left-3.5 top-3.5 w-5 h-5 text-slate-400" />
@@ -131,9 +132,9 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
             <button
               type="submit"
               disabled={isSearching}
-              className="w-full sm:w-auto px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
+              className="btn-interactive w-full sm:w-auto px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm rounded-xl flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2"
             >
-              {isSearching ? 'Searching...' : 'Track Cargo'}
+              {isSearching ? 'Searching...' : 'Track Consignment'}
             </button>
           </form>
 
@@ -162,7 +163,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
 
         {/* Tracking Results Area */}
         {currentShipment ? (
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden animate-in fade-in duration-300">
+          <div className="reveal-on-scroll bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
             
             {/* Result Top Summary Banner */}
             <div className="bg-slate-900 text-white p-6 sm:p-7">
@@ -295,16 +296,16 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
                     )}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-bold rounded-lg transition-colors flex items-center gap-1.5"
+                    className="px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5"
                   >
                     <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Inquire on WhatsApp</span>
+                    <span>Talk to Us on WhatsApp</span>
                   </a>
                   <button
                     onClick={onRequestQuote}
-                    className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-lg transition-colors"
+                    className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer"
                   >
-                    Book New Cargo
+                    Request a Quote
                   </button>
                 </div>
               </div>
