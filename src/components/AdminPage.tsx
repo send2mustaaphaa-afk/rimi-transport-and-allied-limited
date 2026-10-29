@@ -1539,6 +1539,26 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 </div>
               )}
 
+              <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-200 space-y-2 text-xs text-emerald-900">
+                <div className="font-bold flex items-center justify-between">
+                  <span className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+                    FormSubmit Activation Required for rimitransportandalliedlimited@gmail.com
+                  </span>
+                  <a
+                    href="https://formsubmit.co/rimitransportandalliedlimited@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-[11px] transition-colors shadow-2xs"
+                  >
+                    Open FormSubmit Activation Link →
+                  </a>
+                </div>
+                <p className="text-[11px] text-emerald-800 leading-relaxed">
+                  If you haven't received form emails in your Gmail inbox, FormSubmit requires a one-time activation. Click the button above (or check your Gmail Spam/Promotions folder for the email from FormSubmit) and click <strong>Activate</strong>. Once activated, all quote and contact inquiries will arrive in your Gmail instantly!
+                </p>
+              </div>
+
               <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-3 text-xs text-slate-700">
                 <div className="font-bold text-slate-900 text-xs flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-amber-500"></span>
