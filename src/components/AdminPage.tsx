@@ -163,13 +163,13 @@ export const AdminPage: React.FC<AdminPageProps> = ({
             id: `TEST-${Date.now().toString().slice(-4)}`,
             fullName: 'Diagnostic Test User',
             companyName: 'Rimi Logistics Test Systems',
-            email: 'rimitransportandalliedlimited@gmail.com',
+            email: 'rimiandalliedlimited@gmail.com',
             phone: '+234 816 918 3582',
             shipmentType: 'Customs Clearance & Diagnostics',
             containerSize: '20ft Container (FCL)',
             origin: 'Apapa Port Test Pier',
             destination: 'Ikeja Industrial Estate, Lagos',
-            message: 'Live diagnostic test ping to verify Resend email notification delivery to rimitransportandalliedlimited@gmail.com.'
+            message: 'Live diagnostic test ping to verify Resend email notification delivery to rimiandalliedlimited@gmail.com.'
           }
         }
       });
@@ -187,7 +187,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
       } else {
         setEmailTestResult({
           success: true,
-          message: `Success! Test email delivered via Resend API to rimitransportandalliedlimited@gmail.com (ID: ${data?.id || 'OK'})`
+          message: `Success! Test email delivered via Resend API to rimiandalliedlimited@gmail.com (ID: ${data?.id || 'OK'})`
         });
       }
     } catch (err: unknown) {
@@ -1512,7 +1512,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                       </span>
                     </h4>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      Automatically dispatches quote inquiry notifications to <code className="text-slate-800 font-mono font-bold">rimitransportandalliedlimited@gmail.com</code>.
+                      Automatically dispatches quote inquiry notifications to <code className="text-slate-800 font-mono font-bold">rimiandalliedlimited@gmail.com</code>.
                     </p>
                   </div>
                 </div>

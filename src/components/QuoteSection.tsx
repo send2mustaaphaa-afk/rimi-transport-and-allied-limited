@@ -209,7 +209,7 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                   </p>
                   
                   <p className="text-xs text-slate-400 max-w-md mx-auto">
-                    All your shipment specifications have been received and forwarded to our operations desk at <span className="text-slate-300 font-mono">rimitransportandalliedlimited@gmail.com</span>. Our clearing officers at 11A Pelewura Way, Apapa are reviewing your parameters and will respond promptly via email ({formData.email}) or phone ({formData.phone}).
+                    All your shipment specifications have been received and forwarded to our operations desk at <span className="text-slate-300 font-mono">rimiandalliedlimited@gmail.com</span>. Our clearing officers at 11A Pelewura Way, Apapa are reviewing your parameters and will respond promptly via email ({formData.email}) or phone ({formData.phone}).
                   </p>
                 </div>
 

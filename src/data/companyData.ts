@@ -39,7 +39,7 @@ export const COMPANY_DETAILS = {
   subHeadline: "We provide efficient customs clearance, freight forwarding, transportation, and logistics solutions to move your cargo safely and on time.",
   phone: "+234 912 723 2001",
   phoneRaw: "+2349127232001",
-  email: "rimitransportandalliedlimited@gmail.com",
+  email: "rimiandalliedlimited@gmail.com",
   officeAddress: "11A Pelewura Way, Apapa, Lagos State, Nigeria",
   businessHours: "Monday – Saturday: 8:00 AM – 6:00 PM",
   whatsappNumber: "+234 816 918 3582",

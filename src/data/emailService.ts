@@ -1,7 +1,7 @@
 // emailService.ts
-// Direct and reliable email notification service sending all form data to rimitransportandalliedlimited@gmail.com
+// Direct and reliable email notification service sending all form data to rimiandalliedlimited@gmail.com
 
-const OWNER_EMAIL = 'rimitransportandalliedlimited@gmail.com';
+const OWNER_EMAIL = 'rimiandalliedlimited@gmail.com';
 
 export interface QuoteEmailPayload {
   id: string;
