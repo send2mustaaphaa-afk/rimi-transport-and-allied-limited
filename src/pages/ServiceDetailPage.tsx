@@ -18,11 +18,10 @@ import {
   CheckCircle2,
   ArrowRight,
   HelpCircle,
-  FileSpreadsheet,
   ChevronRight,
-  Phone,
-  MessageSquare
+  Phone
 } from 'lucide-react';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 
 const ICON_MAP: Record<string, React.ReactNode> = {
   ShieldCheck: <ShieldCheck className="w-6 h-6 text-amber-500" />,
@@ -230,7 +229,7 @@ export const ServiceDetailPage: React.FC = () => {
                     rel="noopener noreferrer"
                     className="btn-interactive w-full py-3 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 font-bold text-xs rounded-lg flex items-center justify-center gap-2"
                   >
-                    <MessageSquare className="w-4 h-4" />
+                    <WhatsAppIcon className="w-4 h-4" />
                     <span>Inquire via WhatsApp</span>
                   </a>
                 </div>

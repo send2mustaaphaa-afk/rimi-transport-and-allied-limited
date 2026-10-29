@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowRight, MessageSquare, ShieldCheck, Search } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Search } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { COMPANY_DETAILS } from '../data/companyData';
 
 export const QuoteCtaBand: React.FC = () => {
@@ -62,7 +63,7 @@ export const QuoteCtaBand: React.FC = () => {
             rel="noopener noreferrer"
             className="btn-interactive w-full sm:w-auto px-6 py-3.5 bg-emerald-700/80 hover:bg-emerald-600 text-white font-semibold text-sm rounded-lg border border-emerald-600/30 flex items-center justify-center gap-2 shadow-sm transition-colors"
           >
-            <MessageSquare className="w-4 h-4" />
+            <WhatsAppIcon className="w-4 h-4" />
             <span>Talk on WhatsApp</span>
           </a>
 

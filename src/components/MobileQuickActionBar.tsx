@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, MessageSquare, Send } from 'lucide-react';
+import { Phone, Send } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { COMPANY_DETAILS } from '../data/companyData';
 
 interface MobileQuickActionBarProps {
@@ -32,7 +33,7 @@ export const MobileQuickActionBar: React.FC<MobileQuickActionBarProps> = ({ onRe
           aria-label="Chat on WhatsApp"
           className="flex-1 py-2.5 px-2 bg-emerald-700/90 hover:bg-emerald-600 active:bg-emerald-800 text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 shadow-sm transition-colors"
         >
-          <MessageSquare className="w-4 h-4 shrink-0" />
+          <WhatsAppIcon className="w-4 h-4 shrink-0" />
           <span>WhatsApp</span>
         </a>
 

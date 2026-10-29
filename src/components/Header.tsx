@@ -55,7 +55,8 @@ export const Header: React.FC<HeaderProps> = ({
     { label: 'Ports', path: '/ports' },
     { label: 'Fleet', path: '/fleet' },
     { label: 'Why Us', path: '/why-choose-us' },
-    { label: 'Track', path: '/track' }
+    { label: 'Track', path: '/track' },
+    { label: 'Contact', path: '/contact' }
   ];
 
   const isLinkActive = (path: string) => {
@@ -211,32 +212,16 @@ export const Header: React.FC<HeaderProps> = ({
           })}
         </nav>
 
-        {/* Zone 3: Primary Quote Action Button linking to /contact */}
-        <div className="hidden sm:flex items-center gap-3">
-          <Link
-            to="/contact"
-            className="btn-interactive group px-5 py-2.5 text-xs sm:text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 active:bg-slate-950 rounded-lg shadow-sm hover:shadow-md flex items-center gap-2 border border-slate-900 whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2"
-          >
-            <span>Quote</span>
-            <ArrowRight className="w-4 h-4 text-amber-400 group-hover:translate-x-1 transition-transform duration-200 ease-out" />
-          </Link>
-        </div>
 
-        {/* Mobile Quote & Hamburger Controls */}
-        <div className="flex items-center gap-2 lg:hidden">
-          <Link
-            to="/contact"
-            className="btn-interactive px-3.5 py-1.5 text-xs font-bold text-slate-950 bg-amber-500 hover:bg-amber-400 active:bg-amber-600 rounded-lg whitespace-nowrap shadow-xs cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
-          >
-            Quote
-          </Link>
+        {/* Mobile Hamburger Control (Clean, no Quote button) */}
+        <div className="flex items-center lg:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 text-slate-700 hover:text-slate-950 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
@@ -316,16 +301,6 @@ export const Header: React.FC<HeaderProps> = ({
           })}
         </div>
 
-        <div className="pt-3 border-t border-slate-100 flex flex-col gap-2.5">
-          <Link
-            to="/contact"
-            onClick={() => setMobileMenuOpen(false)}
-            className="btn-interactive group w-full py-2.5 px-4 text-sm font-bold text-center text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition-colors flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2"
-          >
-            <span>Quote</span>
-            <ArrowRight className="w-4 h-4 text-amber-400 group-hover:translate-x-1 transition-transform duration-200" />
-          </Link>
-        </div>
       </div>
     </header>
   );

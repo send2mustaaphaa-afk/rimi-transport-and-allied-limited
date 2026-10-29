@@ -15,9 +15,9 @@ import {
   CheckCircle2,
   Clock,
   Briefcase,
-  ArrowRight,
-  MessageSquare
+  ArrowRight
 } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface ServiceDetailModalProps {
   service: ServiceItem | null;
@@ -151,7 +151,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
             rel="noopener noreferrer"
             className="btn-interactive px-4 py-2.5 text-xs font-bold text-emerald-800 bg-emerald-100 hover:bg-emerald-200 border border-emerald-300 rounded-lg transition-colors flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
           >
-            <MessageSquare className="w-4 h-4 text-emerald-600" />
+            <WhatsAppIcon className="w-4 h-4 text-emerald-600" />
             <span>Talk to Us on WhatsApp</span>
           </a>
 

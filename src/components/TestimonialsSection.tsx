@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Quote, ChevronLeft, ChevronRight, Star, ArrowRight, ShieldCheck, Building2 } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { COMPANY_DETAILS } from '../data/companyData';
 
 interface TestimonialPlaceholder {
@@ -219,6 +220,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ onRequ
             rel="noopener noreferrer"
             className="btn-interactive w-full sm:w-auto px-6 py-3.5 bg-slate-800/90 hover:bg-slate-700 text-white font-semibold text-sm rounded-lg border border-slate-700 transition-all flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
           >
+            <WhatsAppIcon className="w-4 h-4 text-emerald-400" />
             <span>Talk to Us on WhatsApp</span>
           </a>
         </div>

@@ -6,7 +6,6 @@ import {
   Mail,
   MapPin,
   Clock,
-  MessageSquare,
   Send,
   CheckCircle2,
   Navigation,
@@ -14,6 +13,7 @@ import {
   Building,
   ShieldCheck
 } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -144,8 +144,8 @@ export const ContactSection: React.FC = () => {
           <div className="reveal-on-scroll group bg-slate-900 text-white rounded-2xl p-5 border border-slate-800 flex flex-col justify-between shadow-card premium-card-lift">
             <div>
               <div className="flex items-center justify-between mb-3">
-                <div className="card-icon-square w-12 h-12 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center">
-                  <MessageSquare className="w-5 h-5 stroke-[2.2]" />
+                <div className="card-icon-square w-12 h-12 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center">
+                  <WhatsAppIcon className="w-5 h-5 text-emerald-400" />
                 </div>
                 <span className="text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full">
                   Instant Response
@@ -169,7 +169,7 @@ export const ContactSection: React.FC = () => {
               rel="noopener noreferrer"
               className="btn-interactive mt-3 w-full py-2 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-bold text-xs rounded-lg transition-colors flex items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
             >
-              <MessageSquare className="w-3.5 h-3.5" />
+              <WhatsAppIcon className="w-3.5 h-3.5" />
               <span>Talk to Us on WhatsApp</span>
             </a>
           </div>
@@ -371,7 +371,7 @@ export const ContactSection: React.FC = () => {
             <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
-                  <MessageSquare className="w-5 h-5" />
+                  <WhatsAppIcon className="w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="text-xs font-bold text-emerald-950">

@@ -4,7 +4,8 @@ import { PageHeader } from '../components/PageHeader';
 import { QuoteSection } from '../components/QuoteSection';
 import { FAQSection } from '../components/FAQSection';
 import { COMPANY_DETAILS } from '../data/companyData';
-import { Phone, Mail, Clock, MessageSquare, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { Phone, Mail, Clock, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 
 interface QuotePageProps {
   selectedService: string;
@@ -68,7 +69,7 @@ export const QuotePage: React.FC<QuotePageProps> = ({
                 rel="noopener noreferrer"
                 className="btn-interactive w-full sm:w-auto px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg flex items-center justify-center gap-2 shadow-sm"
               >
-                <MessageSquare className="w-4 h-4" />
+                <WhatsAppIcon className="w-4 h-4" />
                 <span>WhatsApp ({COMPANY_DETAILS.whatsappNumberDisplay})</span>
               </a>
             </div>

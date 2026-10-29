@@ -5,7 +5,6 @@ import {
   Send,
   CheckCircle2,
   Calculator,
-  MessageSquare,
   Shield,
   HelpCircle,
   FileText,
@@ -15,6 +14,7 @@ import {
   AlertCircle,
   Check
 } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface QuoteSectionProps {
   initialService?: string;
@@ -224,7 +224,7 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                     rel="noopener noreferrer"
                     className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm"
                   >
-                    <MessageSquare className="w-4 h-4" />
+                    <WhatsAppIcon className="w-4 h-4" />
                     <span>Talk to Us on WhatsApp ({COMPANY_DETAILS.whatsappNumberDisplay})</span>
                   </a>
                 </div>
@@ -521,7 +521,7 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                 rel="noopener noreferrer"
                 className="w-full py-2.5 px-4 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-2 transition-colors"
               >
-                <MessageSquare className="w-4 h-4" />
+                <WhatsAppIcon className="w-4 h-4" />
                 <span>Talk to Us on WhatsApp ({COMPANY_DETAILS.whatsappNumberDisplay})</span>
               </a>
             </div>

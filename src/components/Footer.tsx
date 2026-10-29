@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { COMPANY_DETAILS, SERVICES_DATA } from '../data/companyData';
-import { Phone, Mail, MapPin, Clock, MessageSquare, Shield, ArrowUp, Lock } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Shield, ArrowUp, Lock } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import logoImg from '../assets/logo.png';
 
 interface FooterProps {
@@ -150,7 +151,7 @@ export const Footer: React.FC<FooterProps> = ({
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
-                <MessageSquare className="w-4 h-4 text-emerald-400 shrink-0" />
+                <WhatsAppIcon className="w-4 h-4 text-emerald-400 shrink-0" />
                 <a href={COMPANY_DETAILS.whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors text-emerald-400 font-semibold">
                   WhatsApp: {COMPANY_DETAILS.whatsappNumberDisplay}
                 </a>

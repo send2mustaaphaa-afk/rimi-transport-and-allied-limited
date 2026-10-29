@@ -10,12 +10,12 @@ import {
   Mail,
   MapPin,
   Clock,
-  MessageSquare,
   FileText,
   Building,
   ShieldCheck,
   Send
 } from 'lucide-react';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 
 interface ContactPageProps {
   onQuoteSubmitted?: (ref: string) => void;
@@ -93,7 +93,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onQuoteSubmitted }) =>
               rel="noopener noreferrer"
               className="text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1.5 font-semibold"
             >
-              <MessageSquare className="w-3.5 h-3.5" />
+              <WhatsAppIcon className="w-3.5 h-3.5" />
               <span>WhatsApp: {COMPANY_DETAILS.whatsappNumberDisplay}</span>
             </a>
           </div>

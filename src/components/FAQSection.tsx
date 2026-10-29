@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ChevronDown, HelpCircle, FileText, Clock, ShieldAlert, BadgePercent, ArrowRight, MessageSquare } from 'lucide-react';
+import { ChevronDown, HelpCircle, FileText, Clock, ShieldAlert, BadgePercent, ArrowRight } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { COMPANY_DETAILS } from '../data/companyData';
 
 interface FAQItem {
@@ -169,7 +170,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onRequestQuote }) => {
               rel="noopener noreferrer"
               className="btn-interactive w-full sm:w-auto px-4 py-3 bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs rounded-lg border border-slate-700 transition-colors flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
             >
-              <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
+              <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400" />
               <span>Ask on WhatsApp</span>
             </a>
           </div>

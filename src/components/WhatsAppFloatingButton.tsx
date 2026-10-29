@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { COMPANY_DETAILS } from '../data/companyData';
-import { MessageSquare, X, Send, Phone } from 'lucide-react';
+import { X, Send, Phone } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const WhatsAppFloatingButton: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +25,7 @@ export const WhatsAppFloatingButton: React.FC = () => {
           <div className="bg-slate-900 text-white p-4 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white">
-                <MessageSquare className="w-4 h-4" />
+                <WhatsAppIcon className="w-4 h-4" />
               </div>
               <div>
                 <h4 className="text-xs font-bold text-white leading-tight">
@@ -128,7 +129,7 @@ export const WhatsAppFloatingButton: React.FC = () => {
           <X className="w-5 h-5" />
         ) : (
           <div className="relative">
-            <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6" />
+            <WhatsAppIcon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-400 rounded-full border border-slate-950 animate-ping"></span>
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-400 rounded-full border border-slate-950"></span>
           </div>

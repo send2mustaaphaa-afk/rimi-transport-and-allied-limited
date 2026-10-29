@@ -8,11 +8,10 @@ import {
   Ship,
   Plane,
   Truck,
-  FileCheck,
   AlertCircle,
-  ArrowRight,
-  MessageSquare
+  ArrowRight
 } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface TrackingSectionProps {
   initialTrackingId?: string;
@@ -298,7 +297,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
                     rel="noopener noreferrer"
                     className="px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5"
                   >
-                    <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
+                    <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Talk to Us on WhatsApp</span>
                   </a>
                   <button
