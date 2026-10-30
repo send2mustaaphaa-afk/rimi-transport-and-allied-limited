@@ -16,6 +16,7 @@ import {
 import luxuryCarsPortImg from '../assets/images/luxury_cars_port_1791890294373.jpg';
 import carCarrierHaulageImg from '../assets/images/car_carrier_haulage_1791890309517.jpg';
 import roroDischargeImg from '../assets/images/roro_black_officers_1791988253646.jpg';
+import portContainersAutomobilesImg from '../assets/images/port_containers_automobiles_1793358335336.jpg';
 import { AnimatedCounter } from './AnimatedCounter';
 
 interface VehicleFleetSectionProps {
@@ -29,6 +30,23 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const vehicleShowcaseItems = [
+    {
+      id: 'port-containers-autos',
+      tag: 'Container & Automobile Terminal',
+      category: 'roro',
+      title: 'Container Stacking & Automobile Staging at Port Terminal',
+      subtitle: 'Synchronized handling of high-cube containers and imported luxury automobiles at Lagos port quays.',
+      image: portContainersAutomobilesImg,
+      location: 'Lagos Ports Complex & PTML Ro-Ro Terminal',
+      badge: 'Integrated Container & Auto Logistics',
+      highlights: [
+        'Simultaneous container offloading and Ro-Ro car ramp discharge',
+        'State-of-the-art gantry crane and heavy forklift operations',
+        'Secure bonded terminal storage with 24/7 armed CCTV surveillance',
+        'Seamless customs examination and fast gate-out processing'
+      ],
+      turnaround: 'Express Terminal Clearance'
+    },
     {
       id: 'luxury-port',
       tag: 'Portside Discharge & Tally',

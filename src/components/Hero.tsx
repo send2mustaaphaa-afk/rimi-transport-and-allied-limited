@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { COMPANY_DETAILS } from '../data/companyData';
 import { ArrowRight, ShieldCheck, Clock, MapPin, Search, PhoneCall, CheckCircle2 } from 'lucide-react';
 import heroPortImg from '../assets/images/hero_lux_containers_sunset_1791329802841.jpg';
+import blackManagerPortImg from '../assets/images/black_manager_port_cars_1793359470782.jpg';
 
 interface HeroProps {
   onRequestQuote: () => void;
@@ -30,9 +31,9 @@ export const Hero: React.FC<HeroProps> = ({
       {/* Background Graphic & Scrim with Ken Burns subtle zoom */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
-          src={heroPortImg}
-          alt="Modern Cargo Containers at Apapa Seaport Terminal - RIMI TRANSPORT AND ALLIED LIMITED"
-          className="w-full h-full object-cover object-center opacity-40 animate-ken-burns"
+          src={blackManagerPortImg}
+          alt="Professional Port Logistics Manager with Container and Automobile Cars - RIMI TRANSPORT AND ALLIED LIMITED"
+          className="w-full h-full object-cover object-center opacity-45 animate-ken-burns"
           referrerPolicy="no-referrer"
         />
         {/* Layered high-contrast dark scrim ensuring pristine readability across all displays */}
