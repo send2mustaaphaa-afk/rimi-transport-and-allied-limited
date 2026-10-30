@@ -5,16 +5,16 @@ import { Menu, X, ArrowRight, ChevronDown, ShieldCheck, Ship, Plane, Truck, Boxe
 import logoImg from '../assets/logo.png';
 
 const SERVICE_DROPDOWN_ICONS: Record<string, React.ReactNode> = {
-  'customs-clearance': <ShieldCheck className="w-4 h-4 text-amber-500 shrink-0" />,
-  'freight-forwarding': <Ship className="w-4 h-4 text-amber-500 shrink-0" />,
-  'import-export-services': <ArrowLeftRight className="w-4 h-4 text-amber-500 shrink-0" />,
-  'sea-freight': <Ship className="w-4 h-4 text-amber-500 shrink-0" />,
-  'air-freight': <Plane className="w-4 h-4 text-amber-500 shrink-0" />,
-  'land-transportation': <Truck className="w-4 h-4 text-amber-500 shrink-0" />,
-  'cargo-handling': <Boxes className="w-4 h-4 text-amber-500 shrink-0" />,
-  'warehousing-storage': <Warehouse className="w-4 h-4 text-amber-500 shrink-0" />,
-  'documentation-compliance': <FileCheck className="w-4 h-4 text-amber-500 shrink-0" />,
-  'vehicle-clearing-roro': <Car className="w-4 h-4 text-amber-500 shrink-0" />
+  'customs-clearance': <ShieldCheck className="w-4 h-4 text-[#0B192C] shrink-0" />,
+  'freight-forwarding': <Ship className="w-4 h-4 text-[#0B192C] shrink-0" />,
+  'import-export-services': <ArrowLeftRight className="w-4 h-4 text-[#0B192C] shrink-0" />,
+  'sea-freight': <Ship className="w-4 h-4 text-[#0B192C] shrink-0" />,
+  'air-freight': <Plane className="w-4 h-4 text-[#0B192C] shrink-0" />,
+  'land-transportation': <Truck className="w-4 h-4 text-[#0B192C] shrink-0" />,
+  'cargo-handling': <Boxes className="w-4 h-4 text-[#0B192C] shrink-0" />,
+  'warehousing-storage': <Warehouse className="w-4 h-4 text-[#0B192C] shrink-0" />,
+  'documentation-compliance': <FileCheck className="w-4 h-4 text-[#0B192C] shrink-0" />,
+  'vehicle-clearing-roro': <Car className="w-4 h-4 text-[#0B192C] shrink-0" />
 };
 
 interface HeaderProps {
@@ -83,34 +83,34 @@ export const Header: React.FC<HeaderProps> = ({
     <header
       className={`sticky top-0 z-40 backdrop-blur-md border-b transition-all duration-300 ease-in-out ${
         isScrolled
-          ? 'bg-white/95 border-slate-200/90 shadow-[0_8px_24px_-6px_rgba(15,23,42,0.09)]'
-          : 'bg-white/98 border-slate-200 shadow-xs'
+          ? 'bg-white/95 border-slate-200/90 shadow-[0_4px_20px_-4px_rgba(11,25,44,0.06)]'
+          : 'bg-white border-slate-200/70 shadow-xs'
       }`}
     >
       {/* Main Navigation Bar */}
       <div
         className={`max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between transition-all duration-300 ease-in-out ${
-          isScrolled ? 'py-2 sm:py-2.5' : 'py-3 sm:py-3.5'
+          isScrolled ? 'py-3' : 'py-4'
         }`}
       >
         {/* Zone 1: Official Logo + Brand Wordmark */}
         <Link
           to="/"
-          className="text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-lg group cursor-pointer"
+          className="text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B192C] rounded-lg group cursor-pointer"
         >
           <div className="flex items-center gap-3">
             <img
               src={logoImg}
               alt="RIMI TRANSPORT AND ALLIED LIMITED Logo"
-              className={`w-auto object-contain shrink-0 group-hover:scale-105 transition-all duration-300 ease-in-out drop-shadow-xs ${
-                isScrolled ? 'h-[44px]' : 'h-[50px]'
+              className={`w-auto object-contain shrink-0 group-hover:opacity-90 transition-all duration-300 ease-in-out ${
+                isScrolled ? 'h-[42px]' : 'h-[48px]'
               }`}
             />
             <div>
-              <span className="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 font-display block leading-tight group-hover:text-amber-600 transition-colors">
+              <span className="text-base sm:text-lg font-bold tracking-tight text-[#0B192C] font-display block leading-tight">
                 RIMI TRANSPORT
               </span>
-              <span className="text-[11px] font-semibold text-slate-500 tracking-wider block uppercase">
+              <span className="text-[10px] font-medium text-slate-500 tracking-widest block uppercase">
                 AND ALLIED LIMITED
               </span>
             </div>
@@ -118,7 +118,7 @@ export const Header: React.FC<HeaderProps> = ({
         </Link>
 
         {/* Zone 2: Desktop Navigation Links with Services Dropdown */}
-        <nav aria-label="Main Navigation" className="hidden lg:flex items-center gap-5 xl:gap-7 text-sm font-semibold text-slate-700">
+        <nav aria-label="Main Navigation" className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium text-slate-600">
           {navLinks.map((link) => {
             const active = isLinkActive(link.path);
 
@@ -135,14 +135,14 @@ export const Header: React.FC<HeaderProps> = ({
                     aria-current={active ? 'page' : undefined}
                     aria-haspopup="true"
                     aria-expanded={servicesDropdownOpen}
-                    className={`transition-colors relative py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm whitespace-nowrap inline-flex items-center gap-1 ${
+                    className={`transition-colors relative py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B192C] rounded-sm whitespace-nowrap inline-flex items-center gap-1 ${
                       active
-                        ? 'text-amber-600 font-bold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-amber-600'
-                        : 'text-slate-600 hover:text-slate-900'
+                        ? 'text-[#0B192C] font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#0B192C]'
+                        : 'text-slate-600 hover:text-[#0B192C]'
                     }`}
                   >
                     <span>{link.label}</span>
-                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180 text-amber-600' : 'text-slate-400'}`} />
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180 text-[#0B192C]' : 'text-slate-400'}`} />
                   </Link>
 
                   {/* Desktop Dropdown Flyout Panel */}
@@ -161,9 +161,9 @@ export const Header: React.FC<HeaderProps> = ({
                       <Link
                         to="/services"
                         onClick={() => setServicesDropdownOpen(false)}
-                        className="text-[11px] font-bold text-amber-600 hover:text-amber-700 inline-flex items-center gap-1"
+                        className="text-[11px] font-semibold text-[#0B192C] hover:text-blue-700 inline-flex items-center gap-1"
                       >
-                        <span>View Overview</span>
+                        <span>View All Services</span>
                         <ArrowRight className="w-3 h-3" />
                       </Link>
                     </div>
@@ -174,13 +174,13 @@ export const Header: React.FC<HeaderProps> = ({
                           key={service.id}
                           to={`/services/${service.id}`}
                           onClick={() => setServicesDropdownOpen(false)}
-                          className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-amber-50/70 transition-colors group text-left"
+                          className="flex items-start gap-2.5 p-2 rounded-lg hover:bg-slate-50 transition-colors group text-left"
                         >
-                          <div className="p-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 group-hover:bg-amber-500/20 transition-colors mt-0.5">
-                            {SERVICE_DROPDOWN_ICONS[service.id] || <ShieldCheck className="w-4 h-4 text-amber-500" />}
+                          <div className="p-1.5 rounded-md bg-slate-100 group-hover:bg-[#0B192C]/10 transition-colors mt-0.5">
+                            {SERVICE_DROPDOWN_ICONS[service.id] || <ShieldCheck className="w-4 h-4 text-[#0B192C]" />}
                           </div>
                           <div className="min-w-0">
-                            <span className="text-xs font-bold text-slate-900 group-hover:text-amber-700 transition-colors block truncate">
+                            <span className="text-xs font-semibold text-slate-900 group-hover:text-[#0B192C] transition-colors block truncate">
                               {service.title}
                             </span>
                             <span className="text-[10px] text-slate-500 line-clamp-1">
@@ -200,10 +200,10 @@ export const Header: React.FC<HeaderProps> = ({
                 key={link.path}
                 to={link.path}
                 aria-current={active ? 'page' : undefined}
-                className={`transition-colors relative py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm whitespace-nowrap ${
+                className={`transition-colors relative py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B192C] rounded-sm whitespace-nowrap ${
                   active
-                    ? 'text-amber-600 font-bold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-amber-600'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'text-[#0B192C] font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#0B192C]'
+                    : 'text-slate-600 hover:text-[#0B192C]'
                 }`}
               >
                 <span>{link.label}</span>

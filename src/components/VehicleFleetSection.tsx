@@ -7,17 +7,15 @@ import {
   CheckCircle2,
   ArrowRight,
   ExternalLink,
-  Sparkles,
   MapPin,
   Clock,
   Layers,
-  ChevronRight
+  X
 } from 'lucide-react';
 import luxuryCarsPortImg from '../assets/images/luxury_cars_port_1791890294373.jpg';
 import carCarrierHaulageImg from '../assets/images/car_carrier_haulage_1791890309517.jpg';
 import roroDischargeImg from '../assets/images/roro_black_officers_1791988253646.jpg';
 import portContainersAutomobilesImg from '../assets/images/port_containers_automobiles_1793358335336.jpg';
-import { AnimatedCounter } from './AnimatedCounter';
 
 interface VehicleFleetSectionProps {
   onRequestQuoteWithService: (serviceName?: string) => void;
@@ -38,7 +36,6 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
       subtitle: 'Synchronized handling of high-cube containers and imported luxury automobiles at Lagos port quays.',
       image: portContainersAutomobilesImg,
       location: 'Lagos Ports Complex & PTML Ro-Ro Terminal',
-      badge: 'Integrated Container & Auto Logistics',
       highlights: [
         'Simultaneous container offloading and Ro-Ro car ramp discharge',
         'State-of-the-art gantry crane and heavy forklift operations',
@@ -55,7 +52,6 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
       subtitle: 'Brand new Mercedes-Benz, Range Rover, Land Cruiser & executive SUVs staged post-discharge.',
       image: luxuryCarsPortImg,
       location: 'Apapa Seaport Quay & PTML Berth',
-      badge: 'Premium Automobile Handling',
       highlights: [
         'VIN valuation verification with Nigeria Customs Service',
         'Physical port apron inspection and tally verification',
@@ -72,7 +68,6 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
       subtitle: 'Modern hydraulic multi-deck car transporters delivering securely from Lagos ports to nationwide showrooms.',
       image: carCarrierHaulageImg,
       location: 'Lagos-Ibadan Expressway Corridor to Nationwide Hubs',
-      badge: 'Enclosed & Flatbed Carrier Logistics',
       highlights: [
         'Dedicated hydraulic tie-down strapping on modern double-deckers',
         'GPS live telemetry tracking from port gate to destination',
@@ -89,7 +84,6 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
       subtitle: 'Seamless roll-off discharging directly from ocean car carriers with on-site customs clearance.',
       image: roroDischargeImg,
       location: 'PTML Terminal (Grimaldi) & Tin Can Off-Dock',
-      badge: 'Certified NCS Customs Brokerage',
       highlights: [
         'Fast-track Roll-on/Roll-off ocean carrier discharge processing',
         'Nigeria Customs VIN assessment and automated duty payment',
@@ -106,38 +100,34 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
   });
 
   return (
-    <section id="vehicles" className="py-16 sm:py-24 bg-slate-900 text-white border-b border-slate-800 relative overflow-hidden">
-      {/* Subtle ambient background glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
+    <section id="vehicles" className="py-20 sm:py-24 bg-white border-b border-slate-200/80 font-sans">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Section Header with Amber Label & Accent Line */}
-        <div className="reveal-on-scroll flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16">
+        {/* Section Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
           <div className="max-w-2xl">
-            <div className="text-xs font-bold text-amber-400 uppercase tracking-widest flex items-center gap-2">
-              <Car className="w-3.5 h-3.5 text-amber-400" />
+            <div className="text-xs font-bold text-[#0B192C] uppercase tracking-widest flex items-center gap-2">
+              <Car className="w-4 h-4 text-[#0B192C]" />
               <span>AUTOMOBILE & FLEET LOGISTICS</span>
             </div>
-            <span className="section-accent-line" />
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-display tracking-tight text-balance mt-3">
+            <div className="w-12 h-0.5 bg-[#0B192C] mt-2 mb-3" />
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
               Premium Vehicle Importation, Port Clearing & Haulage
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed max-w-[65ch]">
+            <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed max-w-[65ch]">
               We manage the end-to-end clearing and delivery of luxury automobiles, executive fleets, commercial vehicles, and heavy machinery arriving via Roll-on/Roll-off (Ro-Ro) vessels and containerized shipping at Lagos ports.
             </p>
           </div>
 
-          {/* Filter Pills */}
-          <div className="flex items-center gap-2 p-1.5 bg-slate-950/80 border border-slate-800 rounded-xl self-start lg:self-auto overflow-x-auto max-w-full">
+          {/* Filter Tabs */}
+          <div className="flex items-center gap-2 p-1 bg-slate-100 rounded-xl self-start lg:self-auto overflow-x-auto max-w-full border border-slate-200">
             <button
               type="button"
               onClick={() => setActiveGalleryTab('all')}
-              className={`px-3.5 py-1.5 text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
+              className={`px-4 py-2 text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
                 activeGalleryTab === 'all'
-                  ? 'bg-amber-500 text-slate-950 shadow-xs'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#0B192C] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               All Vehicles ({vehicleShowcaseItems.length})
@@ -145,10 +135,10 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
             <button
               type="button"
               onClick={() => setActiveGalleryTab('roro')}
-              className={`px-3.5 py-1.5 text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
+              className={`px-4 py-2 text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
                 activeGalleryTab === 'roro'
-                  ? 'bg-amber-500 text-slate-950 shadow-xs'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#0B192C] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Ro-Ro Vessel Discharge
@@ -156,10 +146,10 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
             <button
               type="button"
               onClick={() => setActiveGalleryTab('luxury')}
-              className={`px-3.5 py-1.5 text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
+              className={`px-4 py-2 text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
                 activeGalleryTab === 'luxury'
-                  ? 'bg-amber-500 text-slate-950 shadow-xs'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#0B192C] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Luxury Fleet & SUVs
@@ -167,10 +157,10 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
             <button
               type="button"
               onClick={() => setActiveGalleryTab('carrier')}
-              className={`px-3.5 py-1.5 text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
+              className={`px-4 py-2 text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
                 activeGalleryTab === 'carrier'
-                  ? 'bg-amber-500 text-slate-950 shadow-xs'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#0B192C] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Car Carrier Haulage
@@ -178,67 +168,67 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
           </div>
         </div>
 
-        {/* Highlight Stats Strip with Animated Counters */}
-        <div className="reveal-group grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <div className="reveal-on-scroll bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 premium-card-lift">
-            <div className="flex items-center gap-2 text-amber-400 text-xs font-bold mb-1">
-              <Anchor className="w-4 h-4 shrink-0" />
-              <span>PTML & Tin Can Direct</span>
+        {/* Highlight Stats Strip */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-5 shadow-[0_2px_12px_-2px_rgba(11,25,44,0.04)]">
+            <div className="flex items-center gap-2 text-[#0B192C] text-xs font-bold mb-1">
+              <Anchor className="w-4 h-4 shrink-0 text-[#0B192C]" />
+              <span>PTML & Tin Can</span>
             </div>
-            <div className="text-xl sm:text-2xl font-extrabold text-white font-display">
-              <AnimatedCounter value="100%" /> Ro-Ro Berth
+            <div className="text-xl sm:text-2xl font-extrabold text-[#0B192C]">
+              100% Ro-Ro Berth
             </div>
-            <p className="text-[11px] text-slate-400 mt-1">
+            <p className="text-[11px] text-slate-500 mt-1">
               Direct presence at Grimaldi PTML terminal gate
             </p>
           </div>
 
-          <div className="reveal-on-scroll bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 premium-card-lift">
-            <div className="flex items-center gap-2 text-amber-400 text-xs font-bold mb-1">
-              <ShieldCheck className="w-4 h-4 shrink-0" />
+          <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-5 shadow-[0_2px_12px_-2px_rgba(11,25,44,0.04)]">
+            <div className="flex items-center gap-2 text-[#0B192C] text-xs font-bold mb-1">
+              <ShieldCheck className="w-4 h-4 shrink-0 text-[#0B192C]" />
               <span>Customs VIN Valuation</span>
             </div>
-            <div className="text-xl sm:text-2xl font-extrabold text-white font-display">
+            <div className="text-xl sm:text-2xl font-extrabold text-[#0B192C]">
               Zero Demurrage
             </div>
-            <p className="text-[11px] text-slate-400 mt-1">
+            <p className="text-[11px] text-slate-500 mt-1">
               Pre-arrival document verification & duty filing
             </p>
           </div>
 
-          <div className="reveal-on-scroll bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 premium-card-lift">
-            <div className="flex items-center gap-2 text-amber-400 text-xs font-bold mb-1">
-              <Truck className="w-4 h-4 shrink-0" />
+          <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-5 shadow-[0_2px_12px_-2px_rgba(11,25,44,0.04)]">
+            <div className="flex items-center gap-2 text-[#0B192C] text-xs font-bold mb-1">
+              <Truck className="w-4 h-4 shrink-0 text-[#0B192C]" />
               <span>Multi-Car Carrier</span>
             </div>
-            <div className="text-xl sm:text-2xl font-extrabold text-white font-display">
+            <div className="text-xl sm:text-2xl font-extrabold text-[#0B192C]">
               Nationwide Delivery
             </div>
-            <p className="text-[11px] text-slate-400 mt-1">
+            <p className="text-[11px] text-slate-500 mt-1">
               GPS tracked enclosed and open hydraulic trucks
             </p>
           </div>
 
-          <div className="reveal-on-scroll bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 premium-card-lift">
-            <div className="flex items-center gap-2 text-amber-400 text-xs font-bold mb-1">
-              <Clock className="w-4 h-4 shrink-0" />
+          <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-5 shadow-[0_2px_12px_-2px_rgba(11,25,44,0.04)]">
+            <div className="flex items-center gap-2 text-[#0B192C] text-xs font-bold mb-1">
+              <Clock className="w-4 h-4 shrink-0 text-[#0B192C]" />
               <span>Fast Terminal Exit</span>
             </div>
-            <div className="text-xl sm:text-2xl font-extrabold text-white font-display">
-              <AnimatedCounter value="24 - 48 Hours" />
+            <div className="text-xl sm:text-2xl font-extrabold text-[#0B192C]">
+              24 - 48 Hours
             </div>
-            <p className="text-[11px] text-slate-400 mt-1">
+            <p className="text-[11px] text-slate-500 mt-1">
               Average release window from ship discharge
             </p>
           </div>
         </div>
 
         {/* Featured Visual Grid of Vehicles */}
-        <div className="reveal-group grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-14">
           {filteredItems.map((item) => (
             <div
               key={item.id}
-              className="reveal-on-scroll bg-slate-950/90 border border-slate-800 hover:border-amber-500/50 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 flex flex-col justify-between group premium-card-lift"
+              className="bg-white border border-slate-200/80 rounded-2xl overflow-hidden shadow-[0_4px_20px_-2px_rgba(11,25,44,0.05)] hover:shadow-[0_12px_32px_-4px_rgba(11,25,44,0.1)] hover:border-[#0B192C]/30 transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
                 {/* Image Showcase Card */}
@@ -246,47 +236,47 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover object-center transform group-hover:scale-102 transition-transform duration-500"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
                   
                   {/* Floating Badges */}
                   <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2">
-                    <span className="text-[11px] font-bold text-slate-950 bg-amber-400 px-3 py-1 rounded-full shadow-md">
+                    <span className="text-[11px] font-bold text-[#0B192C] bg-white px-3 py-1 rounded-full shadow-md">
                       {item.tag}
                     </span>
-                    <span className="text-[11px] font-semibold text-white bg-slate-900/80 backdrop-blur-xs border border-white/20 px-2.5 py-1 rounded-full flex items-center gap-1">
-                      <Sparkles className="w-3 h-3 text-amber-400" />
+                    <span className="text-[11px] font-semibold text-white bg-[#0B192C]/80 px-2.5 py-1 rounded-full flex items-center gap-1 border border-white/10">
+                      <Clock className="w-3 h-3 text-slate-300" />
                       <span>{item.turnaround}</span>
                     </span>
                   </div>
 
                   {/* Bottom Image Overlay Info */}
                   <div className="absolute bottom-3 left-4 right-4">
-                    <div className="flex items-center gap-1.5 text-[11px] font-semibold text-amber-300">
-                      <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <div className="flex items-center gap-1.5 text-xs font-medium text-white">
+                      <MapPin className="w-3.5 h-3.5 text-blue-300 shrink-0" />
                       <span>{item.location}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Content Block */}
-                <div className="p-6 space-y-4">
+                <div className="p-7 space-y-4">
                   <div>
-                    <h3 className="text-lg font-bold text-white font-display group-hover:text-amber-400 transition-colors">
+                    <h3 className="text-xl font-bold text-[#0B192C]">
                       {item.title}
                     </h3>
-                    <p className="mt-2 text-xs text-slate-300 leading-relaxed">
+                    <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
                       {item.subtitle}
                     </p>
                   </div>
 
                   {/* Highlights */}
-                  <div className="pt-3 border-t border-slate-800/80 space-y-2">
+                  <div className="pt-4 border-t border-slate-100 space-y-2.5">
                     {item.highlights.map((point, pIdx) => (
-                      <div key={pIdx} className="flex items-start gap-2 text-xs text-slate-300">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                      <div key={pIdx} className="flex items-start gap-2.5 text-xs text-slate-700">
+                        <CheckCircle2 className="w-4 h-4 text-[#0B192C] shrink-0 mt-0.5" />
                         <span className="leading-snug">{point}</span>
                       </div>
                     ))}
@@ -295,24 +285,24 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
               </div>
 
               {/* Action Buttons */}
-              <div className="p-6 pt-0">
-                <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between gap-3">
+              <div className="p-7 pt-0">
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
                   <button
                     type="button"
                     onClick={() => setPreviewImage(item.image)}
-                    className="text-xs font-semibold text-slate-400 hover:text-white flex items-center gap-1 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm"
+                    className="text-xs font-semibold text-slate-500 hover:text-[#0B192C] flex items-center gap-1.5 transition-colors cursor-pointer"
                   >
                     <span>View HD Photo</span>
-                    <ExternalLink className="w-3 h-3" />
+                    <ExternalLink className="w-3.5 h-3.5 text-[#0B192C]" />
                   </button>
 
                   <button
                     type="button"
                     onClick={() => onRequestQuoteWithService('Vehicle Clearing & Ro-Ro Logistics')}
-                    className="btn-interactive group px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-lg transition-colors flex items-center gap-1.5 shadow-sm cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+                    className="px-4 py-2.5 bg-[#0B192C] hover:bg-[#152a45] text-white font-bold text-xs rounded-lg transition-colors flex items-center gap-1.5 shadow-sm cursor-pointer"
                   >
                     <span>Request a Quote</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" />
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>
@@ -320,17 +310,17 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
           ))}
         </div>
 
-        {/* Specialized Automobile Import Guidance Card */}
-        <div className="reveal-on-scroll bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6">
+        {/* Guidance Card */}
+        <div className="bg-[#0B192C] text-white rounded-2xl p-8 sm:p-10 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
           <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 text-xs font-bold text-amber-400">
+            <div className="inline-flex items-center gap-2 text-xs font-bold text-blue-300">
               <Layers className="w-4 h-4" />
               <span>Importing a Vehicle to Nigeria? Check What We Cover:</span>
             </div>
-            <h3 className="text-lg sm:text-xl font-bold font-display text-white">
+            <h3 className="text-xl sm:text-2xl font-extrabold text-white">
               Complete Documentation: VIN Valuation, Form M, Duty Payment & Terminal Gate Out
             </h3>
-            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               Whether you are importing a single luxury SUV or shipping an entire corporate vehicle fleet from the USA, Europe, UAE, or Asia, our Apapa & PTML agents expedite customs paperwork and protect your vehicle from transit damage.
             </p>
           </div>
@@ -339,7 +329,7 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
             <button
               type="button"
               onClick={() => onRequestQuoteWithService('Vehicle Clearing & Ro-Ro Logistics')}
-              className="btn-interactive w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs sm:text-sm rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+              className="w-full sm:w-auto px-6 py-3.5 bg-white hover:bg-slate-100 text-[#0B192C] font-bold text-xs sm:text-sm rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer"
             >
               <Car className="w-4 h-4" />
               <span>Request a Quote</span>
@@ -364,10 +354,10 @@ export const VehicleFleetSection: React.FC<VehicleFleetSectionProps> = ({
             <button
               type="button"
               onClick={() => setPreviewImage(null)}
-              className="absolute top-3 right-3 bg-slate-900/90 text-white hover:text-amber-400 p-2 rounded-full border border-slate-700 cursor-pointer"
+              className="absolute top-3 right-3 bg-slate-900/90 text-white hover:text-slate-300 p-2 rounded-full border border-slate-700 cursor-pointer"
               aria-label="Close image preview"
             >
-              ✕
+              <X className="w-5 h-5" />
             </button>
           </div>
         </div>

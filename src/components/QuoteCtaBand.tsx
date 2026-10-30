@@ -6,24 +6,20 @@ import { COMPANY_DETAILS } from '../data/companyData';
 
 export const QuoteCtaBand: React.FC = () => {
   const location = useLocation();
-
-  // If already on the contact page where the form is open, show a focused fast-track summary
   const isContactPage = location.pathname === '/contact';
 
   return (
     <section
       aria-label="Request a logistics quotation"
-      className="py-12 sm:py-16 bg-slate-950 text-white border-t border-slate-800 relative overflow-hidden"
+      className="py-16 sm:py-20 bg-[#0B192C] text-white border-t border-slate-800 relative"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(217,119,6,0.12),transparent_70%)] pointer-events-none" />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-8 text-center space-y-5">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
-          <ShieldCheck className="w-3.5 h-3.5" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 text-center space-y-6">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/15">
+          <ShieldCheck className="w-4 h-4 text-blue-300" />
           <span>Transparent Logistics & Duty Costings</span>
         </div>
 
-        <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-display tracking-tight max-w-2xl mx-auto">
+        <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight max-w-2xl mx-auto">
           {isContactPage
             ? 'Need Immediate Assistance on Active Port Clearances?'
             : 'Ready to Clear Your Cargo at Apapa Port Without Delays?'}
@@ -35,11 +31,11 @@ export const QuoteCtaBand: React.FC = () => {
             : 'Get an itemized quotation covering statutory duty tariffs, terminal handling, and insured road haulage within 30 to 60 minutes.'}
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
           {!isContactPage ? (
             <Link
               to="/contact"
-              className="btn-interactive w-full sm:w-auto px-7 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-sm rounded-lg shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-slate-100 text-[#0B192C] font-bold text-xs sm:text-sm rounded-lg shadow-sm flex items-center justify-center gap-2 transition-colors"
             >
               <span>Request a Quote</span>
               <ArrowRight className="w-4 h-4" />
@@ -50,7 +46,7 @@ export const QuoteCtaBand: React.FC = () => {
               onClick={() => {
                 window.scrollTo({ top: 200, behavior: 'smooth' });
               }}
-              className="btn-interactive w-full sm:w-auto px-7 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-sm rounded-lg shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-slate-100 text-[#0B192C] font-bold text-xs sm:text-sm rounded-lg shadow-sm flex items-center justify-center gap-2 cursor-pointer transition-colors"
             >
               <span>Scroll to Quote Form</span>
               <ArrowRight className="w-4 h-4" />
@@ -61,7 +57,7 @@ export const QuoteCtaBand: React.FC = () => {
             href={COMPANY_DETAILS.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-interactive w-full sm:w-auto px-6 py-3.5 bg-emerald-700/80 hover:bg-emerald-600 text-white font-semibold text-sm rounded-lg border border-emerald-600/30 flex items-center justify-center gap-2 shadow-sm transition-colors"
+            className="w-full sm:w-auto px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm rounded-lg flex items-center justify-center gap-2 shadow-sm transition-colors"
           >
             <WhatsAppIcon className="w-4 h-4" />
             <span>Talk on WhatsApp</span>
@@ -69,9 +65,9 @@ export const QuoteCtaBand: React.FC = () => {
 
           <Link
             to="/track"
-            className="btn-interactive w-full sm:w-auto px-6 py-3.5 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm rounded-lg border border-slate-700/80 flex items-center justify-center gap-2 transition-colors"
+            className="w-full sm:w-auto px-6 py-3.5 bg-[#112239] hover:bg-[#1a3355] text-slate-200 hover:text-white font-semibold text-xs sm:text-sm rounded-lg border border-white/10 flex items-center justify-center gap-2 transition-colors"
           >
-            <Search className="w-4 h-4 text-amber-400" />
+            <Search className="w-4 h-4 text-blue-300" />
             <span>Track Consignment</span>
           </Link>
         </div>

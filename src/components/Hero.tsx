@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { COMPANY_DETAILS } from '../data/companyData';
 import { ArrowRight, ShieldCheck, Clock, MapPin, Search, PhoneCall, CheckCircle2 } from 'lucide-react';
-import heroPortImg from '../assets/images/hero_lux_containers_sunset_1791329802841.jpg';
-import blackManagerPortImg from '../assets/images/black_manager_port_cars_1793359470782.jpg';
+import corporateTruckingImg from '../assets/images/corporate_trucking_fleet_1793361788515.jpg';
 
 interface HeroProps {
   onRequestQuote: () => void;
@@ -27,59 +26,59 @@ export const Hero: React.FC<HeroProps> = ({
   };
 
   return (
-    <section className="relative bg-slate-950 text-white overflow-hidden">
-      {/* Background Graphic & Scrim with Ken Burns subtle zoom */}
+    <section className="relative bg-[#0B192C] text-white overflow-hidden">
+      {/* Background Photography with Navy Scrim */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
-          src={blackManagerPortImg}
-          alt="Professional Port Logistics Manager with Container and Automobile Cars - RIMI TRANSPORT AND ALLIED LIMITED"
-          className="w-full h-full object-cover object-center opacity-45 animate-ken-burns"
+          src={corporateTruckingImg}
+          alt="Professional Heavy Duty Container Haulage Trucks at Port Terminal - RIMI TRANSPORT AND ALLIED LIMITED"
+          className="w-full h-full object-cover object-center opacity-30"
           referrerPolicy="no-referrer"
         />
-        {/* Layered high-contrast dark scrim ensuring pristine readability across all displays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/98 via-slate-950/90 to-slate-950/70" />
-        <div className="absolute inset-0 bg-slate-950/40" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(217,119,6,0.18),transparent_65%)]" />
+        {/* Authoritative deep navy corporate scrim */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0B192C] via-[#0B192C]/90 to-[#0B192C]/75" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-20 lg:py-28">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 py-20 sm:py-24 lg:py-28">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
           
-          {/* Left Hero Column with Page Load Stagger */}
+          {/* Left Hero Column */}
           <div className="lg:col-span-7 space-y-6 sm:space-y-7">
-            {/* Trust Kicker (Stagger 1) */}
-            <div className="hero-stagger-1 inline-flex items-center gap-2 text-xs font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-3.5 py-1.5 rounded-full">
-              <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-              <span>11A Pelewura Way, Apapa — Direct Port Terminal Corridor</span>
+            {/* Unboxed Clean Kicker */}
+            <div className="flex items-center gap-2 text-xs font-medium text-slate-300 tracking-wide">
+              <MapPin className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+              <span>11A Pelewura Way, Apapa</span>
+              <span aria-hidden="true" className="text-slate-500">·</span>
+              <span className="text-slate-400">Direct Port Terminal Corridor</span>
             </div>
 
-            {/* Headline with fluid clamp size & tightened line-height (Stagger 2) */}
-            <h1 className="hero-stagger-2 hero-headline-fluid text-white font-display text-balance">
+            {/* Headline in Inter */}
+            <h1 className="hero-headline-fluid text-white font-display text-balance tracking-tight">
               Reliable Clearing & Forwarding Solutions for Your Business
             </h1>
 
-            {/* Supporting Message (Stagger 3) */}
-            <p className="hero-stagger-3 text-base sm:text-lg text-slate-300 font-normal leading-relaxed max-w-2xl">
+            {/* Supporting Message */}
+            <p className="text-base sm:text-lg text-slate-300 font-normal leading-relaxed max-w-2xl">
               We provide efficient customs clearance, freight forwarding, transportation, and logistics solutions to move your cargo safely and on time.
             </p>
 
-            {/* Neatly Grouped Checkmark Benefits Card (Stagger 4) */}
-            <div className="hero-stagger-4 bg-slate-900/80 border border-slate-800/90 rounded-xl p-3.5 sm:p-4 backdrop-blur-xs">
+            {/* Clean Benefits Strip */}
+            <div className="bg-[#0F233D]/90 border border-slate-700/60 rounded-lg p-3.5 sm:p-4 shadow-sm">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-200">
-                  <div className="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+                  <div className="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
                     <CheckCircle2 className="w-3.5 h-3.5 stroke-[2.5]" />
                   </div>
                   <span className="font-medium">Fast PAAR & Release</span>
                 </div>
                 <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-200">
-                  <div className="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+                  <div className="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
                     <CheckCircle2 className="w-3.5 h-3.5 stroke-[2.5]" />
                   </div>
                   <span className="font-medium">Door-to-Door Delivery</span>
                 </div>
                 <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-200">
-                  <div className="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+                  <div className="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
                     <CheckCircle2 className="w-3.5 h-3.5 stroke-[2.5]" />
                   </div>
                   <span className="font-medium">Transparent Tariffs</span>
@@ -87,71 +86,71 @@ export const Hero: React.FC<HeroProps> = ({
               </div>
             </div>
 
-            {/* Primary & Secondary CTAs with Interactive states (Stagger 5) */}
-            <div className="hero-stagger-5 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+            {/* Primary & Secondary Action Controls */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-1">
               <button
                 onClick={onRequestQuote}
-                className="btn-interactive px-7 py-3.5 bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-slate-950 font-bold text-sm sm:text-base rounded-xl shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 flex items-center justify-center gap-2.5 group cursor-pointer ring-2 ring-amber-400/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                className="btn-interactive px-7 py-3.5 bg-white text-[#0B192C] hover:bg-slate-100 font-semibold text-sm sm:text-base rounded-lg shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer transition-all duration-200"
               >
-                <span>Request a Quote</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200 ease-out" />
+                <span>Request a Quotation</span>
+                <ArrowRight className="w-4 h-4 text-[#0B192C]" />
               </button>
 
               <button
                 onClick={onExploreServices}
-                className="btn-interactive px-6 py-3.5 bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-medium text-sm sm:text-base rounded-xl border border-slate-700/80 hover:border-slate-600 transition-colors flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                className="btn-interactive px-6 py-3.5 bg-transparent hover:bg-white/10 text-slate-200 hover:text-white font-medium text-sm sm:text-base rounded-lg border border-slate-600 hover:border-slate-400 transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>Explore 10 Key Services</span>
+                <span>Our Core Services</span>
               </button>
 
               <a
                 href={`tel:${COMPANY_DETAILS.phoneRaw}`}
-                className="btn-interactive px-4 py-3 text-slate-300 hover:text-amber-400 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 rounded-xl transition-colors self-center sm:self-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                className="px-4 py-3 text-slate-300 hover:text-white text-xs sm:text-sm font-medium flex items-center justify-center gap-2 transition-colors self-center sm:self-auto"
               >
-                <PhoneCall className="w-4 h-4 text-amber-400" />
-                <span className="hidden sm:inline">Call:</span>
+                <PhoneCall className="w-4 h-4 text-blue-400" />
+                <span className="hidden sm:inline">Direct Desk:</span>
                 <span>{COMPANY_DETAILS.phone}</span>
               </a>
             </div>
 
-            {/* Metadata separator proof (Stagger 6) */}
-            <div className="hero-stagger-6 pt-4 border-t border-slate-800 flex items-center flex-wrap gap-4 text-xs text-slate-400">
+            {/* Trust Proof Footer */}
+            <div className="pt-4 border-t border-slate-800 flex items-center flex-wrap gap-4 text-xs text-slate-400">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 <span>Nigeria Customs Service Authorized</span>
               </span>
-              <span aria-hidden="true" className="text-slate-700">·</span>
+              <span aria-hidden="true" className="text-slate-600">·</span>
               <span className="flex items-center gap-1.5">
-                <Clock className="w-4 h-4 text-amber-400" />
+                <Clock className="w-4 h-4 text-blue-400" />
                 <span>24 - 72h Swift Port Discharge</span>
               </span>
-              <span aria-hidden="true" className="text-slate-700">·</span>
-              <span>Apapa & Tin Can Terminal Access</span>
+              <span aria-hidden="true" className="text-slate-600">·</span>
+              <span>Apapa & Tin Can Terminal Gate Access</span>
             </div>
           </div>
 
-          {/* Right Hero Column: Quick Logistics Action Card (Stagger Right) */}
-          <div className="lg:col-span-5 hero-stagger-right">
-            <div className="bg-slate-900/95 border border-slate-800 rounded-2xl p-6 sm:p-7 shadow-2xl backdrop-blur-md">
-              <div className="border-b border-slate-800 pb-4 mb-5">
+          {/* Right Hero Column: Clean White Card with Soft Shadows */}
+          <div className="lg:col-span-5">
+            <div className="bg-white text-slate-900 rounded-xl p-6 sm:p-8 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)] border border-slate-100">
+              <div className="border-b border-slate-100 pb-4 mb-5">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-base font-bold text-white font-display">
-                    Quick Cargo Lookup & Dispatch
+                  <h3 className="text-base font-bold text-[#0B192C] font-display">
+                    Consignment Tracking & Lookup
                   </h3>
-                  <span className="text-[11px] font-semibold text-amber-400 uppercase tracking-wider">
+                  <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
                     Apapa Hub
                   </span>
                 </div>
-                <p className="text-xs text-slate-400 mt-1">
-                  Track an existing shipment or begin clearing a new consignment.
+                <p className="text-xs text-slate-500 mt-1">
+                  Enter your consignment code or select a service to begin clearance.
                 </p>
               </div>
 
               {/* Fast Track Form */}
               <form onSubmit={handleQuickTrack} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                    Consignment / Tracking Number
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Consignment / Waybill Reference
                   </label>
                   <div className="relative">
                     <input
@@ -159,59 +158,59 @@ export const Hero: React.FC<HeroProps> = ({
                       placeholder="e.g. RTL-APP-8921, RTL-AIR-1093..."
                       value={quickTrackingInput}
                       onChange={(e) => setQuickTrackingInput(e.target.value)}
-                      className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-3.5 pr-10 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-3.5 pr-12 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-hidden focus:border-[#0B192C] focus:bg-white focus:ring-1 focus:ring-[#0B192C] transition-all"
                     />
                     <button
                       type="submit"
-                      className="absolute right-1.5 top-1.5 bottom-1.5 px-3 bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-slate-950 rounded-md transition-colors flex items-center justify-center cursor-pointer"
+                      className="absolute right-1 top-1 bottom-1 px-3.5 bg-[#0B192C] hover:bg-[#162E4E] text-white rounded-md transition-colors flex items-center justify-center cursor-pointer shadow-xs"
                       aria-label="Track consignment"
                       title="Track consignment"
                     >
-                      <Search className="w-4 h-4 stroke-[2.5]" />
+                      <Search className="w-4 h-4 stroke-[2.2]" />
                     </button>
                   </div>
-                  <p className="text-[11px] text-slate-300 mt-1.5">
-                    Demo consignment codes: <button type="button" onClick={() => setQuickTrackingInput('RTL-APP-8921')} className="text-amber-400 font-medium underline hover:text-amber-300">RTL-APP-8921</button> or <button type="button" onClick={() => setQuickTrackingInput('RTL-AIR-1093')} className="text-amber-400 font-medium underline hover:text-amber-300">RTL-AIR-1093</button>
+                  <p className="text-[11px] text-slate-500 mt-1.5">
+                    Sample references: <button type="button" onClick={() => setQuickTrackingInput('RTL-APP-8921')} className="text-[#0B192C] font-medium underline hover:text-blue-700">RTL-APP-8921</button> or <button type="button" onClick={() => setQuickTrackingInput('RTL-AIR-1093')} className="text-[#0B192C] font-medium underline hover:text-blue-700">RTL-AIR-1093</button>
                   </p>
                 </div>
 
-                {/* Quick Service Category Selector */}
-                <div className="pt-2 border-t border-slate-800/80 space-y-2.5">
-                  <div className="text-xs font-semibold text-slate-300">
-                    What service do you require today?
+                {/* Quick Service Categories */}
+                <div className="pt-2 border-t border-slate-100 space-y-2.5">
+                  <div className="text-xs font-semibold text-slate-600">
+                    Select a service category:
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       type="button"
                       onClick={onRequestQuote}
-                      className="p-2.5 text-left bg-slate-950/80 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 rounded-lg transition-all text-xs text-slate-200"
+                      className="p-2.5 text-left bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-slate-300 rounded-lg transition-all text-xs text-slate-700 cursor-pointer"
                     >
-                      <span className="font-semibold text-amber-400 block">Customs Clearance</span>
-                      <span className="text-[11px] text-slate-400">Apapa & Tin Can Ports</span>
+                      <span className="font-semibold text-[#0B192C] block">Customs Clearance</span>
+                      <span className="text-[11px] text-slate-500">Apapa & Tin Can</span>
                     </button>
                     <button
                       type="button"
                       onClick={onRequestQuote}
-                      className="p-2.5 text-left bg-slate-950/80 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 rounded-lg transition-all text-xs text-slate-200"
+                      className="p-2.5 text-left bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-slate-300 rounded-lg transition-all text-xs text-slate-700 cursor-pointer"
                     >
-                      <span className="font-semibold text-amber-400 block">Ocean & Air Freight</span>
-                      <span className="text-[11px] text-slate-400">FCL, LCL & Air Cargo</span>
+                      <span className="font-semibold text-[#0B192C] block">Ocean & Air Freight</span>
+                      <span className="text-[11px] text-slate-500">FCL, LCL & Air Cargo</span>
                     </button>
                     <button
                       type="button"
                       onClick={onRequestQuote}
-                      className="p-2.5 text-left bg-slate-950/80 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 rounded-lg transition-all text-xs text-slate-200"
+                      className="p-2.5 text-left bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-slate-300 rounded-lg transition-all text-xs text-slate-700 cursor-pointer"
                     >
-                      <span className="font-semibold text-amber-400 block">Land Haulage</span>
-                      <span className="text-[11px] text-slate-400">Nationwide Trucking</span>
+                      <span className="font-semibold text-[#0B192C] block">Land Haulage</span>
+                      <span className="text-[11px] text-slate-500">Nationwide Trucking</span>
                     </button>
                     <button
                       type="button"
                       onClick={onRequestQuote}
-                      className="p-2.5 text-left bg-slate-950/80 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 rounded-lg transition-all text-xs text-slate-200"
+                      className="p-2.5 text-left bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-slate-300 rounded-lg transition-all text-xs text-slate-700 cursor-pointer"
                     >
-                      <span className="font-semibold text-amber-400 block">Warehousing</span>
-                      <span className="text-[11px] text-slate-400">Secure Port Storage</span>
+                      <span className="font-semibold text-[#0B192C] block">Warehousing</span>
+                      <span className="text-[11px] text-slate-500">Secure Port Storage</span>
                     </button>
                   </div>
                 </div>
@@ -220,10 +219,10 @@ export const Hero: React.FC<HeroProps> = ({
                   <button
                     type="button"
                     onClick={onRequestQuote}
-                    className="btn-interactive group w-full py-2.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-900 text-amber-400 hover:text-amber-300 font-semibold text-xs rounded-lg border border-amber-500/25 flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                    className="btn-interactive w-full py-2.5 bg-[#0B192C] hover:bg-[#162E4E] text-white font-semibold text-xs rounded-lg flex items-center justify-center gap-2 cursor-pointer shadow-sm transition-colors"
                   >
-                    <span>Request a Quote</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" />
+                    <span>Request Full Tariff Assessment</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-blue-300" />
                   </button>
                 </div>
               </form>

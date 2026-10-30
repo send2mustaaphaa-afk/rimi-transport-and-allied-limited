@@ -5,8 +5,7 @@ import { ServicesSection } from '../components/ServicesSection';
 import { HowItWorksSection } from '../components/HowItWorksSection';
 import { FAQSection } from '../components/FAQSection';
 import { SeoHead } from '../components/SeoHead';
-import { COMPANY_DETAILS } from '../data/companyData';
-import { ArrowRight, Truck, MessageSquare, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Truck } from 'lucide-react';
 
 interface ServicesPageProps {
   onQuoteWithService: (serviceName?: string) => void;
@@ -25,7 +24,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onQuoteWithService }
   };
 
   return (
-    <div className="flex-1">
+    <div className="flex-1 font-sans">
       <SeoHead
         title="Our Services | Clearing, Forwarding & Haulage Solutions"
         description="Explore RIMI TRANSPORT AND ALLIED LIMITED's 10 core logistics services: customs clearance, ocean & air freight, land haulage, warehousing, and Ro-Ro vehicle clearing."
@@ -44,26 +43,26 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onQuoteWithService }
       <ServicesSection onRequestQuoteWithService={handleSelectService} />
 
       {/* 3. Link to Specialized Fleet Page */}
-      <section className="py-10 bg-slate-900 border-b border-slate-800 text-white">
+      <section className="py-12 bg-[#0B192C] border-b border-slate-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center sm:text-left">
-            <span className="text-[11px] font-bold text-amber-400 uppercase tracking-widest">
+            <span className="text-[11px] font-bold text-blue-300 uppercase tracking-widest">
               SPECIALIZED HANDLING
             </span>
-            <h3 className="text-lg sm:text-xl font-bold font-display text-white">
+            <h3 className="text-xl sm:text-2xl font-bold text-white">
               Importing Automobiles, Machinery, or Heavy Project Plant?
             </h3>
-            <p className="text-xs text-slate-300 max-w-xl">
+            <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
               Discover our specialized Ro-Ro port discharge, lowbed transport, and multi-vehicle carrier haulage fleet.
             </p>
           </div>
           <Link
             to="/fleet"
-            className="btn-interactive px-5 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-lg transition-colors flex items-center gap-2 shrink-0"
+            className="px-6 py-3.5 bg-white hover:bg-slate-100 text-[#0B192C] font-bold text-xs sm:text-sm rounded-lg transition-colors flex items-center gap-2 shrink-0 shadow-sm"
           >
-            <Truck className="w-4 h-4" />
+            <Truck className="w-4 h-4 text-[#0B192C]" />
             <span>Explore Automobiles & Fleet</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-3.5 h-3.5 text-[#0B192C]" />
           </Link>
         </div>
       </section>

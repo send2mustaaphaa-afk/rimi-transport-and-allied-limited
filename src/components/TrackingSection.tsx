@@ -3,13 +3,8 @@ import { DEMO_TRACKING_SHIPMENTS, TrackingShipment, COMPANY_DETAILS } from '../d
 import {
   Search,
   CheckCircle2,
-  Clock,
   MapPin,
-  Ship,
-  Plane,
-  Truck,
-  AlertCircle,
-  ArrowRight
+  AlertCircle
 } from 'lucide-react';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
@@ -34,7 +29,6 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
       setSearchQuery(initialTrackingId);
       performSearch(initialTrackingId);
     } else {
-      // Default to first demo consignment
       performSearch('RTL-APP-8921');
     }
   }, [initialTrackingId, shipmentsList]);
@@ -52,7 +46,6 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
       if (found) {
         setCurrentShipment(found);
       } else if (cleaned.startsWith('RTL-QT-') || cleaned.startsWith('RTL-')) {
-        // Dynamic simulated quote or active consignment
         setCurrentShipment({
           trackingId: cleaned,
           consignee: "Valued Consignee / Merchant",
@@ -74,7 +67,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
         setCurrentShipment(null);
       }
       setIsSearching(false);
-    }, 350);
+    }, 300);
   };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -89,34 +82,34 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
       case 'Terminal Cleared':
         return 'bg-blue-50 text-blue-700 border-blue-300';
       case 'Customs Examination':
-        return 'bg-amber-50 text-amber-800 border-amber-300';
+        return 'bg-slate-100 text-slate-800 border-slate-300';
       case 'In Transit':
-        return 'bg-indigo-50 text-indigo-700 border-indigo-300';
+        return 'bg-blue-50 text-blue-800 border-blue-300';
       default:
         return 'bg-slate-100 text-slate-800 border-slate-300';
     }
   };
 
   return (
-    <section id="tracking" className="py-16 sm:py-24 bg-slate-100/80 border-b border-slate-200">
+    <section id="tracking" className="py-20 sm:py-24 bg-slate-50 border-b border-slate-200/80 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Section Header with Amber Label & Accent Line */}
-        <div className="reveal-on-scroll max-w-3xl mb-12 sm:mb-16">
-          <div className="text-xs font-bold text-amber-600 uppercase tracking-widest flex items-center gap-2">
+        {/* Section Header */}
+        <div className="max-w-3xl mb-14">
+          <div className="text-xs font-bold text-[#0B192C] uppercase tracking-widest flex items-center gap-2">
             <span>CARGO TRACKING</span>
           </div>
-          <span className="section-accent-line" />
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-display tracking-tight text-balance mt-3">
+          <div className="w-12 h-0.5 bg-[#0B192C] mt-2 mb-3" />
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             Track Consignment Status & Port Clearance Progress
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed max-w-[65ch]">
-            Monitor real-time updates for shipments clearing through Apapa Port, Tin Can Island, and Murtala Muhammed Airport.
+            Monitor real-time milestone updates for shipments clearing through Apapa Port, Tin Can Island, and Murtala Muhammed Airport.
           </p>
         </div>
 
         {/* Search Bar Box */}
-        <div className="reveal-on-scroll bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-sm mb-8">
+        <div className="bg-white rounded-2xl p-7 sm:p-8 border border-slate-200/80 shadow-[0_4px_24px_-2px_rgba(11,25,44,0.06)] mb-8">
           <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row gap-3 items-center">
             <div className="relative flex-1 w-full">
               <Search className="absolute left-3.5 top-3.5 w-5 h-5 text-slate-400" />
@@ -125,13 +118,13 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
                 placeholder="Enter Consignment No (e.g., RTL-APP-8921, RTL-AIR-1093, RTL-TIN-4402)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-hidden focus:border-amber-500 focus:bg-white focus:ring-1 focus:ring-amber-500"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-hidden focus:border-[#0B192C] focus:bg-white focus:ring-1 focus:ring-[#0B192C] transition-all"
               />
             </div>
             <button
               type="submit"
               disabled={isSearching}
-              className="btn-interactive w-full sm:w-auto px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm rounded-xl flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2"
+              className="w-full sm:w-auto px-7 py-3 bg-[#0B192C] hover:bg-[#152a45] text-white font-bold text-xs sm:text-sm rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-sm transition-colors"
             >
               {isSearching ? 'Searching...' : 'Track Consignment'}
             </button>
@@ -148,10 +141,10 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
                   setSearchQuery(s.trackingId);
                   performSearch(s.trackingId);
                 }}
-                className={`px-2.5 py-1 rounded-md border text-xs font-mono transition-colors cursor-pointer ${
+                className={`px-3 py-1 rounded-md border text-xs font-mono transition-colors cursor-pointer ${
                   searchQuery === s.trackingId
-                    ? 'bg-amber-100 border-amber-400 text-amber-900 font-bold'
-                    : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'
+                    ? 'bg-[#0B192C] border-[#0B192C] text-white font-bold'
+                    : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                 }`}
               >
                 {s.trackingId} ({s.status})
@@ -162,26 +155,26 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
 
         {/* Tracking Results Area */}
         {currentShipment ? (
-          <div className="reveal-on-scroll bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-2xl border border-slate-200/80 shadow-[0_4px_24px_-2px_rgba(11,25,44,0.06)] overflow-hidden">
             
             {/* Result Top Summary Banner */}
-            <div className="bg-slate-900 text-white p-6 sm:p-7">
+            <div className="bg-[#0B192C] text-white p-7 sm:p-8">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 <div>
                   <div className="flex items-center gap-3 flex-wrap">
-                    <span className="font-mono text-xl sm:text-2xl font-black text-amber-400">
+                    <span className="font-mono text-2xl font-extrabold text-white">
                       {currentShipment.trackingId}
                     </span>
                     <span className={`text-xs font-bold px-3 py-1 rounded-full border ${getStatusColor(currentShipment.status)}`}>
                       {currentShipment.status}
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-300 mt-1">
+                  <p className="text-xs sm:text-sm text-slate-300 mt-1.5">
                     {currentShipment.serviceType} · Consignee: <strong className="text-white">{currentShipment.consignee}</strong>
                   </p>
                 </div>
 
-                <div className="flex items-center gap-6 text-xs text-slate-300 border-t lg:border-t-0 pt-3 lg:pt-0 border-slate-800">
+                <div className="flex items-center gap-6 text-xs text-slate-300 border-t lg:border-t-0 pt-3 lg:pt-0 border-white/10">
                   <div>
                     <span className="text-slate-400 block text-[11px]">Vessel / Flight</span>
                     <span className="font-semibold text-white">{currentShipment.vesselOrFlight}</span>
@@ -189,28 +182,28 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
                   {currentShipment.containerNumber && (
                     <div>
                       <span className="text-slate-400 block text-[11px]">Container / AWB</span>
-                      <span className="font-mono font-semibold text-amber-400">{currentShipment.containerNumber}</span>
+                      <span className="font-mono font-semibold text-blue-300">{currentShipment.containerNumber}</span>
                     </div>
                   )}
                   <div>
                     <span className="text-slate-400 block text-[11px]">Estimated Arrival</span>
-                    <span className="font-semibold text-emerald-400">{currentShipment.eta}</span>
+                    <span className="font-semibold text-emerald-300">{currentShipment.eta}</span>
                   </div>
                 </div>
               </div>
 
               {/* Origin to Destination Route */}
-              <div className="mt-5 pt-4 border-t border-slate-800 flex items-center justify-between gap-4 text-xs">
+              <div className="mt-6 pt-5 border-t border-white/10 flex items-center justify-between gap-4 text-xs">
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
+                  <MapPin className="w-4 h-4 text-blue-300 shrink-0" />
                   <div>
                     <span className="text-slate-400 block text-[10px] uppercase">Origin Port</span>
                     <span className="font-semibold text-white">{currentShipment.origin}</span>
                   </div>
                 </div>
 
-                <div className="flex-1 max-w-xs border-b border-dashed border-slate-700 hidden sm:block relative">
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-900 px-2 text-[10px] text-amber-400 font-mono">
+                <div className="flex-1 max-w-xs border-b border-dashed border-white/20 hidden sm:block relative">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0B192C] px-2 text-[10px] text-blue-300 font-mono">
                     APAPA CORRIDOR
                   </div>
                 </div>
@@ -226,8 +219,8 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
             </div>
 
             {/* Milestones Flow */}
-            <div className="p-6 sm:p-8">
-              <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-6">
+            <div className="p-7 sm:p-9">
+              <h4 className="text-xs font-bold text-[#0B192C] uppercase tracking-wider mb-6">
                 Customs Clearance & Transit Lifecycle
               </h4>
 
@@ -240,7 +233,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
                         milestone.completed
                           ? 'bg-emerald-600 text-white'
                           : milestone.current
-                          ? 'bg-amber-500 text-white ring-4 ring-amber-100 animate-pulse'
+                          ? 'bg-[#0B192C] text-white ring-4 ring-blue-100'
                           : 'bg-slate-200 text-slate-400'
                       }`}
                     >
@@ -251,14 +244,14 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
                       )}
                     </div>
 
-                    <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                    <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-5">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
                         <div className="flex items-center gap-2">
                           <h5 className="text-sm font-bold text-slate-900">
                             {milestone.stage}
                           </h5>
                           {milestone.current && (
-                            <span className="text-[10px] font-bold bg-amber-500 text-white px-2 py-0.5 rounded-sm">
+                            <span className="text-[10px] font-bold bg-[#0B192C] text-white px-2 py-0.5 rounded-sm">
                               Active Stage
                             </span>
                           )}
@@ -274,7 +267,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
                       </div>
 
                       {milestone.notes && (
-                        <p className="mt-2 text-xs bg-white border border-slate-200 rounded-lg p-2.5 text-slate-700 leading-normal">
+                        <p className="mt-2.5 text-xs bg-white border border-slate-200 rounded-lg p-3 text-slate-700 leading-normal">
                           <strong>Update:</strong> {milestone.notes}
                         </p>
                       )}
@@ -284,7 +277,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
               </div>
 
               {/* Action row */}
-              <div className="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <p className="text-xs text-slate-500">
                   Need expedited assistance with this consignment? Our Apapa clearing desk is on standby.
                 </p>
@@ -302,7 +295,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
                   </a>
                   <button
                     onClick={onRequestQuote}
-                    className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer"
+                    className="px-4 py-2 bg-[#0B192C] hover:bg-[#152a45] text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer"
                   >
                     Request a Quote
                   </button>
@@ -312,15 +305,15 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
 
           </div>
         ) : hasSearched ? (
-          <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center space-y-4">
-            <div className="w-12 h-12 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mx-auto">
+          <div className="bg-white rounded-2xl border border-slate-200/80 p-9 text-center space-y-4 shadow-[0_4px_20px_-2px_rgba(11,25,44,0.05)]">
+            <div className="w-12 h-12 bg-slate-100 text-[#0B192C] rounded-full flex items-center justify-center mx-auto">
               <AlertCircle className="w-6 h-6" />
             </div>
             <h4 className="text-base font-bold text-slate-900">
               Consignment Reference "{searchQuery}" Not Found
             </h4>
-            <p className="text-xs text-slate-600 max-w-md mx-auto">
-              Please check your tracking number or contact our Apapa operations desk at <a href={`tel:${COMPANY_DETAILS.phoneRaw}`} className="text-amber-600 font-bold underline">{COMPANY_DETAILS.phone}</a> or <a href={COMPANY_DETAILS.whatsappUrl} className="text-emerald-600 font-bold underline">WhatsApp ({COMPANY_DETAILS.whatsappNumber})</a> for immediate verification.
+            <p className="text-xs text-slate-600 max-w-md mx-auto leading-relaxed">
+              Please check your tracking number or contact our Apapa operations desk at <a href={`tel:${COMPANY_DETAILS.phoneRaw}`} className="text-[#0B192C] font-bold underline">{COMPANY_DETAILS.phone}</a> or <a href={COMPANY_DETAILS.whatsappUrl} className="text-emerald-600 font-bold underline">WhatsApp ({COMPANY_DETAILS.whatsappNumber})</a> for immediate verification.
             </p>
             <div className="pt-2">
               <button
@@ -329,7 +322,7 @@ export const TrackingSection: React.FC<TrackingSectionProps> = ({
                   setSearchQuery('RTL-APP-8921');
                   performSearch('RTL-APP-8921');
                 }}
-                className="text-xs font-bold text-slate-900 bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-lg transition-colors"
+                className="text-xs font-bold text-white bg-[#0B192C] hover:bg-[#152a45] px-4 py-2 rounded-lg transition-colors cursor-pointer"
               >
                 Load Sample Tracking ID (RTL-APP-8921)
               </button>

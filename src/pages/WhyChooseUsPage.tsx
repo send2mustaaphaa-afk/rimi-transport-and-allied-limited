@@ -10,7 +10,7 @@ export const WhyChooseUsPage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex-1">
+    <div className="flex-1 font-sans">
       <SeoHead
         title="Why Choose Us | Licensed NCS Brokerage & Logistics"
         description="Discover why commercial importers choose RIMI TRANSPORT AND ALLIED LIMITED. Zero demurrage protocols, 100% transparent tariffs, 48-72h terminal release, and Apapa hub proximity."
@@ -29,17 +29,15 @@ export const WhyChooseUsPage: React.FC = () => {
       <WhyChooseUs onRequestQuote={() => navigate('/contact')} />
 
       {/* 3. Deep Dive into Demurrage Risk Mitigation */}
-      <section className="py-16 sm:py-20 bg-slate-900 text-white relative overflow-hidden border-t border-slate-800">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(217,119,6,0.1),transparent_50%)] pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 relative">
+      <section className="py-20 sm:py-24 bg-[#0B192C] text-white border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
           
-          <div className="reveal-on-scroll max-w-3xl mb-12 sm:mb-16">
-            <div className="text-xs font-bold text-amber-400 uppercase tracking-widest flex items-center gap-2">
+          <div className="max-w-3xl mb-14">
+            <div className="text-xs font-bold text-slate-300 uppercase tracking-widest flex items-center gap-2">
               <span>DEMURRAGE & COST CONTROL PROTOCOL</span>
             </div>
-            <span className="section-accent-line" />
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-display tracking-tight text-balance mt-3">
+            <div className="w-12 h-0.5 bg-blue-400 mt-2 mb-3" />
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
               How We Prevent Demurrage & Unexpected Port Storage Charges
             </h2>
             <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed max-w-[65ch]">
@@ -48,11 +46,11 @@ export const WhyChooseUsPage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-slate-950 border border-slate-800 p-6 rounded-2xl space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-sm">
+            <div className="bg-[#112239] border border-white/10 p-7 rounded-2xl space-y-3 shadow-md hover:border-white/20 transition-all duration-200">
+              <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-white font-bold text-sm">
                 01
               </div>
-              <h3 className="text-sm font-bold text-white font-display">
+              <h3 className="text-base font-bold text-white">
                 Pre-Berth Documentation Scrutiny
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed">
@@ -60,11 +58,11 @@ export const WhyChooseUsPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="bg-slate-950 border border-slate-800 p-6 rounded-2xl space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-sm">
+            <div className="bg-[#112239] border border-white/10 p-7 rounded-2xl space-y-3 shadow-md hover:border-white/20 transition-all duration-200">
+              <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-white font-bold text-sm">
                 02
               </div>
-              <h3 className="text-sm font-bold text-white font-display">
+              <h3 className="text-base font-bold text-white">
                 Immediate Terminal Positioning
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed">
@@ -72,23 +70,23 @@ export const WhyChooseUsPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="bg-slate-950 border border-slate-800 p-6 rounded-2xl space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-sm">
+            <div className="bg-[#112239] border border-white/10 p-7 rounded-2xl space-y-3 shadow-md hover:border-white/20 transition-all duration-200">
+              <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-white font-bold text-sm">
                 03
               </div>
-              <h3 className="text-sm font-bold text-white font-display">
-                Joint Customs Joint Examination
+              <h3 className="text-base font-bold text-white">
+                Joint Customs Examination
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed">
                 We physically represent your consignments alongside NCS officers, NDLEA, NAFDAC, and SON officials to resolve query discrepancies on the spot.
               </p>
             </div>
 
-            <div className="bg-slate-950 border border-slate-800 p-6 rounded-2xl space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-sm">
+            <div className="bg-[#112239] border border-white/10 p-7 rounded-2xl space-y-3 shadow-md hover:border-white/20 transition-all duration-200">
+              <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-white font-bold text-sm">
                 04
               </div>
-              <h3 className="text-sm font-bold text-white font-display">
+              <h3 className="text-base font-bold text-white">
                 Pre-Staged Haulage Trucks
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed">
@@ -100,11 +98,11 @@ export const WhyChooseUsPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. Verified Operational Statistics */}
-      <StatsSection onRequestQuote={() => navigate('/contact')} />
-
-      {/* 5. Client Testimonials & Corporate References */}
+      {/* 4. Client Testimonials */}
       <TestimonialsSection onRequestQuote={() => navigate('/contact')} />
+
+      {/* 5. Operational Stats */}
+      <StatsSection onRequestQuote={() => navigate('/contact')} />
     </div>
   );
 };

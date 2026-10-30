@@ -14,11 +14,10 @@ import {
   FileCheck,
   Car,
   ArrowRight,
-  CheckCircle,
-  ExternalLink
+  CheckCircle
 } from 'lucide-react';
-import seaAirFreightImg from '../assets/images/sea_air_freight_cargo_1791329104912.jpg';
-import landTruckingImg from '../assets/images/lux_containers_freight_sunset_1791329824177.jpg';
+import corporateFleetImg from '../assets/images/corporate_trucking_fleet_1793361788515.jpg';
+import terminalHubImg from '../assets/images/trucking_terminal_hub_1793361802966.jpg';
 
 interface ServicesSectionProps {
   onRequestQuoteWithService: (serviceName?: string) => void;
@@ -31,7 +30,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
   const [activeFilter, setActiveFilter] = useState<string>('all');
 
   const getServiceIcon = (iconName: string) => {
-    const props = { className: "w-5 h-5 text-amber-500" };
+    const props = { className: "w-5 h-5 text-[#0B192C] group-hover:text-white transition-colors" };
     switch (iconName) {
       case 'ShieldCheck': return <ShieldCheck {...props} />;
       case 'Globe': return <Globe {...props} />;
@@ -56,17 +55,17 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
   });
 
   return (
-    <section id="services" className="py-16 sm:py-24 bg-slate-50 border-b border-slate-200">
+    <section id="services" className="py-20 sm:py-24 bg-white border-b border-slate-200/80 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Section Header with Amber Label & Accent Line */}
-        <div className="reveal-on-scroll flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div className="max-w-2xl">
-            <div className="text-xs font-bold text-amber-600 uppercase tracking-widest flex items-center gap-2">
+            <div className="text-xs font-bold text-[#0B192C] uppercase tracking-widest flex items-center gap-2">
               <span>OUR SERVICES</span>
             </div>
-            <span className="section-accent-line" />
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-display tracking-tight text-balance mt-3">
+            <div className="w-12 h-0.5 bg-[#0B192C] mt-2 mb-3" />
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
               End-to-End Clearing, Forwarding & Haulage Services
             </h2>
             <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed max-w-[65ch]">
@@ -75,12 +74,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
           </div>
 
           {/* Filter segment tabs */}
-          <div className="flex items-center gap-1.5 p-1.5 bg-slate-200/90 rounded-xl self-start md:self-auto overflow-x-auto max-w-full">
+          <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl self-start md:self-auto overflow-x-auto max-w-full border border-slate-200">
             <button
               onClick={() => setActiveFilter('all')}
               className={`px-4 py-2 text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
                 activeFilter === 'all'
-                  ? 'bg-white text-slate-900 shadow-xs'
+                  ? 'bg-[#0B192C] text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -90,7 +89,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               onClick={() => setActiveFilter('customs')}
               className={`px-4 py-2 text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
                 activeFilter === 'customs'
-                  ? 'bg-white text-slate-900 shadow-xs'
+                  ? 'bg-[#0B192C] text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -100,7 +99,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               onClick={() => setActiveFilter('freight')}
               className={`px-4 py-2 text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
                 activeFilter === 'freight'
-                  ? 'bg-white text-slate-900 shadow-xs'
+                  ? 'bg-[#0B192C] text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -110,7 +109,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               onClick={() => setActiveFilter('haulage')}
               className={`px-4 py-2 text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
                 activeFilter === 'haulage'
-                  ? 'bg-white text-slate-900 shadow-xs'
+                  ? 'bg-[#0B192C] text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -119,46 +118,46 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
           </div>
         </div>
 
-        {/* Featured Visual Callout Banners */}
-        <div className="reveal-group grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        {/* Featured Visual Callout Banners with Real Photography */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-14">
           
-          <div className="reveal-on-scroll relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-card group">
+          <div className="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-[0_4px_20px_-2px_rgba(11,25,44,0.06)] group bg-slate-950">
             <img
-              src={seaAirFreightImg}
-              alt="Global Freight Forwarding and Sea Air Operations"
-              className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700"
+              src={corporateFleetImg}
+              alt="Heavy Duty Container Truck Fleet Operating on Corridor"
+              className="w-full h-64 object-cover group-hover:scale-102 transition-transform duration-500"
               referrerPolicy="no-referrer"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/65 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B192C] via-[#0B192C]/50 to-transparent" />
             <div className="absolute bottom-5 left-5 right-5 text-white">
-              <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider block mb-1">
+              <span className="text-[11px] font-bold text-blue-300 uppercase tracking-wider block mb-1">
                 International Sea & Air Logistics
               </span>
-              <h3 className="text-lg font-bold font-display">
+              <h3 className="text-xl font-bold">
                 Connecting Nigeria to Global Shipping Lanes
               </h3>
-              <p className="text-xs text-slate-300 mt-1 line-clamp-2 max-w-[65ch]">
+              <p className="text-xs sm:text-sm text-slate-300 mt-1 line-clamp-2 max-w-[65ch]">
                 Containerized FCL, grouped LCL, and scheduled air freight from Asia, Europe, the Americas, and the Middle East.
               </p>
             </div>
           </div>
 
-          <div className="reveal-on-scroll relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-card group">
+          <div className="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-[0_4px_20px_-2px_rgba(11,25,44,0.06)] group bg-slate-950">
             <img
-              src={landTruckingImg}
-              alt="Heavy Duty Land Haulage and Container Trucking"
-              className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700"
+              src={terminalHubImg}
+              alt="Heavy Duty Land Haulage and Container Trucking Terminal Hub"
+              className="w-full h-64 object-cover group-hover:scale-102 transition-transform duration-500"
               referrerPolicy="no-referrer"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/65 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B192C] via-[#0B192C]/50 to-transparent" />
             <div className="absolute bottom-5 left-5 right-5 text-white">
-              <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider block mb-1">
+              <span className="text-[11px] font-bold text-blue-300 uppercase tracking-wider block mb-1">
                 Inland Haulage & Distribution
               </span>
-              <h3 className="text-lg font-bold font-display">
+              <h3 className="text-xl font-bold">
                 Heavy Duty Container & Project Haulage Fleet
               </h3>
-              <p className="text-xs text-slate-300 mt-1 line-clamp-2 max-w-[65ch]">
+              <p className="text-xs sm:text-sm text-slate-300 mt-1 line-clamp-2 max-w-[65ch]">
                 Direct container dispatch from Apapa & Tin Can gates to factory destinations nationwide with GPS monitoring.
               </p>
             </div>
@@ -166,17 +165,17 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 
         </div>
 
-        {/* 10 Services Bento Grid (Equal heights, 16px radius, hover lift, amber-tinted icon square) */}
-        <div className="reveal-group grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* 10 Services Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredServices.map((service, index) => (
             <div
               key={service.id}
-              className="reveal-on-scroll bg-white rounded-2xl p-6 border border-slate-200/90 shadow-card hover:border-amber-500/50 flex flex-col justify-between group premium-card-lift"
+              className="bg-white rounded-2xl p-7 border border-slate-200/80 shadow-[0_4px_20px_-2px_rgba(11,25,44,0.05)] hover:shadow-[0_12px_32px_-4px_rgba(11,25,44,0.1)] hover:border-[#0B192C]/30 flex flex-col justify-between group transition-all duration-300"
             >
               <div className="space-y-4">
                 {/* Top card header */}
                 <div className="flex items-center justify-between">
-                  <div className="card-icon-square w-12 h-12 rounded-xl bg-amber-500/12 border border-amber-500/25 flex items-center justify-center shadow-2xs group-hover:bg-amber-500/20 transition-colors">
+                  <div className="w-12 h-12 rounded-xl bg-[#0B192C]/5 border border-[#0B192C]/10 flex items-center justify-center group-hover:bg-[#0B192C] group-hover:text-white transition-colors duration-200">
                     {getServiceIcon(service.iconName)}
                   </div>
                   <span className="text-xs font-mono text-slate-400 font-bold">
@@ -188,19 +187,19 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 <div>
                   <Link
                     to={`/services/${service.id}`}
-                    className="text-lg font-bold text-slate-900 font-display group-hover:text-amber-600 transition-colors block"
+                    className="text-lg font-bold text-slate-900 group-hover:text-[#0B192C] transition-colors block"
                   >
                     {service.title}
                   </Link>
-                  <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+                  <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
                     {service.shortDescription}
                   </p>
                 </div>
 
                 {/* Key Bullet Features */}
-                <div className="pt-2 border-t border-slate-100 space-y-1.5">
+                <div className="pt-3 border-t border-slate-100 space-y-1.5">
                   {service.features.slice(0, 2).map((feat, fIdx) => (
-                    <div key={fIdx} className="flex items-start gap-2 text-[11px] text-slate-600">
+                    <div key={fIdx} className="flex items-start gap-2 text-xs text-slate-600">
                       <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                       <span className="line-clamp-1">{feat}</span>
                     </div>
@@ -209,22 +208,22 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               </div>
 
               {/* Card Action Footers */}
-              <div className="pt-5 mt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+              <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between gap-2">
                 <Link
                   to={`/services/${service.id}`}
-                  className="text-xs font-bold text-slate-800 hover:text-amber-600 flex items-center gap-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm"
+                  className="text-xs font-bold text-slate-700 hover:text-[#0B192C] flex items-center gap-1 transition-colors"
                 >
                   <span>Explore Service</span>
-                  <ArrowRight className="w-3 h-3 text-amber-500" />
+                  <ArrowRight className="w-3 h-3 text-[#0B192C]" />
                 </Link>
 
                 <button
                   type="button"
                   onClick={() => onRequestQuoteWithService(service.title)}
-                  className="btn-interactive group text-xs font-bold text-amber-700 hover:text-amber-800 bg-amber-50 hover:bg-amber-100 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+                  className="text-xs font-bold text-[#0B192C] bg-slate-100 hover:bg-[#0B192C] hover:text-white px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
                 >
                   <span>Request Quote</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-200" />
+                  <ArrowRight className="w-3 h-3" />
                 </button>
               </div>
             </div>
@@ -232,18 +231,18 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         </div>
 
         {/* Bottom Banner for Custom Inquiries */}
-        <div className="reveal-on-scroll mt-12 bg-slate-900 text-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 border border-slate-800">
+        <div className="mt-14 bg-[#0B192C] text-white rounded-2xl p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
           <div className="space-y-1 text-center sm:text-left">
-            <h3 className="text-lg sm:text-xl font-bold font-display text-white">
+            <h3 className="text-xl sm:text-2xl font-bold text-white">
               Need a Custom Multimodal Logistics Solution?
             </h3>
-            <p className="text-xs sm:text-sm text-slate-300">
+            <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
               Speak directly with our Apapa port logistics coordinators for tailored container clearing & haulage rates.
             </p>
           </div>
           <button
             onClick={() => onRequestQuoteWithService()}
-            className="btn-interactive px-6 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs sm:text-sm rounded-lg whitespace-nowrap shrink-0 shadow-sm cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+            className="w-full sm:w-auto px-6 py-3.5 bg-white hover:bg-slate-100 text-[#0B192C] font-bold text-xs sm:text-sm rounded-lg whitespace-nowrap shrink-0 shadow-sm cursor-pointer transition-colors"
           >
             Request a Quote
           </button>

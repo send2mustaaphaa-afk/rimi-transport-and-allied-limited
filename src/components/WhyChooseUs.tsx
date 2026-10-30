@@ -20,12 +20,12 @@ interface WhyChooseUsProps {
 export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onRequestQuote }) => {
   const getPillarIcon = (iconName: string) => {
     switch (iconName) {
-      case 'Award': return <Award className="w-5 h-5 text-amber-500" />;
-      case 'Zap': return <Zap className="w-5 h-5 text-amber-500" />;
-      case 'TrendingDown': return <TrendingDown className="w-5 h-5 text-amber-500" />;
-      case 'ShieldAlert': return <ShieldAlert className="w-5 h-5 text-amber-500" />;
-      case 'Headphones': return <Headphones className="w-5 h-5 text-amber-500" />;
-      default: return <Award className="w-5 h-5 text-amber-500" />;
+      case 'Award': return <Award className="w-5 h-5 text-[#0B192C]" />;
+      case 'Zap': return <Zap className="w-5 h-5 text-[#0B192C]" />;
+      case 'TrendingDown': return <TrendingDown className="w-5 h-5 text-[#0B192C]" />;
+      case 'ShieldAlert': return <ShieldAlert className="w-5 h-5 text-[#0B192C]" />;
+      case 'Headphones': return <Headphones className="w-5 h-5 text-[#0B192C]" />;
+      default: return <Award className="w-5 h-5 text-[#0B192C]" />;
     }
   };
 
@@ -58,16 +58,16 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onRequestQuote }) => {
   ];
 
   return (
-    <section id="why-us" className="py-16 sm:py-24 bg-white border-b border-slate-200">
+    <section id="why-us" className="py-20 sm:py-24 bg-white border-b border-slate-200/80 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Section Header with Amber Label & Accent Line */}
-        <div className="reveal-on-scroll text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <div className="text-xs font-bold text-amber-600 uppercase tracking-widest inline-flex items-center gap-2">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
+          <div className="text-xs font-bold text-[#0B192C] uppercase tracking-widest inline-flex items-center gap-2">
             <span>WHY CHOOSE US</span>
           </div>
-          <span className="section-accent-line mx-auto" />
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-display tracking-tight text-balance mt-3">
+          <div className="w-12 h-0.5 bg-[#0B192C] mx-auto mt-2 mb-3" />
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             Delivering Strategic Value & Operational Peace of Mind
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed max-w-[65ch] mx-auto">
@@ -75,124 +75,97 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onRequestQuote }) => {
           </p>
         </div>
 
-        {/* 5 Core Pillars Grid + CTA (Equal Heights, 16px radius, hover lift, amber-tinted icon square) */}
-        <div className="reveal-group grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        {/* 5 Core Pillars Grid + CTA */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {WHY_CHOOSE_US_POINTS.map((point, index) => (
             <div
               key={index}
-              className={`reveal-on-scroll rounded-2xl p-6 border transition-all duration-200 shadow-card hover:border-amber-500/50 flex flex-col justify-between group premium-card-lift ${
-                index === 0
-                  ? 'bg-slate-900 text-white border-slate-800'
-                  : 'bg-slate-50 text-slate-900 border-slate-200/90'
-              }`}
+              className="bg-white rounded-2xl p-7 border border-slate-200/80 shadow-[0_4px_20px_-2px_rgba(11,25,44,0.05)] hover:shadow-[0_12px_32px_-4px_rgba(11,25,44,0.1)] hover:border-[#0B192C]/30 flex flex-col justify-between group transition-all duration-300"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className={`card-icon-square w-12 h-12 rounded-xl flex items-center justify-center border shadow-2xs ${
-                    index === 0
-                      ? 'bg-amber-500/15 border-amber-500/30 text-amber-400'
-                      : 'bg-amber-500/12 border-amber-500/25 text-amber-600'
-                  }`}>
+                  <div className="w-12 h-12 rounded-xl bg-[#0B192C]/5 border border-[#0B192C]/10 flex items-center justify-center group-hover:bg-[#0B192C] group-hover:text-white transition-colors duration-200">
                     {getPillarIcon(point.icon)}
                   </div>
                   <div className="text-right">
-                    <span className={`text-lg font-extrabold font-mono tabular-nums ${
-                      index === 0 ? 'text-amber-400' : 'text-slate-900'
-                    }`}>
+                    <span className="text-xl font-extrabold font-mono tabular-nums text-[#0B192C]">
                       <AnimatedCounter value={point.stat} />
                     </span>
-                    <span className={`text-[10px] block font-medium ${
-                      index === 0 ? 'text-slate-400' : 'text-slate-500'
-                    }`}>
+                    <span className="text-[11px] block font-medium text-slate-500">
                       {point.statLabel}
                     </span>
                   </div>
                 </div>
 
-                <h3 className={`text-base font-bold font-display group-hover:text-amber-500 transition-colors ${
-                  index === 0 ? 'text-white' : 'text-slate-900'
-                }`}>
+                <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#0B192C] transition-colors">
                   {point.title}
                 </h3>
                 
-                <p className={`mt-2 text-xs leading-relaxed max-w-[65ch] ${
-                  index === 0 ? 'text-slate-300' : 'text-slate-600'
-                }`}>
+                <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
                   {point.description}
                 </p>
               </div>
             </div>
           ))}
 
-          {/* 6th Card: Direct Hotline */}
-          <div className="reveal-on-scroll bg-gradient-to-br from-amber-500 to-amber-600 text-slate-950 rounded-2xl p-6 flex flex-col justify-between shadow-card border border-amber-400/50 premium-card-lift group">
+          {/* 6th Card: Direct Corporate Engagement */}
+          <div className="bg-[#0B192C] text-white rounded-2xl p-7 flex flex-col justify-between shadow-[0_4px_20px_-2px_rgba(11,25,44,0.12)]">
             <div>
-              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider mb-2">
+              <div className="flex items-center gap-2 text-xs font-bold text-blue-300 uppercase tracking-wider mb-2">
                 <ShieldCheck className="w-4 h-4" />
                 <span>Immediate Engagement</span>
               </div>
-              <h3 className="text-lg font-extrabold font-display leading-snug">
+              <h3 className="text-xl font-extrabold text-white leading-snug">
                 Have a Container Vessel Arriving at Apapa Port?
               </h3>
-              <p className="text-xs text-slate-950/90 mt-2 font-medium max-w-[65ch]">
+              <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
                 Send your Bill of Lading & Packing List to our Apapa team for immediate document pre-assessment.
               </p>
             </div>
 
-            <div className="pt-4 mt-4 border-t border-slate-950/15">
-              <button
-                onClick={onRequestQuote}
-                className="btn-interactive group/btn w-full py-3 bg-slate-950 text-amber-400 hover:text-white hover:bg-slate-900 font-extrabold text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 focus-visible:ring-offset-amber-500"
-              >
-                <span>Request a Quote</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform duration-200" />
-              </button>
-            </div>
+            <button
+              onClick={onRequestQuote}
+              className="mt-6 w-full py-3 bg-white hover:bg-slate-100 text-[#0B192C] font-bold text-xs rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer"
+            >
+              <span>Get Immediate Assessment</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
           </div>
         </div>
 
-        {/* Interactive Comparison Table */}
-        <div className="reveal-on-scroll bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
-          <div className="p-6 sm:p-7 border-b border-slate-200 bg-white">
-            <h3 className="text-lg font-bold text-slate-900 font-display">
-              The RIMI Advantage: Solving Nigeria Port Clearance Bottlenecks
+        {/* Comparison Table */}
+        <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-7 sm:p-10 shadow-[0_4px_20px_-2px_rgba(11,25,44,0.04)]">
+          <div className="max-w-2xl mb-8">
+            <h3 className="text-xl font-extrabold text-slate-900">
+              The RIMI Standard vs. Traditional Port Clearing
             </h3>
-            <p className="text-xs text-slate-600 mt-1">
-              Compare our proactive operational workflow against standard industry delays.
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              How our structured processes protect shippers from unforeseen demurrage, lost documentation, and customs queries.
             </p>
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider text-[11px] border-b border-slate-200">
-                <tr>
-                  <th className="py-3.5 px-6">Operational Factor</th>
-                  <th className="py-3.5 px-6 text-slate-500">Traditional Clearing Bottlenecks</th>
-                  <th className="py-3.5 px-6 text-amber-900 bg-amber-50/70">
-                    <span className="flex items-center gap-1.5 font-bold">
-                      <ShieldCheck className="w-4 h-4 text-amber-600" />
-                      RIMI Standard Workflow
-                    </span>
-                  </th>
+            <table className="w-full text-left text-xs sm:text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 text-slate-500 font-semibold uppercase text-[11px] tracking-wider">
+                  <th className="py-3 px-4">Performance Metric</th>
+                  <th className="py-3 px-4 text-slate-500">Traditional Brokers</th>
+                  <th className="py-3 px-4 text-[#0B192C] font-bold bg-[#0B192C]/5 rounded-t-lg">RIMI TRANSPORT Service</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 bg-white">
-                {comparisonRows.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-slate-50 transition-colors">
-                    <td className="py-4 px-6 font-bold text-slate-900 whitespace-nowrap">
+              <tbody className="divide-y divide-slate-200/80">
+                {comparisonRows.map((row, rIdx) => (
+                  <tr key={rIdx} className="hover:bg-white/60 transition-colors">
+                    <td className="py-3.5 px-4 font-bold text-slate-900">
                       {row.feature}
                     </td>
-                    <td className="py-4 px-6 text-slate-600 max-w-xs">
-                      <div className="flex items-start gap-2">
-                        <X className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
-                        <span>{row.traditional}</span>
-                      </div>
+                    <td className="py-3.5 px-4 text-slate-500 flex items-center gap-2">
+                      <X className="w-4 h-4 text-rose-500 shrink-0" />
+                      <span>{row.traditional}</span>
                     </td>
-                    <td className="py-4 px-6 text-slate-900 font-medium bg-amber-50/30 max-w-sm">
-                      <div className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                        <span>{row.rimi}</span>
-                      </div>
+                    <td className="py-3.5 px-4 font-semibold text-[#0B192C] bg-[#0B192C]/5 flex items-center gap-2">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <span>{row.rimi}</span>
                     </td>
                   </tr>
                 ))}

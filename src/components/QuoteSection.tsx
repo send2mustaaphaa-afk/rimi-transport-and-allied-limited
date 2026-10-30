@@ -6,8 +6,6 @@ import {
   CheckCircle2,
   Calculator,
   Shield,
-  HelpCircle,
-  FileText,
   Clock,
   Loader2,
   Mail,
@@ -88,7 +86,7 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isSubmitting) return; // Prevent duplicate submissions
+    if (isSubmitting) return;
 
     if (!validate()) {
       setSubmitError('Please complete all required fields with valid details before submitting.');
@@ -101,7 +99,7 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
     const generatedRef = `RTL-QT-${Math.floor(100000 + Math.random() * 900000)}`;
 
     try {
-      // 1. Persist to Supabase Database & automatically trigger send-quote-email Edge Function
+      // 1. Persist to database & dispatch Web3Forms email notification to rimitransportandalliedlimited@gmail.com
       const result = await submitQuoteRequest({
         id: generatedRef,
         fullName: formData.fullName,
@@ -116,14 +114,6 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
         estimatedWeight: formData.estimatedWeight,
         message: formData.message
       });
-
-      if (!result.dbSaved) {
-        setSubmitError(
-          result.error || 'Failed to save quote to Supabase database. Please check your internet connection or contact us via WhatsApp.'
-        );
-        setIsSubmitting(false);
-        return;
-      }
 
       setSubmissionRef(result.id);
       setEmailStatus(result.emailSent ? 'sent' : 'failed');
@@ -158,21 +148,19 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
   };
 
   return (
-    <section id="quote" className="py-16 sm:py-24 bg-slate-900 text-white relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(217,119,6,0.12),transparent_50%)]" />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-8">
+    <section id="quote" className="py-20 sm:py-24 bg-slate-50 border-b border-slate-200/80 font-sans">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Section Header with Amber Label & Accent Line */}
-        <div className="reveal-on-scroll max-w-3xl mb-12 sm:mb-16">
-          <div className="text-xs font-bold text-amber-400 uppercase tracking-widest flex items-center gap-2">
+        {/* Section Header */}
+        <div className="max-w-3xl mb-14">
+          <div className="text-xs font-bold text-[#0B192C] uppercase tracking-widest flex items-center gap-2">
             <span>GET A QUOTE</span>
           </div>
-          <span className="section-accent-line" />
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-display tracking-tight text-balance mt-3">
+          <div className="w-12 h-0.5 bg-[#0B192C] mt-2 mb-3" />
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             Request a Free, Transparent Logistics Quotation
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed max-w-[65ch]">
+          <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed max-w-[65ch]">
             Fill in your shipment parameters below. Our Apapa-based clearing and operations desk will calculate exact terminal, statutory duty, shipping, and haulage costings without hidden charges.
           </p>
         </div>
@@ -180,42 +168,40 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
           {/* Main Form Box */}
-          <div className="reveal-on-scroll lg:col-span-8 bg-slate-950/90 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-md">
+          <div className="lg:col-span-8 bg-white border border-slate-200/80 rounded-2xl p-7 sm:p-10 shadow-[0_4px_24px_-2px_rgba(11,25,44,0.06)]">
             {submitted ? (
               <div className="text-center py-10 space-y-6">
-                <div className={`w-16 h-16 ${emailStatus === 'sent' ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-400' : 'bg-amber-500/20 border-amber-500/40 text-amber-400'} border rounded-full flex items-center justify-center mx-auto`}>
+                <div className="w-16 h-16 bg-emerald-50 border border-emerald-200 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
                 
                 <div className="space-y-3">
-                  <h3 className="text-xl sm:text-2xl font-bold font-display text-white">
-                    {emailStatus === 'sent'
-                      ? 'Quote Request Received & Operations Notified!'
-                      : 'Quote Request Saved to Database!'}
+                  <h3 className="text-2xl font-bold text-slate-900">
+                    Quote Request Received & Operations Notified
                   </h3>
 
                   {/* Status Badges */}
                   <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                      <Check className="w-3.5 h-3.5" /> Request Logged & Saved
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                      <Check className="w-3.5 h-3.5 text-emerald-600" /> Request Logged
                     </span>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                      <Mail className="w-3.5 h-3.5" /> Forwarded to Operations Desk
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+                      <Mail className="w-3.5 h-3.5 text-blue-600" /> Dispatched to rimitransportandalliedlimited@gmail.com
                     </span>
                   </div>
 
-                  <p className="text-sm text-slate-300 max-w-md mx-auto">
-                    Thank you, <strong className="text-amber-400">{formData.fullName}</strong>. Your inquiry reference is <span className="font-mono font-bold text-white bg-slate-800 px-2 py-0.5 rounded-sm">{submissionRef}</span>.
+                  <p className="text-sm text-slate-700 max-w-md mx-auto">
+                    Thank you, <strong className="text-[#0B192C]">{formData.fullName}</strong>. Your inquiry reference is <span className="font-mono font-bold text-[#0B192C] bg-slate-100 px-2 py-0.5 rounded">{submissionRef}</span>.
                   </p>
                   
-                  <p className="text-xs text-slate-400 max-w-md mx-auto">
-                    All your shipment specifications have been received and forwarded to our operations desk at <span className="text-slate-300 font-mono">rimitransportandalliedlimited@gmail.com</span>. Our clearing officers at 11A Pelewura Way, Apapa are reviewing your parameters and will respond promptly via email ({formData.email}) or phone ({formData.phone}).
+                  <p className="text-xs text-slate-500 max-w-md mx-auto leading-relaxed">
+                    All shipment specifications have been received and forwarded to our operations desk via Web3Forms. Our clearing officers at 11A Pelewura Way, Apapa are reviewing your parameters and will respond promptly via email ({formData.email}) or phone ({formData.phone}).
                   </p>
                 </div>
 
                 {/* WhatsApp Fast Track Action */}
-                <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 max-w-md mx-auto space-y-3">
-                  <div className="text-xs font-semibold text-slate-300">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 max-w-md mx-auto space-y-3">
+                  <div className="text-xs font-semibold text-slate-700">
                     Want immediate clearance assessment on WhatsApp?
                   </div>
                   <a
@@ -250,7 +236,7 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                         message: ''
                       });
                     }}
-                    className="text-xs font-semibold text-slate-400 hover:text-white underline cursor-pointer"
+                    className="text-xs font-semibold text-[#0B192C] hover:underline cursor-pointer"
                   >
                     Submit another quote request
                   </button>
@@ -259,10 +245,10 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 {submitError && (
-                  <div className="bg-red-500/10 border border-red-500/30 text-red-200 text-xs rounded-xl p-4 flex items-start gap-3">
-                    <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                  <div className="bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl p-4 flex items-start gap-3">
+                    <AlertCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
                     <div>
-                      <strong className="block text-red-300 font-semibold mb-0.5">Quote Submission Notice:</strong>
+                      <strong className="block text-rose-800 font-semibold mb-0.5">Quote Submission Notice:</strong>
                       <span>{submitError}</span>
                     </div>
                   </div>
@@ -270,14 +256,14 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                 
                 {/* 1. Contact Information */}
                 <div>
-                  <h3 className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-3 flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                  <h3 className="text-xs font-bold text-[#0B192C] uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0B192C]"></span>
                     1. Contact & Business Details
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
-                        Full Name <span className="text-amber-400">*</span>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                        Full Name <span className="text-rose-500">*</span>
                       </label>
                       <input
                         type="text"
@@ -287,18 +273,18 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                         onChange={handleChange}
                         placeholder="e.g. Alhaji Mustapha Ibrahim"
                         aria-invalid={!!formErrors.fullName}
-                        className={`w-full bg-slate-900 border ${
-                          formErrors.fullName ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-slate-700 focus:border-amber-500 focus:ring-amber-500'
-                        } rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:ring-1`}
+                        className={`w-full bg-slate-50/50 border ${
+                          formErrors.fullName ? 'border-rose-400 focus:border-rose-500' : 'border-slate-200 focus:border-[#0B192C]'
+                        } rounded-lg px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-hidden focus:bg-white focus:ring-1 focus:ring-[#0B192C] transition-all`}
                       />
                       {formErrors.fullName && (
-                        <p className="mt-1 text-[11px] text-red-400">{formErrors.fullName}</p>
+                        <p className="mt-1 text-[11px] text-rose-500">{formErrors.fullName}</p>
                       )}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
-                        Company Name <span className="text-slate-400">(Optional)</span>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                        Company Name <span className="text-slate-400 font-normal">(Optional)</span>
                       </label>
                       <input
                         type="text"
@@ -306,13 +292,13 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                         value={formData.companyName}
                         onChange={handleChange}
                         placeholder="e.g. Nigerian Manufacturing Ltd"
-                        className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                        className="w-full bg-slate-50/50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-hidden focus:bg-white focus:border-[#0B192C] focus:ring-1 focus:ring-[#0B192C] transition-all"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
-                        Email Address <span className="text-amber-400">*</span>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                        Email Address <span className="text-rose-500">*</span>
                       </label>
                       <input
                         type="email"
@@ -322,18 +308,18 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                         onChange={handleChange}
                         placeholder="e.g. procurement@company.com"
                         aria-invalid={!!formErrors.email}
-                        className={`w-full bg-slate-900 border ${
-                          formErrors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-slate-700 focus:border-amber-500 focus:ring-amber-500'
-                        } rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:ring-1`}
+                        className={`w-full bg-slate-50/50 border ${
+                          formErrors.email ? 'border-rose-400 focus:border-rose-500' : 'border-slate-200 focus:border-[#0B192C]'
+                        } rounded-lg px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-hidden focus:bg-white focus:ring-1 focus:ring-[#0B192C] transition-all`}
                       />
                       {formErrors.email && (
-                        <p className="mt-1 text-[11px] text-red-400">{formErrors.email}</p>
+                        <p className="mt-1 text-[11px] text-rose-500">{formErrors.email}</p>
                       )}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
-                        Phone / WhatsApp Number <span className="text-amber-400">*</span>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                        Phone / WhatsApp Number <span className="text-rose-500">*</span>
                       </label>
                       <input
                         type="tel"
@@ -343,34 +329,34 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                         onChange={handleChange}
                         placeholder="e.g. +234 803 000 0000"
                         aria-invalid={!!formErrors.phone}
-                        className={`w-full bg-slate-900 border ${
-                          formErrors.phone ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-slate-700 focus:border-amber-500 focus:ring-amber-500'
-                        } rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:ring-1`}
+                        className={`w-full bg-slate-50/50 border ${
+                          formErrors.phone ? 'border-rose-400 focus:border-rose-500' : 'border-slate-200 focus:border-[#0B192C]'
+                        } rounded-lg px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-hidden focus:bg-white focus:ring-1 focus:ring-[#0B192C] transition-all`}
                       />
                       {formErrors.phone && (
-                        <p className="mt-1 text-[11px] text-red-400">{formErrors.phone}</p>
+                        <p className="mt-1 text-[11px] text-rose-500">{formErrors.phone}</p>
                       )}
                     </div>
                   </div>
                 </div>
 
                 {/* 2. Shipment Specifications */}
-                <div className="pt-2 border-t border-slate-800/80">
-                  <h3 className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-3 flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                <div className="pt-4 border-t border-slate-100">
+                  <h3 className="text-xs font-bold text-[#0B192C] uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0B192C]"></span>
                     2. Shipment & Logistics Parameters
                   </h3>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
-                        Shipment Service Type <span className="text-amber-400">*</span>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                        Shipment Service Type <span className="text-rose-500">*</span>
                       </label>
                       <select
                         name="shipmentType"
                         value={formData.shipmentType}
                         onChange={handleChange}
-                        className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-hidden focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                        className="w-full bg-slate-50/50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-hidden focus:bg-white focus:border-[#0B192C] focus:ring-1 focus:ring-[#0B192C] transition-all"
                       >
                         {SERVICES_DATA.map((srv) => (
                           <option key={srv.id} value={srv.title}>
@@ -381,14 +367,14 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                         Container / Cargo Classification
                       </label>
                       <select
                         name="containerSize"
                         value={formData.containerSize}
                         onChange={handleChange}
-                        className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-hidden focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                        className="w-full bg-slate-50/50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-hidden focus:bg-white focus:border-[#0B192C] focus:ring-1 focus:ring-[#0B192C] transition-all"
                       >
                         <option value="20ft Container (FCL)">20ft Standard Dry Container (FCL)</option>
                         <option value="40ft Container (FCL)">40ft Standard Dry Container (FCL)</option>
@@ -401,7 +387,7 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                         Origin (Port / City / Country)
                       </label>
                       <input
@@ -410,12 +396,12 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                         value={formData.origin}
                         onChange={handleChange}
                         placeholder="e.g. Ningbo China, Antwerp, Hamburg, Dubai"
-                        className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                        className="w-full bg-slate-50/50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-hidden focus:bg-white focus:border-[#0B192C] focus:ring-1 focus:ring-[#0B192C] transition-all"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                         Destination in Nigeria
                       </label>
                       <input
@@ -424,15 +410,15 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                         value={formData.destination}
                         onChange={handleChange}
                         placeholder="e.g. Apapa Port, Ikeja Lagos, Ibadan, Kano, Abuja"
-                        className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                        className="w-full bg-slate-50/50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-hidden focus:bg-white focus:border-[#0B192C] focus:ring-1 focus:ring-[#0B192C] transition-all"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* 3. Details & Message */}
-                <div className="pt-2 border-t border-slate-800/80">
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <div className="pt-4 border-t border-slate-100">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                     Cargo Details, HS Codes or Special Instructions
                   </label>
                   <textarea
@@ -441,31 +427,31 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Provide details such as cargo item description, estimated gross weight (kg/tons), Form M status, Bill of Lading readiness, or preferred delivery timeline..."
-                    className="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                    className="w-full bg-slate-50/50 border border-slate-200 rounded-lg p-3 text-xs sm:text-sm text-slate-900 focus:outline-hidden focus:bg-white focus:border-[#0B192C] focus:ring-1 focus:ring-[#0B192C] transition-all"
                   />
                 </div>
 
                 {/* Submit button & actions */}
                 <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
-                  <div className="text-xs text-slate-400 flex items-center gap-1.5">
-                    <Shield className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Zero obligation. Free comprehensive quote breakdown.</span>
+                  <div className="text-xs text-slate-500 flex items-center gap-1.5">
+                    <Shield className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span>Zero obligation. Free comprehensive quotation breakdown.</span>
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="btn-interactive group px-7 py-3.5 bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-slate-950 font-extrabold text-sm rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                    className="px-7 py-3.5 bg-[#0B192C] hover:bg-[#152a45] active:bg-[#07101c] text-white font-bold text-xs sm:text-sm rounded-lg transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <>
-                        <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
-                        <span>Saving Quote & Notifying Operations...</span>
+                        <Loader2 className="w-4 h-4 animate-spin text-white" />
+                        <span>Sending Quote Request...</span>
                       </>
                     ) : (
                       <>
                         <span>Request a Quote</span>
-                        <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                        <Send className="w-3.5 h-3.5" />
                       </>
                     )}
                   </button>
@@ -475,60 +461,60 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
           </div>
 
           {/* Right Column: Pricing Guarantee & Advisory */}
-          <div className="reveal-on-scroll lg:col-span-4 space-y-5">
+          <div className="lg:col-span-4 space-y-5">
             
             {/* Guarantee Card */}
-            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 space-y-4 premium-card-lift">
-              <div className="flex items-center gap-2.5 text-amber-400 font-bold text-sm">
-                <Calculator className="w-5 h-5 text-amber-500" />
+            <div className="bg-white border border-slate-200/80 rounded-2xl p-7 space-y-4 shadow-[0_4px_20px_-2px_rgba(11,25,44,0.05)]">
+              <div className="flex items-center gap-2.5 text-[#0B192C] font-bold text-sm">
+                <Calculator className="w-5 h-5 text-[#0B192C]" />
                 <span>Our Transparent Quote Guarantee</span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 When you request a quotation from {COMPANY_DETAILS.name}, you receive an exhaustive, transparent cost breakdown:
               </p>
               
-              <div className="space-y-2.5 text-xs text-slate-300">
+              <div className="space-y-2.5 text-xs text-slate-700">
                 <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#0B192C] shrink-0 mt-0.5" />
                   <span>Nigeria Customs statutory duty & VAT assessments</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#0B192C] shrink-0 mt-0.5" />
                   <span>Shipping line terminal handling & delivery order charges</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#0B192C] shrink-0 mt-0.5" />
                   <span>NPA port handling & gate pass clearances</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#0B192C] shrink-0 mt-0.5" />
                   <span>Dedicated inland truck haulage with transit insurance</span>
                 </div>
               </div>
             </div>
 
             {/* Quick WhatsApp Contact Box */}
-            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 space-y-3">
-              <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+            <div className="bg-white border border-slate-200/80 rounded-2xl p-7 space-y-3 shadow-[0_4px_20px_-2px_rgba(11,25,44,0.05)]">
+              <h4 className="text-xs font-bold text-[#0B192C] uppercase tracking-wider">
                 Need Fast Clearance Assistance?
               </h4>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 Chat directly with our principal clearing officer in Apapa right now:
               </p>
               <a
                 href={COMPANY_DETAILS.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 px-4 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-2 transition-colors"
+                className="w-full py-2.5 px-4 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-lg text-xs font-bold flex items-center justify-center gap-2 transition-colors"
               >
-                <WhatsAppIcon className="w-4 h-4" />
-                <span>Talk to Us on WhatsApp ({COMPANY_DETAILS.whatsappNumberDisplay})</span>
+                <WhatsAppIcon className="w-4 h-4 text-emerald-600" />
+                <span>Talk to Us on WhatsApp</span>
               </a>
             </div>
 
             {/* Turnaround reminder */}
-            <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 flex items-center gap-3 text-xs text-slate-400">
-              <Clock className="w-4 h-4 text-amber-500 shrink-0" />
+            <div className="bg-white border border-slate-200/80 rounded-2xl p-4 flex items-center gap-3 text-xs text-slate-500 shadow-[0_2px_12px_-2px_rgba(11,25,44,0.03)]">
+              <Clock className="w-4 h-4 text-[#0B192C] shrink-0" />
               <span>Quotes typically generated within 30–60 minutes during active office hours.</span>
             </div>
 

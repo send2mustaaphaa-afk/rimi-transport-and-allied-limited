@@ -12,21 +12,16 @@ interface FooterProps {
   onNavigateToAdmin?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({
-  onNavigate,
-  onRequestQuote,
-  onSelectService,
-  onNavigateToAdmin
-}) => {
+export const Footer: React.FC<FooterProps> = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <footer className="bg-slate-950 text-slate-400 text-xs border-t border-slate-800">
+    <footer className="bg-[#0B192C] text-slate-300 text-xs border-t border-slate-800 font-sans">
       
       {/* Upper Footer Block */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
           
           {/* Column 1: Company Profile (4 cols) */}
@@ -38,10 +33,10 @@ export const Footer: React.FC<FooterProps> = ({
                 className="h-[48px] w-auto object-contain shrink-0 drop-shadow-md"
               />
               <div>
-                <span className="text-base font-extrabold text-white font-display block leading-tight">
+                <span className="text-base font-extrabold text-white block leading-tight">
                   RIMI TRANSPORT
                 </span>
-                <span className="text-[10px] font-semibold text-slate-500 tracking-wider block uppercase">
+                <span className="text-[10px] font-semibold text-slate-400 tracking-wider block uppercase">
                   AND ALLIED LIMITED
                 </span>
               </div>
@@ -52,7 +47,7 @@ export const Footer: React.FC<FooterProps> = ({
             </p>
 
             <div className="pt-2 flex items-center gap-2 text-slate-300">
-              <Shield className="w-4 h-4 text-amber-500 shrink-0" />
+              <Shield className="w-4 h-4 text-blue-300 shrink-0" />
               <span className="text-xs font-semibold">
                 Nigeria Customs Service Authorized Clearing Agency
               </span>
@@ -66,42 +61,42 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="hover:text-amber-400 transition-colors text-left block">
+                <Link to="/" className="hover:text-white transition-colors text-left block">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-amber-400 transition-colors text-left block">
+                <Link to="/about" className="hover:text-white transition-colors text-left block">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-amber-400 transition-colors text-left block">
+                <Link to="/services" className="hover:text-white transition-colors text-left block">
                   Our Services
                 </Link>
               </li>
               <li>
-                <Link to="/ports" className="hover:text-amber-400 transition-colors text-left block">
+                <Link to="/ports" className="hover:text-white transition-colors text-left block">
                   Ports & Coverage
                 </Link>
               </li>
               <li>
-                <Link to="/fleet" className="hover:text-amber-400 transition-colors text-left block">
+                <Link to="/fleet" className="hover:text-white transition-colors text-left block">
                   Fleet & Automobiles
                 </Link>
               </li>
               <li>
-                <Link to="/why-choose-us" className="hover:text-amber-400 transition-colors text-left block">
+                <Link to="/why-choose-us" className="hover:text-white transition-colors text-left block">
                   Why Choose Us
                 </Link>
               </li>
               <li>
-                <Link to="/track" className="hover:text-amber-400 transition-colors text-left block">
+                <Link to="/track" className="hover:text-white transition-colors text-left block">
                   Track Consignment
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-amber-400 hover:text-amber-300 font-semibold transition-colors text-left block">
+                <Link to="/contact" className="text-white hover:text-blue-200 font-semibold transition-colors text-left block">
                   Contact & Quote
                 </Link>
               </li>
@@ -113,12 +108,12 @@ export const Footer: React.FC<FooterProps> = ({
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">
               Our Core Services
             </h4>
-            <ul className="space-y-1.5">
+            <ul className="space-y-2">
               {SERVICES_DATA.slice(0, 7).map((srv) => (
                 <li key={srv.id}>
                   <Link
                     to={`/services/${srv.id}`}
-                    className="hover:text-amber-400 transition-colors text-left truncate block max-w-full"
+                    className="hover:text-white transition-colors text-left truncate block max-w-full text-slate-400"
                     title={srv.title}
                   >
                     {srv.title}
@@ -135,29 +130,29 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <div className="space-y-3 text-xs text-slate-300">
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-blue-300 shrink-0 mt-0.5" />
                 <span className="leading-relaxed">{COMPANY_DETAILS.officeAddress}</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-amber-500 shrink-0" />
-                <a href={`tel:${COMPANY_DETAILS.phoneRaw}`} className="hover:text-amber-400 transition-colors font-medium text-white">
+                <Phone className="w-4 h-4 text-blue-300 shrink-0" />
+                <a href={`tel:${COMPANY_DETAILS.phoneRaw}`} className="hover:text-white transition-colors font-medium text-white">
                   {COMPANY_DETAILS.phone}
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-amber-500 shrink-0" />
-                <a href={`mailto:${COMPANY_DETAILS.email}`} className="hover:text-amber-400 transition-colors truncate" title={COMPANY_DETAILS.email}>
+                <Mail className="w-4 h-4 text-blue-300 shrink-0" />
+                <a href={`mailto:${COMPANY_DETAILS.email}`} className="hover:text-white transition-colors truncate" title={COMPANY_DETAILS.email}>
                   {COMPANY_DETAILS.email}
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
                 <WhatsAppIcon className="w-4 h-4 text-emerald-400 shrink-0" />
-                <a href={COMPANY_DETAILS.whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors text-emerald-400 font-semibold">
+                <a href={COMPANY_DETAILS.whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 transition-colors text-emerald-400 font-semibold">
                   WhatsApp: {COMPANY_DETAILS.whatsappNumberDisplay}
                 </a>
               </div>
-              <div className="flex items-center gap-2.5 text-slate-300 pt-1 border-t border-slate-900">
-                <Clock className="w-4 h-4 text-amber-500 shrink-0" />
+              <div className="flex items-center gap-2.5 text-slate-400 pt-2 border-t border-white/10">
+                <Clock className="w-4 h-4 text-blue-300 shrink-0" />
                 <span className="leading-relaxed">{COMPANY_DETAILS.businessHours}</span>
               </div>
             </div>
@@ -167,7 +162,7 @@ export const Footer: React.FC<FooterProps> = ({
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-slate-900 bg-slate-950 py-6 px-4 sm:px-8">
+      <div className="border-t border-white/10 bg-[#07101c] py-6 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[11px] text-slate-400 text-center sm:text-left">
             © {new Date().getFullYear()} {COMPANY_DETAILS.name}. All rights reserved. Registered customs clearing and freight forwarding agency in Apapa, Lagos.
@@ -175,10 +170,10 @@ export const Footer: React.FC<FooterProps> = ({
 
           <div className="flex items-center gap-4 text-[11px]">
             <span className="text-slate-400 hidden sm:inline">Apapa Port · Tin Can Island · MMIA Airport</span>
-            <span className="text-slate-700 hidden sm:inline" aria-hidden="true">·</span>
+            <span className="text-slate-600 hidden sm:inline" aria-hidden="true">·</span>
             <Link
               to="/admin"
-              className="text-[11px] text-slate-400 hover:text-slate-200 transition-colors inline-flex items-center gap-1.5 cursor-pointer hover:underline underline-offset-2"
+              className="text-[11px] text-slate-400 hover:text-white transition-colors inline-flex items-center gap-1.5 cursor-pointer hover:underline underline-offset-2"
               title="Staff Login"
             >
               <Lock className="w-3 h-3 text-slate-400" />
@@ -186,7 +181,7 @@ export const Footer: React.FC<FooterProps> = ({
             </Link>
             <button
               onClick={scrollToTop}
-              className="btn-interactive p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white transition-colors flex items-center gap-1 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+              className="p-2 rounded-lg bg-[#0B192C] hover:bg-[#152a45] text-slate-300 hover:text-white transition-colors flex items-center gap-1 cursor-pointer border border-white/10"
               aria-label="Scroll back to top of page"
               title="Scroll to top"
             >
