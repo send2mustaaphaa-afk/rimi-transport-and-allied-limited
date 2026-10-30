@@ -1,17 +1,17 @@
 // emailService.ts
-// Robust email notification service supporting Web3Forms API (reliable alternative when FormSubmit is down)
-// and Supabase database storage.
+// Robust email notification service supporting Web3Forms API with access key 5c15bcb3-a1f5-4caa-96cf-3f1dc483a513
+// routing directly to rimitransportandalliedlimited@gmail.com and Supabase database storage.
 
 const OWNER_EMAIL = 'rimitransportandalliedlimited@gmail.com';
+const WEB3FORMS_DEFAULT_KEY = '5c15bcb3-a1f5-4caa-96cf-3f1dc483a513';
 
-// Default public/test Web3Forms key or user-configured key from localStorage
+// Get configured Web3Forms key from localStorage or use user's key
 export const getWeb3FormsKey = (): string => {
   if (typeof window !== 'undefined') {
     const saved = localStorage.getItem('rimi_web3forms_key');
     if (saved) return saved;
   }
-  // Default shared demo/public key for Web3Forms or fallback
-  return 'YOUR_WEB3FORMS_ACCESS_KEY';
+  return WEB3FORMS_DEFAULT_KEY;
 };
 
 export const setWeb3FormsKey = (key: string): void => {
@@ -48,13 +48,13 @@ export interface ContactEmailPayload {
 
 /**
  * Sends quote request details to rimitransportandalliedlimited@gmail.com
- * using Web3Forms API (bypassing FormSubmit 521 server downtime).
+ * using Web3Forms API with the user's provided access key.
  */
 export async function sendQuoteNotificationEmail(quote: QuoteEmailPayload): Promise<{ success: boolean; message?: string }> {
   try {
     const accessKey = getWeb3FormsKey();
     const payload = {
-      access_key: accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY' ? 'f6551b91-4c1c-4235-96b5-858883d3e232' : accessKey, // robust fallback key
+      access_key: accessKey || WEB3FORMS_DEFAULT_KEY,
       subject: `New Quote Request from ${quote.fullName} [${quote.id}]`,
       from_name: quote.fullName,
       email: quote.email,
@@ -108,7 +108,7 @@ export async function sendContactNotificationEmail(contact: ContactEmailPayload)
   try {
     const accessKey = getWeb3FormsKey();
     const payload = {
-      access_key: accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY' ? 'f6551b91-4c1c-4235-96b5-858883d3e232' : accessKey,
+      access_key: accessKey || WEB3FORMS_DEFAULT_KEY,
       subject: `New Inquiry from ${contact.name} [${contact.subject}]`,
       from_name: contact.name,
       email: contact.email,

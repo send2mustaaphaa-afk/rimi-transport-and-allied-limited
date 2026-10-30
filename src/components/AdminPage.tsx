@@ -1543,19 +1543,14 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 <div className="font-bold flex items-center justify-between">
                   <span className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
-                    Email Forwarding Upgraded to Web3Forms (Active)
+                    Web3Forms Connected (Access Key Configured)
                   </span>
-                  <a
-                    href="https://web3forms.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-[11px] transition-colors shadow-2xs"
-                  >
-                    Get Free Web3Forms Key →
-                  </a>
+                  <span className="px-2.5 py-1 bg-emerald-200 text-emerald-900 rounded font-mono font-bold text-[11px]">
+                    5c15bcb3-a1f5-4caa-96cf-3f1dc483a513
+                  </span>
                 </div>
                 <p className="text-[11px] text-emerald-800 leading-relaxed">
-                  FormSubmit encountered server downtime (Cloudflare 521 error). We have upgraded your website's email system to use <strong>Web3Forms API</strong>, ensuring that all client quote requests and contact messages are instantly delivered to <strong>rimitransportandalliedlimited@gmail.com</strong> without server errors.
+                  Your "Get a Quote" and "Contact Us" forms are successfully connected to Web3Forms using your access key. Whenever a customer submits a quote, notifications are instantly sent directly to <strong>rimitransportandalliedlimited@gmail.com</strong>.
                 </p>
               </div>
 
